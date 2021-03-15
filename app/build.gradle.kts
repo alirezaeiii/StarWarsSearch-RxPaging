@@ -2,7 +2,6 @@ import dependencies.Dependencies
 import dependencies.DebugDependencies
 import dependencies.AnnotationProcessorsDependencies
 import extensions.addTestsDependencies
-import extensions.api
 import extensions.debugImplementation
 import extensions.kapt
 
@@ -56,7 +55,6 @@ dependencies {
     implementation(project(BuildModules.CORE))
 
     implementation(Dependencies.KOTLIN)
-    //implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.MATERIAL)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
     implementation(Dependencies.NAVIGATION_FRAGMENT)
