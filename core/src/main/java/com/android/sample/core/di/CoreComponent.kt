@@ -1,5 +1,6 @@
 package com.android.sample.core.di
 
+import android.app.Application
 import com.android.sample.core.network.NetworkModule
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
@@ -12,8 +13,18 @@ import javax.inject.Singleton
  * @see Component
  */
 @Singleton
-@Component(modules = [NetworkModule::class])
+@Component(
+    modules = [ApplicationModule::class,
+        NetworkModule::class]
+)
 interface CoreComponent {
+
+    /**
+     * Provide dependency graph Context
+     *
+     * @return Context
+     */
+    fun application(): Application
 
     /**
      * Provide dependency graph StarWarsService

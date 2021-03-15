@@ -2,6 +2,7 @@ package com.android.sample.starwars
 
 import android.app.Application
 import android.content.Context
+import com.android.sample.core.di.ApplicationModule
 import com.android.sample.core.di.CoreComponent
 import com.android.sample.core.di.DaggerCoreComponent
 import com.android.sample.starwars.di.DaggerAppComponent
@@ -26,7 +27,7 @@ open class StarWarsApplication : Application() {
          */
         @JvmStatic
         fun coreComponent(context: Context) =
-                (context.applicationContext as StarWarsApplication).coreComponent
+            (context.applicationContext as StarWarsApplication).coreComponent
     }
 
     override fun onCreate() {
@@ -36,15 +37,18 @@ open class StarWarsApplication : Application() {
         /**
          * Initialize core dependency injection component.
          */
-        coreComponent = DaggerCoreComponent.builder().build()
+        coreComponent = DaggerCoreComponent
+            .builder()
+            .applicationModule(ApplicationModule(this))
+            .build()
 
         /**
          * Initialize app dependency injection component.
          */
         DaggerAppComponent
-                .builder()
-                .coreComponent(coreComponent)
-                .build()
-                .inject(this)
+            .builder()
+            .coreComponent(coreComponent)
+            .build()
+            .inject(this)
     }
 }

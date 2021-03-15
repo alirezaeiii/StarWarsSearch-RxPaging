@@ -11,7 +11,9 @@ import dagger.Component
  * @see Component
  */
 @AppScope
-@Component(dependencies = [CoreComponent::class])
+@Component(
+    dependencies = [CoreComponent::class]
+)
 interface AppComponent {
 
     /**

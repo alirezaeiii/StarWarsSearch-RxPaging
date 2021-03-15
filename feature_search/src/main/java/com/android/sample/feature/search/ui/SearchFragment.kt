@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.android.sample.commons.base.BaseFragment
-import com.android.sample.commons.util.Resource
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding
@@ -45,13 +44,15 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        viewModel.liveData.observe(viewLifecycleOwner, { resource ->
-            if (resource is Resource.Success) {
-                viewModelAdapter.submitList(resource.data)
-            }
+        viewModel.items.observe(viewLifecycleOwner, {
+            viewModelAdapter.submitList(it)
         })
 
-        viewModelAdapter = MainAdapter()
+        viewModel.networkState.observe(viewLifecycleOwner, {
+            viewModelAdapter.setNetworkState(it)
+        })
+
+        viewModelAdapter = MainAdapter { viewModel.retry() }
 
 
         with(binding) {
@@ -65,7 +66,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             }
         }
 
-        viewModel.searchPeople("s")
+        viewModel.showQuery("a")
 
         return binding.root
     }

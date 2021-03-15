@@ -7,7 +7,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
-import io.reactivex.Single
+import io.reactivex.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,7 +25,10 @@ import javax.inject.Singleton
 interface StarWarsService {
 
     @GET("people/")
-    fun searchPeople(@Query("search") query: String): Single<PeopleWrapper>
+    fun searchPeople(
+        @Query("search") query: String,
+        @Query("page") page: Int,
+    ): Observable<PeopleWrapper>
 }
 
 /**
@@ -55,7 +58,8 @@ class NetworkModule {
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.STAR_WARS_API_BASE_URL)
-        .client(OkHttpClient.Builder()
+        .client(
+            OkHttpClient.Builder()
                 .addInterceptor(getLoggerInterceptor())
                 .build()
         )

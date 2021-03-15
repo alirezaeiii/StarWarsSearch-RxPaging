@@ -19,9 +19,9 @@ open class BaseViewModel<T>(
     private val schedulerProvider: BaseSchedulerProvider,
 ) : ViewModel() {
 
-    private val compositeDisposable = CompositeDisposable()
+    protected val compositeDisposable = CompositeDisposable()
 
-    private val _liveData = MutableLiveData<Resource<T>>()
+    protected val _liveData = MutableLiveData<Resource<T>>()
     val liveData: LiveData<Resource<T>>
         get() = _liveData
 

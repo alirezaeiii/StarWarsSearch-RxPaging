@@ -1,5 +1,6 @@
 package com.android.sample.feature.search.di
 
+import android.app.Application
 import com.android.sample.commons.extension.viewModel
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.commons.util.schedulers.SchedulerProvider
@@ -26,9 +27,12 @@ class SearchModule(
      * @see Provides
      */
     @Provides
-    fun providesSearchViewModel(useCase: SearchPeopleUseCase,
-                                schedulerProvider: BaseSchedulerProvider) = fragment.viewModel {
-        SearchViewModel(useCase, schedulerProvider)
+    fun providesSearchViewModel(
+        useCase: SearchPeopleUseCase,
+        schedulerProvider: BaseSchedulerProvider,
+        application: Application
+    ) = fragment.viewModel {
+        SearchViewModel(useCase, schedulerProvider, application)
     }
 
     @Provides

@@ -10,4 +10,5 @@ dependencies {
     implementation(Dependencies.RX_JAVA)
     implementation(Dependencies.RX_ANDROID)
     implementation(Dependencies.TIMBER)
+    implementation("androidx.paging:paging-runtime-ktx:2.1.2")
 }

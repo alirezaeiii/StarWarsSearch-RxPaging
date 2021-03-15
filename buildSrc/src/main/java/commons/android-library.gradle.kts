@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(Dependencies.KOTLIN)
     api(Dependencies.DAGGER)
+    api(Dependencies.PAGING)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
 }
