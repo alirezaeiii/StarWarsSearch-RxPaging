@@ -5,6 +5,7 @@ import com.android.sample.commons.base.BaseDataSourceFactory
 import com.android.sample.commons.base.BasePageKeyedItemDataSource
 import com.android.sample.commons.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
+import com.android.sample.core.model.PeopleWrapper
 import com.android.sample.core.model.Person
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
@@ -16,9 +17,9 @@ class SearchDataSourceFactory(
     private val schedulerProvider: SchedulerProvider,
     private val retryExecutor: Executor,
     private val context: Context
-) : BaseDataSourceFactory<Person>() {
+) : BaseDataSourceFactory<Person, PeopleWrapper>() {
 
-    override fun getDataSource(): BasePageKeyedItemDataSource<Person> =
+    override fun getDataSource(): BasePageKeyedItemDataSource<Person, PeopleWrapper> =
         SearchPageKeyedDataSource(useCase = useCase,
             query = query,
             compositeDisposable = compositeDisposable,

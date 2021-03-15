@@ -8,12 +8,6 @@
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 
-    <style name="LoadingStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/loading_animation</item>
-    </style>
-
     <style name="ErrorViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

@@ -31,7 +31,6 @@
             android:layout_height="match_parent"
             app:layoutManager="LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_marginBottom="@dimen/spacing_small"
             tools:listitem="@layout/star_wars_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

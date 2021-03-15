@@ -7,9 +7,9 @@ import com.android.sample.commons.paging.Listing
 import com.android.sample.commons.paging.PageKeyRepository
 import java.util.concurrent.Executor
 
-abstract class BasePageKeyRepository<T> : PageKeyRepository<T> {
+abstract class BasePageKeyRepository<T, R> : PageKeyRepository<T> {
 
-    protected abstract fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<T>
+    protected abstract fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<T, R>
 
     @MainThread
     override fun getItems(networkExecutor: Executor): Listing<T> {

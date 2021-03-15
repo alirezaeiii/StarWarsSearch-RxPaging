@@ -3,8 +3,8 @@ package com.android.sample.feature.search.ui
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sample.commons.extension.layoutInflater
@@ -19,12 +19,12 @@ import com.android.sample.feature.search.R
  * It is used to show the network state of paging.
  */
 class NetworkStateItemViewHolder(
-    root: View,
+    private val root: View,
     retryCallback: () -> Unit
 ) : RecyclerView.ViewHolder(root) {
 
     private val networkStateLayout = root.findViewById<LinearLayout>(R.id.network_state_layout)
-    private val progressBar = root.findViewById<ImageView>(R.id.progress_bar)
+    private val progressBar = root.findViewById<ProgressBar>(R.id.progress_bar)
     private val retry = root.findViewById<Button>(R.id.retry_button)
     private val errorMsg = root.findViewById<TextView>(R.id.error_msg)
 
@@ -35,6 +35,27 @@ class NetworkStateItemViewHolder(
     }
 
     fun bindTo(networkState: NetworkState?, position: Int) {
+        if (position == 0) {
+            networkStateLayout.layoutParams = ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            networkStateLayout.setPadding(
+                0, 0, 0,
+                root.context.resources.getDimension(R.dimen.network_state_bottom_padding).toInt()
+            )
+        } else {
+            networkStateLayout.layoutParams = ViewGroup.LayoutParams(
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    root.context.resources.getDimension(R.dimen.network_state_height).toInt()
+                )
+            )
+            val padding = root.context.resources.getDimension(R.dimen.spacing_small).toInt()
+            networkStateLayout.setPadding(padding, padding, padding, padding)
+        }
         progressBar.toVisibility(networkState?.status == RUNNING)
         retry.toVisibility(networkState?.status == FAILED)
         errorMsg.toVisibility(networkState?.msg != null)

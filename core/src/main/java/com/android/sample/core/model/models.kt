@@ -4,7 +4,8 @@ import com.squareup.moshi.Json
 
 class PeopleWrapper(
     @Json(name = "results")
-    val wrapper: List<Person>
+    val wrapper: List<Person>,
+    val next: String?
 )
 
 data class Person(
