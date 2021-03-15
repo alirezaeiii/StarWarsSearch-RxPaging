@@ -1,0 +1,5 @@
+include ':core'
+include ':commons'
+include ':feature_search'
+include ':app'
+rootProject.name = "StarWars"
