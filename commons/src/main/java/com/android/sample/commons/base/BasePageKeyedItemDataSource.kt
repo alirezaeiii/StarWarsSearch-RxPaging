@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.android.sample.commons.paging.NetworkState
-import com.android.sample.commons.util.schedulers.SchedulerProvider
+import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import java.util.concurrent.Executor
 
 
 abstract class BasePageKeyedItemDataSource<T, R>(
-    protected val schedulerProvider: SchedulerProvider,
-    private val retryExecutor: Executor
+        protected val schedulerProvider: BaseSchedulerProvider,
+        private val retryExecutor: Executor
 ) : PageKeyedDataSource<Int, T>() {
 
     // keep a function reference for the retry event

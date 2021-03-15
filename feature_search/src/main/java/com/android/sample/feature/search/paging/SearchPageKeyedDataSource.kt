@@ -5,7 +5,7 @@ import com.android.sample.commons.R
 import com.android.sample.commons.base.BasePageKeyedItemDataSource
 import com.android.sample.commons.extension.isNetworkAvailable
 import com.android.sample.commons.paging.NetworkState
-import com.android.sample.commons.util.schedulers.SchedulerProvider
+import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.model.PeopleWrapper
 import com.android.sample.core.model.Person
@@ -17,7 +17,7 @@ class SearchPageKeyedDataSource(
         private val useCase: SearchPeopleUseCase,
         private val query: String,
         private val compositeDisposable: CompositeDisposable,
-        schedulerProvider: SchedulerProvider,
+        schedulerProvider: BaseSchedulerProvider,
         retryExecutor: Executor,
         private val context: Context,
 ) : BasePageKeyedItemDataSource<Person, PeopleWrapper>(
