@@ -5,6 +5,7 @@ import com.android.sample.commons.R
 import com.android.sample.commons.base.BasePageKeyedItemDataSource
 import com.android.sample.commons.extension.isNetworkAvailable
 import com.android.sample.commons.paging.NetworkState
+import com.android.sample.commons.util.NetworkException
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.model.PeopleWrapper
@@ -30,28 +31,31 @@ class SearchPageKeyedDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Person>) {
         _networkState.postValue(NetworkState.LOADING)
 
-        if (context.isNetworkAvailable()) {
-            fetchItems(params.key).subscribe({
-                _networkState.postValue(NetworkState.LOADED)
-                //clear retry since last request succeeded
-                retry = null
-                if (it.next != null) {
-                    callback.onResult(it.wrapper, params.key + 1)
-                }
-            }) {
-                retry = {
-                    loadAfter(params, callback)
-                }
-                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
-                _networkState.postValue(error)
-            }.also { compositeDisposable.add(it) }
-        } else {
+        Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
+            if (it) {
+                fetchItems(params.key)
+            } else {
+                Observable.error(NetworkException())
+            }
+        }.subscribe({
+            _networkState.postValue(NetworkState.LOADED)
+            //clear retry since last request succeeded
+            retry = null
+            if (it.next != null) {
+                callback.onResult(it.wrapper, params.key + 1)
+            }
+        }) {
             retry = {
                 loadAfter(params, callback)
             }
-            val error = NetworkState.error(context.getString(R.string.failed_network_msg))
-            _networkState.postValue(error)
-        }
+            if (it is NetworkException) {
+                val error = NetworkState.error(context.getString(R.string.failed_network_msg))
+                _networkState.postValue(error)
+            } else {
+                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
+                _networkState.postValue(error)
+            }
+        }.also { compositeDisposable.add(it) }
     }
 
     override fun loadInitial(
@@ -59,25 +63,28 @@ class SearchPageKeyedDataSource(
     ) {
         _networkState.postValue(NetworkState.LOADING)
 
-        if (context.isNetworkAvailable()) {
-            fetchItems(1).subscribe({
-                _networkState.postValue(NetworkState.LOADED)
-                if (it.next != null) {
-                    callback.onResult(it.wrapper, null, 2)
-                }
-            }) {
-                retry = {
-                    loadInitial(params, callback)
-                }
-                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
-                _networkState.postValue(error)
-            }.also { compositeDisposable.add(it) }
-        } else {
+        Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
+            if (it) {
+                fetchItems(1)
+            } else {
+                Observable.error(NetworkException())
+            }
+        }.subscribe({
+            _networkState.postValue(NetworkState.LOADED)
+            if (it.next != null) {
+                callback.onResult(it.wrapper, null, 2)
+            }
+        }) {
             retry = {
                 loadInitial(params, callback)
             }
-            val error = NetworkState.error(context.getString(R.string.failed_network_msg))
-            _networkState.postValue(error)
-        }
+            if (it is NetworkException) {
+                val error = NetworkState.error(context.getString(R.string.failed_network_msg))
+                _networkState.postValue(error)
+            } else {
+                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
+                _networkState.postValue(error)
+            }
+        }.also { compositeDisposable.add(it) }
     }
 }
