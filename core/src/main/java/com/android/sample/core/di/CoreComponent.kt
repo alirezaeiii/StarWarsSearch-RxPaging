@@ -3,6 +3,7 @@ package com.android.sample.core.di
 import android.app.Application
 import com.android.sample.core.network.NetworkModule
 import com.android.sample.core.network.StarWarsService
+import com.android.sample.core.repository.DetailRepository
 import com.android.sample.core.repository.SearchRepository
 import dagger.Component
 import javax.inject.Singleton
@@ -14,8 +15,8 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(
-    modules = [ApplicationModule::class,
-        NetworkModule::class]
+        modules = [ApplicationModule::class,
+            NetworkModule::class]
 )
 interface CoreComponent {
 
@@ -39,4 +40,11 @@ interface CoreComponent {
      * @return SearchRepository
      */
     fun searchRepository(): SearchRepository
+
+    /**
+     * Provide dependency graph DetailRepository
+     *
+     * @return DetailRepository
+     */
+    fun detailRepository(): DetailRepository
 }

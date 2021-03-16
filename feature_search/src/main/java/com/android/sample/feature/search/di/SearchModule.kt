@@ -16,9 +16,7 @@ import dagger.Provides
  * @see Module
  */
 @Module
-class SearchModule(
-    private val fragment: SearchFragment
-) {
+class SearchModule(private val fragment: SearchFragment) {
 
     /**
      * Create a provider method binding for [SearchViewModel].
@@ -28,14 +26,14 @@ class SearchModule(
      */
     @Provides
     fun providesSearchViewModel(
-        useCase: SearchPeopleUseCase,
-        schedulerProvider: BaseSchedulerProvider,
-        application: Application
+            useCase: SearchPeopleUseCase,
+            schedulerProvider: BaseSchedulerProvider,
+            application: Application,
     ) = fragment.viewModel {
         SearchViewModel(useCase, schedulerProvider, application)
     }
 
     @Provides
     internal fun provideSchedulerProvider(): BaseSchedulerProvider =
-        SchedulerProvider()
+            SchedulerProvider()
 }

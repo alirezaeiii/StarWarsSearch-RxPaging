@@ -3,7 +3,7 @@ package com.android.sample.feature.search.ui
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sample.commons.extension.layoutInflater
-import com.android.sample.core.model.Person
+import com.android.sample.core.response.Person
 import com.android.sample.feature.search.databinding.StarWarsItemBinding
 
 class StarWarsItemViewHolder(private val binding: StarWarsItemBinding) :

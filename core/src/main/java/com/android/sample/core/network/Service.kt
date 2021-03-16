@@ -1,13 +1,17 @@
 package com.android.sample.core.network
 
 import com.android.sample.core.BuildConfig
-import com.android.sample.core.model.PeopleWrapper
+import com.android.sample.core.response.Film
+import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.Planet
+import com.android.sample.core.response.Specie
 import com.android.sample.core.repository.SearchRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
+import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,6 +20,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 import timber.log.Timber
 import javax.inject.Singleton
 
@@ -29,6 +34,15 @@ interface StarWarsService {
         @Query("search") query: String,
         @Query("page") page: Int,
     ): Observable<PeopleWrapper>
+
+    @GET
+    fun getSpecie(@Url url: String) : Single<Specie>
+
+    @GET
+    fun getPlanet(@Url url: String) : Single<Planet>
+
+    @GET
+    fun getFilm(@Url url: String) : Single<Film>
 }
 
 /**

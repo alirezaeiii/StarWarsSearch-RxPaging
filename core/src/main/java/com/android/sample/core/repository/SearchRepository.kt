@@ -1,6 +1,6 @@
 package com.android.sample.core.repository
 
-import com.android.sample.core.model.PeopleWrapper
+import com.android.sample.core.response.PeopleWrapper
 import com.android.sample.core.network.StarWarsService
 import io.reactivex.Observable
 import javax.inject.Inject

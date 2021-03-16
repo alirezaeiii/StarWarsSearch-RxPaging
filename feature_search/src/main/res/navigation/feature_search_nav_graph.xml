@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="person"
-            app:argType="com.android.sample.core.model.Person" />
+            app:argType="com.android.sample.core.response.Person" />
     </fragment>
 
 </navigation>

@@ -5,8 +5,8 @@ import com.android.sample.commons.base.BaseDataSourceFactory
 import com.android.sample.commons.base.BasePageKeyedItemDataSource
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
-import com.android.sample.core.model.PeopleWrapper
-import com.android.sample.core.model.Person
+import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.Person
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
 

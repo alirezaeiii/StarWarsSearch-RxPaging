@@ -8,7 +8,7 @@ import com.android.sample.commons.base.BasePagingViewModel
 import com.android.sample.commons.paging.Listing
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
-import com.android.sample.core.model.Person
+import com.android.sample.core.response.Person
 import com.android.sample.feature.search.paging.SearchPageKeyRepository
 import javax.inject.Inject
 

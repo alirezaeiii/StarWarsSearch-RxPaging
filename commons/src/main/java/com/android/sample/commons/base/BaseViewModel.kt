@@ -17,15 +17,16 @@ import timber.log.Timber
  */
 open class BaseViewModel<T>(
     private val schedulerProvider: BaseSchedulerProvider,
+    private val singleRequest: Single<T>
 ) : ViewModel() {
 
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
-    protected val _liveData = MutableLiveData<Resource<T>>()
+    private val _liveData = MutableLiveData<Resource<T>>()
     val liveData: LiveData<Resource<T>>
         get() = _liveData
 
-    protected fun sendRequest(singleRequest: Single<T>) {
+    protected fun sendRequest() {
         _liveData.value = Resource.Loading
         singleRequest.subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui()).subscribe({

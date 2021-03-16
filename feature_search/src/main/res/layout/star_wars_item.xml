@@ -6,7 +6,7 @@
 
         <variable
             name="personItem"
-            type="com.android.sample.core.model.Person" />
+            type="com.android.sample.core.response.Person" />
 
         <variable
             name="callback"

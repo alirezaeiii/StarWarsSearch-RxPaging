@@ -2,25 +2,25 @@ package com.android.sample.feature.search.di
 
 import com.android.sample.core.di.CoreComponent
 import com.android.sample.core.di.FeatureScope
-import com.android.sample.feature.search.ui.SearchFragment
+import com.android.sample.feature.search.ui.DetailFragment
 import dagger.Component
 
 /**
  * Class for which a fully-formed, dependency-injected implementation is to
- * be generated from [SearchModule].
+ * be generated from [DetailModule].
  *
  * @see Component
  */
 @FeatureScope
-@Component(modules = [SearchModule::class],
-        dependencies = [CoreComponent::class]
+@Component(modules = [DetailModule::class],
+    dependencies = [CoreComponent::class]
 )
-interface SearchComponent {
+interface DetailComponent {
 
     /**
      * Inject dependencies on component.
      *
-     * @param searchFragment
+     * @param detailFragment
      */
-    fun inject(searchFragment: SearchFragment)
+    fun inject(detailFragment: DetailFragment)
 }
