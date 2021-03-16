@@ -25,19 +25,16 @@ class SearchPageKeyedDataSource(
     schedulerProvider, retryExecutor
 ) {
 
+    private val isNetworkAvailable: Observable<Boolean> =
+        Observable.fromCallable { context.isNetworkAvailable() }
+
     override fun fetchItems(page: Int): Observable<PeopleWrapper> =
         composeObservable { useCase(query, page) }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Person>) {
         _networkState.postValue(NetworkState.LOADING)
 
-        Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
-            if (it) {
-                fetchItems(params.key)
-            } else {
-                Observable.error(NetworkException())
-            }
-        }.subscribe({
+        isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
             _networkState.postValue(NetworkState.LOADED)
             //clear retry since last request succeeded
             retry = null
@@ -48,13 +45,7 @@ class SearchPageKeyedDataSource(
             retry = {
                 loadAfter(params, callback)
             }
-            if (it is NetworkException) {
-                val error = NetworkState.error(context.getString(R.string.failed_network_msg))
-                _networkState.postValue(error)
-            } else {
-                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
-                _networkState.postValue(error)
-            }
+            initError(it)
         }.also { compositeDisposable.add(it) }
     }
 
@@ -63,13 +54,7 @@ class SearchPageKeyedDataSource(
     ) {
         _networkState.postValue(NetworkState.LOADING)
 
-        Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
-            if (it) {
-                fetchItems(1)
-            } else {
-                Observable.error(NetworkException())
-            }
-        }.subscribe({
+        isNetworkAvailable.flatMap { fetchItems(it, 1) }.subscribe({
             _networkState.postValue(NetworkState.LOADED)
             if (it.next != null) {
                 callback.onResult(it.wrapper, null, 2)
@@ -78,13 +63,29 @@ class SearchPageKeyedDataSource(
             retry = {
                 loadInitial(params, callback)
             }
-            if (it is NetworkException) {
-                val error = NetworkState.error(context.getString(R.string.failed_network_msg))
-                _networkState.postValue(error)
-            } else {
-                val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
-                _networkState.postValue(error)
-            }
+            initError(it)
         }.also { compositeDisposable.add(it) }
+    }
+
+    // ============================================================================================
+    //  Private helper methods
+    // ============================================================================================
+
+    private fun initError(throwable: Throwable) {
+        if (throwable is NetworkException) {
+            val error = NetworkState.error(context.getString(R.string.failed_network_msg))
+            _networkState.postValue(error)
+        } else {
+            val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
+            _networkState.postValue(error)
+        }
+    }
+
+    private fun fetchItems(isNetworkAvailable: Boolean, page: Int): Observable<PeopleWrapper> {
+        return if (isNetworkAvailable) {
+            fetchItems(page)
+        } else {
+            Observable.error(NetworkException())
+        }
     }
 }
