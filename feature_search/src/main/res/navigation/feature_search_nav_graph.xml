@@ -21,8 +21,8 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="person"
-            app:argType="com.android.sample.core.response.Person" />
+            android:name="character"
+            app:argType="com.android.sample.core.response.Character" />
     </fragment>
 
 </navigation>

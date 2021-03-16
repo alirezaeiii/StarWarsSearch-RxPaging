@@ -6,7 +6,7 @@ import com.android.sample.commons.base.BasePageKeyRepository
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.PeopleWrapper
-import com.android.sample.core.response.Person
+import com.android.sample.core.response.Character
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
 
@@ -16,9 +16,9 @@ class SearchPageKeyRepository(
         private val compositeDisposable: CompositeDisposable,
         private val schedulerProvider: BaseSchedulerProvider,
         private val context: Context
-) : BasePageKeyRepository<Person, PeopleWrapper>() {
+) : BasePageKeyRepository<Character, PeopleWrapper>() {
 
-    override fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<Person, PeopleWrapper> =
+    override fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<Character, PeopleWrapper> =
         SearchDataSourceFactory(
             useCase = useCase,
             query = query,

@@ -5,18 +5,18 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sample.commons.paging.NetworkState
-import com.android.sample.core.response.Person
+import com.android.sample.core.response.Character
 import com.android.sample.feature.search.R
 
 class MainAdapter(
     private val retryCallback: () -> Unit,
     private val callback: OnClickListener
-) : PagedListAdapter<Person, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Person>() {
-    override fun areItemsTheSame(oldItem: Person, newItem: Person): Boolean {
+) : PagedListAdapter<Character, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Character>() {
+    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Person, newItem: Person): Boolean {
+    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
         return oldItem == newItem
     }
 }) {
@@ -70,12 +70,12 @@ class MainAdapter(
     }
 
     /**
-     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [Person]
+     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [Character]
      * associated with the current item to the [onClick] function.
-     * @param clickListener lambda that will be called with the current [Person]
+     * @param clickListener lambda that will be called with the current [Character]
      */
-    class OnClickListener(val clickListener: (person: Person) -> Unit) {
-        fun onClick(person: Person) =
-            clickListener(person)
+    class OnClickListener(val clickListener: (character: Character) -> Unit) {
+        fun onClick(character: Character) =
+            clickListener(character)
     }
 }

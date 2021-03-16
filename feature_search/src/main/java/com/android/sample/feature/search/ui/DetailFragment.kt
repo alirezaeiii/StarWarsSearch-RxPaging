@@ -33,7 +33,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
     ): View {
 
         val binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
-            person = args.person
+            person = args.character
         }
 
         return binding.root

@@ -9,7 +9,7 @@ import com.android.sample.commons.util.NetworkException
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.PeopleWrapper
-import com.android.sample.core.response.Person
+import com.android.sample.core.response.Character
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
@@ -21,7 +21,7 @@ class SearchPageKeyedDataSource(
     schedulerProvider: BaseSchedulerProvider,
     retryExecutor: Executor,
     private val context: Context,
-) : BasePageKeyedItemDataSource<Person, PeopleWrapper>(
+) : BasePageKeyedItemDataSource<Character, PeopleWrapper>(
     schedulerProvider, retryExecutor
 ) {
 
@@ -31,7 +31,7 @@ class SearchPageKeyedDataSource(
     override fun fetchItems(page: Int): Observable<PeopleWrapper> =
         composeObservable { useCase(query, page) }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Person>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         _networkState.postValue(NetworkState.LOADING)
 
         isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
@@ -50,7 +50,7 @@ class SearchPageKeyedDataSource(
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Person>,
+        params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
     ) {
         _networkState.postValue(NetworkState.LOADING)
 

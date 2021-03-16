@@ -32,7 +32,7 @@ class DetailModule(private val fragment: DetailFragment) {
             getPlanetUseCase: GetPlanetUseCase,
             getFilmUseCase: GetFilmUseCase,
     ) = fragment.viewModel {
-        DetailViewModel(schedulerProvider, fragment.args.person, getSpecieUseCase,
+        DetailViewModel(schedulerProvider, fragment.args.character, getSpecieUseCase,
                 getPlanetUseCase, getFilmUseCase)
     }
 

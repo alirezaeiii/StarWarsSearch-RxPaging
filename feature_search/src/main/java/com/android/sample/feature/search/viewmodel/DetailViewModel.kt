@@ -6,21 +6,21 @@ import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
 import com.android.sample.core.response.Film
-import com.android.sample.core.response.Person
+import com.android.sample.core.response.Character
 import io.reactivex.Flowable
 import io.reactivex.Single
 import com.android.sample.feature.search.viewmodel.DetailViewModel.DetailWrapper
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
-        schedulerProvider: BaseSchedulerProvider,
-        person: Person,
-        getSpecieUseCase: GetSpecieUseCase,
-        getPlanetUseCase: GetPlanetUseCase,
-        getFilmUseCase: GetFilmUseCase,
+    schedulerProvider: BaseSchedulerProvider,
+    character: Character,
+    getSpecieUseCase: GetSpecieUseCase,
+    getPlanetUseCase: GetPlanetUseCase,
+    getFilmUseCase: GetFilmUseCase,
 ) : BaseViewModel<DetailWrapper>(schedulerProvider,
-        Single.zip(getSpeciesWrapper(person, getSpecieUseCase, getPlanetUseCase),
-                getFilms(person, getFilmUseCase), { species, films ->
+        Single.zip(getSpeciesWrapper(character, getSpecieUseCase, getPlanetUseCase),
+                getFilms(character, getFilmUseCase), { species, films ->
             DetailWrapper(species, films)
         })) {
 
@@ -31,11 +31,11 @@ class DetailViewModel @Inject constructor(
 }
 
 private fun getSpeciesWrapper(
-        person: Person, getSpecieUseCase: GetSpecieUseCase, getPlanetUseCase: GetPlanetUseCase,
+    character: Character, getSpecieUseCase: GetSpecieUseCase, getPlanetUseCase: GetPlanetUseCase,
 ): Single<List<SpecieWrapper>> {
     var name: String? = null
     var language: String? = null
-    return Flowable.fromIterable(person.species)
+    return Flowable.fromIterable(character.species)
             .flatMapSingle { specieUrl -> getSpecieUseCase(specieUrl) }
             .flatMapSingle { specie ->
                 name = specie.name
@@ -46,8 +46,8 @@ private fun getSpeciesWrapper(
             }.toList()
 }
 
-private fun getFilms(person: Person, getFilmUseCase: GetFilmUseCase): Single<List<Film>> {
-    return Flowable.fromIterable(person.films)
+private fun getFilms(character: Character, getFilmUseCase: GetFilmUseCase): Single<List<Film>> {
+    return Flowable.fromIterable(character.films)
             .flatMapSingle { filmUrl -> getFilmUseCase(filmUrl) }
             .toList()
 }

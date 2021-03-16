@@ -3,15 +3,15 @@ package com.android.sample.feature.search.ui
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sample.commons.extension.layoutInflater
-import com.android.sample.core.response.Person
+import com.android.sample.core.response.Character
 import com.android.sample.feature.search.databinding.StarWarsItemBinding
 
 class StarWarsItemViewHolder(private val binding: StarWarsItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bindTo(person: Person?, personCallback: MainAdapter.OnClickListener) {
+    fun bindTo(character: Character?, personCallback: MainAdapter.OnClickListener) {
         with(binding) {
-            personItem = person
+            person = character
             callback = personCallback
             executePendingBindings()
         }
