@@ -8,8 +8,10 @@ import com.android.sample.commons.paging.NetworkState
 import com.android.sample.core.model.Person
 import com.android.sample.feature.search.R
 
-class MainAdapter(private val retryCallback: () -> Unit)
-    : PagedListAdapter<Person, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Person>() {
+class MainAdapter(
+    private val retryCallback: () -> Unit,
+    private val callback: OnClickListener
+) : PagedListAdapter<Person, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<Person>() {
     override fun areItemsTheSame(oldItem: Person, newItem: Person): Boolean {
         return oldItem.name == newItem.name
     }
@@ -23,12 +25,9 @@ class MainAdapter(private val retryCallback: () -> Unit)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.star_wars_item -> {
-                with((holder as StarWarsItemViewHolder).binding) {
-                    personItem = getItem(position)
-                    executePendingBindings()
-                }
-            }
+            R.layout.star_wars_item ->
+                (holder as StarWarsItemViewHolder).bindTo(getItem(position), callback)
+
             R.layout.network_state_item ->
                 (holder as NetworkStateItemViewHolder).bindTo(networkState, position)
         }
@@ -68,5 +67,15 @@ class MainAdapter(private val retryCallback: () -> Unit)
         } else if (hasExtraRow && previousState != newNetworkState) {
             notifyItemChanged(itemCount - 1)
         }
+    }
+
+    /**
+     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [Person]
+     * associated with the current item to the [onClick] function.
+     * @param clickListener lambda that will be called with the current [Person]
+     */
+    class OnClickListener(val clickListener: (person: Person) -> Unit) {
+        fun onClick(person: Person) =
+            clickListener(person)
     }
 }

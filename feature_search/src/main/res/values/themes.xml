@@ -29,4 +29,12 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:text">@string/retry</item>
     </style>
+
+    <style name="TextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/spacing_small</item>
+        <item name="android:layout_marginTop">@dimen/spacing_xlarge</item>
+    </style>
+
 </resources>

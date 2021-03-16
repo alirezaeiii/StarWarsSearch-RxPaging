@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.android.sample.commons.base.BaseFragment
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.R
@@ -52,8 +53,15 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             viewModelAdapter.setNetworkState(it)
         })
 
-        viewModelAdapter = MainAdapter { viewModel.retry() }
-
+        viewModelAdapter =
+            MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { person ->
+                val destination =
+                    SearchFragmentDirections.actionSearchFragmentToDetailFragment(person)
+                with(findNavController()) {
+                    currentDestination?.getAction(destination.actionId)
+                        ?.let { navigate(destination) }
+                }
+            })
 
         with(binding) {
             recyclerView.apply {

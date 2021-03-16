@@ -2,4 +2,8 @@
     <string name="star_wars">StarWars</string>
     <string name="feature_search">feature_search</string>
     <string name="retry">Retry</string>
+
+    <string name="person_name">name : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; %s</string>
+    <string name="person_birth_year">BirthYear : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; %s</string>
+    <string name="person_height">Height : &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; %s cm or %s feet</string>
 </resources>

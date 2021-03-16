@@ -8,6 +8,10 @@
             name="personItem"
             type="com.android.sample.core.model.Person" />
 
+        <variable
+            name="callback"
+            type="com.android.sample.feature.search.ui.MainAdapter.OnClickListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -19,6 +23,7 @@
         android:clickable="true"
         android:elevation="@dimen/spacing_mini"
         android:focusable="true"
+        android:onClick="@{() -> callback.onClick(personItem)}"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="@dimen/spacing_mini">
 
