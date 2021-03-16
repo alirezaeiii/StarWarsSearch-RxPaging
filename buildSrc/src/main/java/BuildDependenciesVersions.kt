@@ -15,7 +15,7 @@ object BuildDependenciesVersions {
     const val DAGGER = "2.26"
     const val RX_JAVA = "2.1.9"
     const val RX_ANDROID = "2.1.1"
-    const val PAGING = "2.0.0"
+    const val PAGING = "2.1.2"
     const val TIMBER = "4.7.1"
     const val RETROFIT = "2.9.0"
     const val LOGGING = "4.9.0"

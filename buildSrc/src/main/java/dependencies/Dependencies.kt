@@ -17,7 +17,7 @@ object Dependencies {
     const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${BuildDependenciesVersions.FRAGMENT_KTX}"
     const val CORE_KTX = "androidx.core:core-ktx:${BuildDependenciesVersions.CORE_KTX}"
     const val CONSTRAIN_LAYOUT = "androidx.constraintlayout:constraintlayout:${BuildDependenciesVersions.CONSTRAIN_LAYOUT}"
-    const val PAGING = "androidx.paging:paging-runtime:${BuildDependenciesVersions.PAGING}"
+    const val PAGING = "androidx.paging:paging-runtime-ktx:${BuildDependenciesVersions.PAGING}"
     const val DAGGER = "com.google.dagger:dagger:${BuildDependenciesVersions.DAGGER}"
     const val RX_JAVA = "io.reactivex.rxjava2:rxjava:${BuildDependenciesVersions.RX_JAVA}"
     const val RX_ANDROID = "io.reactivex.rxjava2:rxandroid:${BuildDependenciesVersions.RX_ANDROID}"
