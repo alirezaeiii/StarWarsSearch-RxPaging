@@ -194,7 +194,7 @@
                                 android:textAllCaps="false"
                                 app:layout_constraintBottom_toBottomOf="@+id/label_specie_language"
                                 app:layout_constraintStart_toEndOf="@+id/label_specie_language"
-                                tools:text="Ali basic" />
+                                tools:text="Persian" />
 
                             <TextView
                                 android:id="@+id/label_planet_population"

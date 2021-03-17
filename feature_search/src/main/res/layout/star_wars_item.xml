@@ -17,9 +17,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginStart="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_small"
         android:clickable="true"
         android:elevation="@dimen/spacing_mini"
         android:focusable="true"
@@ -29,13 +30,12 @@
 
         <TextView
             android:id="@+id/name"
+            style="@style/Widget.StarWarsSearch.Label"
             android:layout_width="match_parent"
             android:layout_height="@dimen/star_wars_item_height"
             android:layout_margin="@dimen/spacing_small"
-            android:background="@color/black"
             android:gravity="center"
-            android:text="@{person.name}"
-            android:textColor="@color/white" />
+            android:text="@{person.name}" />
 
     </androidx.cardview.widget.CardView>
 
