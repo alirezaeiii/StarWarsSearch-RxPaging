@@ -1,4 +1,4 @@
-package com.android.sample.feature.search.ui
+package com.android.sample.feature.search.ui.search
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

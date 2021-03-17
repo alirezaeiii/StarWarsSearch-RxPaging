@@ -10,7 +10,7 @@
 
         <variable
             name="callback"
-            type="com.android.sample.feature.search.ui.MainAdapter.OnClickListener" />
+            type="com.android.sample.feature.search.ui.search.MainAdapter.OnClickListener" />
 
     </data>
 
@@ -23,8 +23,8 @@
         android:clickable="true"
         android:elevation="@dimen/spacing_mini"
         android:focusable="true"
-        android:onClick="@{() -> callback.onClick(person)}"
         android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> callback.onClick(person)}"
         app:cardElevation="@dimen/spacing_mini">
 
         <TextView

@@ -6,7 +6,7 @@ import com.android.sample.commons.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
-import com.android.sample.feature.search.ui.DetailFragment
+import com.android.sample.feature.search.ui.detail.DetailFragment
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import dagger.Module
 import dagger.Provides

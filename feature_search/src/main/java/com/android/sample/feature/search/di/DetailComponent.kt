@@ -2,7 +2,7 @@ package com.android.sample.feature.search.di
 
 import com.android.sample.core.di.CoreComponent
 import com.android.sample.core.di.FeatureScope
-import com.android.sample.feature.search.ui.DetailFragment
+import com.android.sample.feature.search.ui.detail.DetailFragment
 import dagger.Component
 
 /**
