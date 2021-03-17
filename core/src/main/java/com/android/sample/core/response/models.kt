@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 class PeopleWrapper(
         @Json(name = "results")
         val wrapper: List<Character>,
-        val next: String?,
+        val next: String?
 )
 
 @Parcelize

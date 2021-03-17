@@ -1,11 +1,19 @@
 <resources>
 
-    <style name="ToolbarStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+    <style name="SearchViewTheme" parent="@android:style/ThemeOverlay.Material.ActionBar">
+        <item name="colorControlActivated">?android:colorAccent</item>
+        <item name="android:searchViewStyle">@style/Widget.SearchView</item>
+    </style>
+
+    <style name="Widget.SearchView" parent="android:style/Widget.Material.SearchView">
+        <item name="android:searchIcon">@android:color/transparent</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:submitBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="LoadingStyle">

@@ -18,10 +18,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/ToolbarStyle"
-                app:layout_scrollFlags="scroll|enterAlways" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:elevation="4dp"
+                android:outlineProvider="bounds"
+                app:layout_scrollFlags="scroll|enterAlways"
+                android:theme="@style/SearchViewTheme"
+                android:transitionGroup="false">
+
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="@string/app_name"
+                    android:theme="@style/SearchViewStyle"
+                    android:transitionGroup="true"/>
+
+            </FrameLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 

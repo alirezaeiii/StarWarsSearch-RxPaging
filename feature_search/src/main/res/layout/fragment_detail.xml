@@ -136,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_small"
                         android:layout_marginBottom="@dimen/spacing_medium"
-                        android:text="@string/specie" />
+                        android:text="@string/label_specie" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"

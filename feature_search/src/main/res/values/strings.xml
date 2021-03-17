@@ -1,14 +1,13 @@
 <resources>
-    <string name="star_wars">StarWars</string>
+    <string name="search_hint">Search for star wars character</string>
     <string name="feature_search">feature_search</string>
     <string name="retry">Retry</string>
-    <string name="label_birth_year">Birth Year:</string>
-    <string name="label_height">Height:</string>
-    <string name="person_height">%s cm or %s feet</string>
-    <string name="specie">Species</string>
+    <string name="label_birth_year">Birth Year :</string>
+    <string name="label_height">Height :</string>
+    <string name="person_height">%scm or %sfeet</string>
+    <string name="label_specie">Species</string>
     <string name="label_name">Name :</string>
-    <string name="label_language">Language:</string>
-    <string name="planet">Planet</string>
-    <string name="label_population">Population:</string>
+    <string name="label_language">Language :</string>
+    <string name="label_population">Population :</string>
     <string name="films">Films</string>
 </resources>
