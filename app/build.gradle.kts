@@ -62,7 +62,6 @@ dependencies {
     implementation(Dependencies.NAVIGATION_FEATURE)
     implementation(Dependencies.TIMBER)
     implementation(Dependencies.LOGGING)
-    implementation(Dependencies.PLAY_CORE)
     implementation(Dependencies.DAGGER)
 
     debugImplementation(DebugDependencies.LEAK_CANARY)

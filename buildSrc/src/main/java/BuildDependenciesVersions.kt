@@ -3,7 +3,7 @@
  */
 object BuildDependenciesVersions {
     const val GRADLE_ANDROID = "4.1.2"
-    const val KOTLIN = "1.4.21"
+    const val KOTLIN = "1.4.31"
     const val NAVIGATION = "2.3.4"
     const val APPCOMPAT = "1.2.0"
     const val MATERIAL = "1.2.1"
@@ -12,7 +12,7 @@ object BuildDependenciesVersions {
     const val CORE_KTX = "1.3.2"
     const val FRAGMENT_KTX = "1.3.1"
     const val CONSTRAIN_LAYOUT = "2.0.4"
-    const val DAGGER = "2.26"
+    const val DAGGER = "2.33"
     const val RX_JAVA = "2.1.9"
     const val RX_ANDROID = "2.1.1"
     const val PAGING = "2.1.2"
@@ -20,7 +20,6 @@ object BuildDependenciesVersions {
     const val RETROFIT = "2.9.0"
     const val LOGGING = "4.9.0"
     const val MOSHI = "1.11.0"
-    const val PLAY_CORE = "1.8.2"
     const val LEAK_CANARY = "2.5"
 
     // Tests

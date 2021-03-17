@@ -78,7 +78,6 @@ fun DependencyHandler.addTestsDependencies() {
     testImplementation(TestDependencies.RUNNER)
     testImplementation(TestDependencies.EXT)
 
-    androidTestImplementation(TestAndroidDependencies.PLAY_CORE)
     androidTestImplementation(TestAndroidDependencies.ESPRESSO)
     androidTestImplementation(TestAndroidDependencies.RUNNER)
     androidTestImplementation(TestAndroidDependencies.RULES)
