@@ -25,7 +25,7 @@ class SearchPageKeyedDataSource(
         schedulerProvider, retryExecutor
 ) {
 
-    private var flagToRetry = true
+    private var isNext = true
 
     private val isNetworkAvailable: Observable<Boolean> =
             Observable.fromCallable { context.isNetworkAvailable() }
@@ -34,26 +34,23 @@ class SearchPageKeyedDataSource(
             composeObservable { useCase(query, page) }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
-        _networkState.postValue(NetworkState.LOADING)
-
-        isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
-            _networkState.postValue(NetworkState.LOADED)
-            //clear retry since last request succeeded
-            retry = null
-            if (it.next == null) {
-                flagToRetry = false
-            }
-            callback.onResult(it.wrapper, params.key + 1)
-        }) {
-            if (flagToRetry) {
+        if (isNext) {
+            _networkState.postValue(NetworkState.LOADING)
+            isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
+                _networkState.postValue(NetworkState.LOADED)
+                //clear retry since last request succeeded
+                retry = null
+                if (it.next == null) {
+                    isNext = false
+                }
+                callback.onResult(it.wrapper, params.key + 1)
+            }) {
                 retry = {
                     loadAfter(params, callback)
                 }
                 initError(it)
-            } else {
-                _networkState.postValue(NetworkState.LOADED)
-            }
-        }.also { compositeDisposable.add(it) }
+            }.also { compositeDisposable.add(it) }
+        }
     }
 
     override fun loadInitial(
@@ -64,7 +61,7 @@ class SearchPageKeyedDataSource(
         isNetworkAvailable.flatMap { fetchItems(it, 1) }.subscribe({
             _networkState.postValue(NetworkState.LOADED)
             if (it.next == null) {
-                flagToRetry = false
+                isNext = false
             }
             callback.onResult(it.wrapper, null, 2)
         }) {
