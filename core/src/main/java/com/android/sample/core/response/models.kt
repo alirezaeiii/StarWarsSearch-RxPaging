@@ -31,7 +31,7 @@ class Planet(
         val population: String,
 )
 
-class Film(
+data class Film(
         @Json(name = "opening_crawl")
         val openingCrawl: String
 )

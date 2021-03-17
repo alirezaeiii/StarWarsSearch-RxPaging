@@ -7,12 +7,16 @@
     <data>
 
         <variable
+            name="vm"
+            type="com.android.sample.feature.search.viewmodel.DetailViewModel" />
+
+        <variable
             name="character"
             type="com.android.sample.core.response.Character" />
 
         <variable
-            name="detailWrapper"
-            type="com.android.sample.feature.search.model.DetailWrapper" />
+            name="specie"
+            type="com.android.sample.feature.search.model.SpecieWrapper" />
 
     </data>
 
@@ -23,7 +27,8 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/layout_character_details"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:showData="@{vm.liveData}">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -41,8 +46,10 @@
                         android:id="@+id/toolbar_character_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:navigationIcon="@drawable/ic_arrow_back"
                         app:title="@{character.name}"
-                        tools:title="Ali" />
+                        app:titleTextColor="@color/white"
+                        tools:title="Title" />
 
                 </com.google.android.material.appbar.AppBarLayout>
 
@@ -128,11 +135,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="@string/specie" />
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_micro"
+                        android:layout_marginEnd="@dimen/spacing_micro"
+                        android:layout_marginBottom="@dimen/spacing_micro">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -155,7 +166,7 @@
                                 style="@style/Widget.StarWarsSearch.Text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{detailWrapper.species.get(0).name}"
+                                android:text="@{specie.name}"
                                 android:textAllCaps="false"
                                 app:layout_constraintStart_toEndOf="@id/label_specie_name"
                                 app:layout_constraintStart_toStartOf="@+id/text_specie_language"
@@ -179,11 +190,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/spacing_medium"
-                                android:text="@{detailWrapper.species.get(0).language}"
+                                android:text="@{specie.language}"
                                 android:textAllCaps="false"
                                 app:layout_constraintBottom_toBottomOf="@+id/label_specie_language"
                                 app:layout_constraintStart_toEndOf="@+id/label_specie_language"
-                                tools:text="Galactic basic" />
+                                tools:text="Ali basic" />
 
                             <TextView
                                 android:id="@+id/label_planet_population"
@@ -191,9 +202,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
+                                android:layout_marginBottom="@dimen/spacing_medium"
                                 android:text="@string/label_population"
-                                app:layout_constraintStart_toStartOf="@id/label_specie_language"
-                                app:layout_constraintTop_toBottomOf="@+id/text_specie_language" />
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/label_specie_language"
+                                app:layout_constraintTop_toBottomOf="@+id/label_specie_language" />
 
                             <TextView
                                 android:id="@+id/text_planet_population"
@@ -201,7 +214,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="@{detailWrapper.species.get(0).population}"
+                                android:text="@{specie.population}"
                                 android:textAllCaps="false"
                                 app:layout_constraintBottom_toBottomOf="@+id/label_planet_population"
                                 app:layout_constraintStart_toEndOf="@+id/label_planet_population"
@@ -238,12 +251,33 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/film_item" />
 
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            style="@style/LoadingStyle"
+            app:showLoading="@{vm.liveData}"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/error_view"
+            style="@style/ErrorViewStyle"
+            app:showError="@{vm.liveData}">
+
+            <TextView style="@style/ErrorTextViewStyle" />
+
+            <Button
+                android:id="@+id/retry_btn"
+                style="@style/ErrorButtonStyle"
+                android:onClick="@{()-> vm.sendRequest()}" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
