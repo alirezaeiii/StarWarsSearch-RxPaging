@@ -5,11 +5,12 @@ import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
-import com.android.sample.core.response.Film
 import com.android.sample.core.response.Character
+import com.android.sample.core.response.Film
+import com.android.sample.feature.search.model.DetailWrapper
+import com.android.sample.feature.search.model.SpecieWrapper
 import io.reactivex.Flowable
 import io.reactivex.Single
-import com.android.sample.feature.search.viewmodel.DetailViewModel.DetailWrapper
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
@@ -22,13 +23,7 @@ class DetailViewModel @Inject constructor(
         Single.zip(getSpeciesWrapper(character, getSpecieUseCase, getPlanetUseCase),
                 getFilms(character, getFilmUseCase), { species, films ->
             DetailWrapper(species, films)
-        })) {
-
-    class DetailWrapper(
-            val species: List<SpecieWrapper>,
-            val films: List<Film>,
-    )
-}
+        }))
 
 private fun getSpeciesWrapper(
     character: Character, getSpecieUseCase: GetSpecieUseCase, getPlanetUseCase: GetPlanetUseCase,
@@ -51,9 +46,3 @@ private fun getFilms(character: Character, getFilmUseCase: GetFilmUseCase): Sing
             .flatMapSingle { filmUrl -> getFilmUseCase(filmUrl) }
             .toList()
 }
-
-class SpecieWrapper(
-        val name: String?,
-        val language: String?,
-        val population: String,
-)

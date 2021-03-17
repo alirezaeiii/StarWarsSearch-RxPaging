@@ -7,8 +7,12 @@
     <data>
 
         <variable
-            name="person"
+            name="character"
             type="com.android.sample.core.response.Character" />
+
+        <variable
+            name="detailWrapper"
+            type="com.android.sample.feature.search.model.DetailWrapper" />
 
     </data>
 
@@ -17,48 +21,228 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/layout_character_details"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/person_name"
-                    style="@style/TextViewStyle"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@{@string/person_name(person.name)}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@id/guideline"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/person_birth_year"
-                    style="@style/TextViewStyle"
-                    android:text="@{@string/person_birth_year(person.birthYear)}"
-                    app:layout_constraintEnd_toEndOf="@id/guideline"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/person_name" />
-
-                <TextView
-                    android:id="@+id/person_height"
-                    style="@style/TextViewStyle"
-                    app:height="@{person.height}"
-                    app:layout_constraintEnd_toEndOf="@id/guideline"
-                    app:layout_constraintStart_toStartOf="@id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/person_birth_year" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar_character_details"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar_character_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:title="@{character.name}"
+                        tools:title="Ali" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/layout_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/app_bar_character_details">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/label_birth_year"
+                            style="@style/Widget.StarWarsSearch.Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_medium"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:text="@string/label_birth_year"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/text_birth_year"
+                            style="@style/Widget.StarWarsSearch.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_medium"
+                            android:text="@{character.birthYear}"
+                            app:layout_constraintBottom_toBottomOf="@+id/label_birth_year"
+                            app:layout_constraintStart_toEndOf="@+id/label_birth_year"
+                            tools:text="80BBY" />
+
+
+                        <TextView
+                            android:id="@+id/label_height"
+                            style="@style/Widget.StarWarsSearch.Label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_medium"
+                            android:layout_marginBottom="@dimen/spacing_medium"
+                            android:text="@string/label_height"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/label_birth_year"
+                            app:layout_constraintTop_toBottomOf="@+id/label_birth_year" />
+
+                        <TextView
+                            android:id="@+id/text_height"
+                            style="@style/Widget.StarWarsSearch.Text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:height="@{character.height}"
+                            app:layout_constraintBottom_toBottomOf="@+id/label_height"
+                            app:layout_constraintStart_toStartOf="@+id/text_birth_year"
+                            tools:text="20cm or 1.6feet" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/layout_specie"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_profile">
+
+                    <TextView
+                        style="@style/Widget.StarWarsSearch.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:text="@string/specie" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/label_specie_name"
+                                style="@style/Widget.StarWarsSearch.Label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_medium"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="@string/label_name"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                            <TextView
+                                android:id="@+id/text_specie_name"
+                                style="@style/Widget.StarWarsSearch.Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{detailWrapper.species.get(0).name}"
+                                android:textAllCaps="false"
+                                app:layout_constraintStart_toEndOf="@id/label_specie_name"
+                                app:layout_constraintStart_toStartOf="@+id/text_specie_language"
+                                app:layout_constraintTop_toTopOf="@+id/label_specie_name"
+                                tools:text="Ali's species" />
+
+                            <TextView
+                                android:id="@+id/label_specie_language"
+                                style="@style/Widget.StarWarsSearch.Label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:layout_marginBottom="@dimen/spacing_small"
+                                android:text="@string/label_language"
+                                app:layout_constraintStart_toStartOf="@+id/label_specie_name"
+                                app:layout_constraintTop_toBottomOf="@+id/label_specie_name" />
+
+                            <TextView
+                                android:id="@+id/text_specie_language"
+                                style="@style/Widget.StarWarsSearch.Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/spacing_medium"
+                                android:text="@{detailWrapper.species.get(0).language}"
+                                android:textAllCaps="false"
+                                app:layout_constraintBottom_toBottomOf="@+id/label_specie_language"
+                                app:layout_constraintStart_toEndOf="@+id/label_specie_language"
+                                tools:text="Galactic basic" />
+
+                            <TextView
+                                android:id="@+id/label_planet_population"
+                                style="@style/Widget.StarWarsSearch.Label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="@string/label_population"
+                                app:layout_constraintStart_toStartOf="@id/label_specie_language"
+                                app:layout_constraintTop_toBottomOf="@+id/text_specie_language" />
+
+                            <TextView
+                                android:id="@+id/text_planet_population"
+                                style="@style/Widget.StarWarsSearch.Text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="@{detailWrapper.species.get(0).population}"
+                                android:textAllCaps="false"
+                                app:layout_constraintBottom_toBottomOf="@+id/label_planet_population"
+                                app:layout_constraintStart_toEndOf="@+id/label_planet_population"
+                                tools:text="unknown" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_films"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_specie">
+
+                    <TextView
+                        style="@style/Widget.StarWarsSearch.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:text="@string/films" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_film"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.core.widget.NestedScrollView>
 
     </FrameLayout>
