@@ -24,7 +24,9 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
      */
     private lateinit var viewModelAdapter: MainAdapter
 
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+
+    private val binding get() = _binding!!
 
     /**
      * Initialize dagger injection dependency graph.
@@ -42,7 +44,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
             setVariable(BR.vm, viewModel)
             // Set the lifecycleOwner so DataBinding can observe LiveData
             lifecycleOwner = viewLifecycleOwner
@@ -101,5 +103,10 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             binding.recyclerView.scrollToPosition(0)
             (binding.recyclerView.adapter as MainAdapter).submitList(null)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
