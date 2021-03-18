@@ -1,7 +1,6 @@
 package com.android.sample.core.usecase
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.DetailRepository
