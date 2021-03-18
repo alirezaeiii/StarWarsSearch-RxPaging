@@ -8,10 +8,10 @@ An Android Application interacting with [Star Wars API](https://swapi.dev/). It 
 * Kotlin Gradle DSL
 
 ## Architecture
-Modular Android App Architecture presented in Google I/O’19, is a software design technique to separate functionality into independent, interchangeable modules so that each contains everything necessary to execute a specific functionality.
+Modular Android App Architecture presented in Google I/O’19, is a software design technique to separate functionality into independent, interchangeable modules so that each contains everything necessary to execute a specific functionality. Modular app architecture allows to be developed features in isolation, independently from other features.
 
 Clean architecture helps organizing the project into different layers so that it's easy to understand, scale and debug when need arises.
-Clean architecture maximizes the usage of SOLID principles. To keep things simple, I have used five layers :
+Clean architecture maximizes the usage of SOLID principles. SOLID design principles intended to make software designs more understandable, flexible and maintainable. To keep things simple, I have used five layers :
 
 * Presentation which is a layer that interacts with the UI.
 * UseCases(InterActors) defines actions that user can trigger.
@@ -19,10 +19,35 @@ Clean architecture maximizes the usage of SOLID principles. To keep things simpl
 * Data which include abstract definition of all the data sources.
 * Framework which implements interaction with the Android SDK and provide concrete implementations for the data layer.
 
-The project is divided into 4 Modules :
-*  **:app**  depends on **:core** and indirectly depends on **:features_search** by dynamic-features. It also depends on **:commons** and **:feature_search** for instrumentation test using _androidTestImplementation_.
-* **:features_search** modules depend on **:commons**, **:core** and **:app**.
-* **:core** and **:commons** don’t have any dependency.
+A single-activity architecture, using the Navigation component to manage fragment operations.
+
+[Android architecture components](https://developer.android.com/topic/libraries/architecture/) which is part of Android Jetpack to give the project a robust design, testable and maintainable.
+
+Pattern Model-View-ViewModel (MVVM) facilitating a separation of development of the graphical user interface.
+
+### Modules
+
+Modules are collection of source files and build settings that allow you to divide a project into discrete units of functionality. In this case apart from dividing by functionality/responsibility, existing the following dependence between them. The project is divided into 4 Modules :
+
+*  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:commons` and `:feature_search` for instrumentation test using _androidTestImplementation_.
+* `:features_search` modules depend on `:commons`, `:core` and `:app`.
+* `:core` and `:commons` don’t have any dependency.
+
+#### App module
+
+The `:app` module is an [com.android.application](https://developer.android.com/studio/build/), which is needed to create the app bundle. It is also responsible for initiating the [dependency graph](https://github.com/google/dagger).
+
+#### Core module
+
+The `:core` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) for serving network requests. Providing the data source for the many features that require it.
+
+#### Feature modules
+
+The `:features_search` module is an [com.android.dynamic-feature](https://developer.android.com/studio/projects/dynamic-delivery) is essentially a gradle module which can be downloaded independently from the base application module. It can hold code and resources and include dependencies, just like any other gradle module.
+
+#### Commons modules
+
+The `:commons` modules are an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
 ## Testing
 Testing is done in each layer includes Repository and UseCase in core module as well as ViewModel in feature module. This is one of the advantages of Clean Architecture.
