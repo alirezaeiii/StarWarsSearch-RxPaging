@@ -1,7 +1,7 @@
 import dependencies.Dependencies
 import dependencies.DebugDependencies
 import dependencies.AnnotationProcessorsDependencies
-import extensions.addTestsDependencies
+import extensions.addAndroidTestsDependencies
 import extensions.debugImplementation
 import extensions.kapt
 
@@ -70,5 +70,5 @@ dependencies {
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
 
-    addTestsDependencies()
+    addAndroidTestsDependencies()
 }

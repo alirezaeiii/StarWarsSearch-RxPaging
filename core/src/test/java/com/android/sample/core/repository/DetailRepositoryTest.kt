@@ -66,6 +66,8 @@ class DetailRepositoryTest {
 
         val testObserver = detailRepository.getFilm(anyString()).test()
 
+        testObserver.assertValues(film)
+
         testObserver.dispose()
     }
 }

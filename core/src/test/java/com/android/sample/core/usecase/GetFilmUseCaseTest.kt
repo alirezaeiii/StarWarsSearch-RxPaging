@@ -36,6 +36,8 @@ class GetFilmUseCaseTest {
 
         val testObserver = getFilmUseCase(anyString()).test()
 
+        testObserver.assertValues(film)
+
         testObserver.dispose()
     }
 }

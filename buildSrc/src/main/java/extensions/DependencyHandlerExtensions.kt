@@ -77,7 +77,12 @@ fun DependencyHandler.addTestsDependencies() {
     testImplementation(TestDependencies.RULES)
     testImplementation(TestDependencies.RUNNER)
     testImplementation(TestDependencies.EXT)
+}
 
+/**
+ * Adds all the Android tests dependencies to specific configuration.
+ */
+fun DependencyHandler.addAndroidTestsDependencies() {
     androidTestImplementation(TestAndroidDependencies.ESPRESSO_CORE)
     androidTestImplementation(TestAndroidDependencies.ESPRESSO_CONTRIB)
     androidTestImplementation(TestAndroidDependencies.RUNNER)
