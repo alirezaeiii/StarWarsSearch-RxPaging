@@ -41,11 +41,11 @@ The `:app` module is an [com.android.application](https://developer.android.com/
 
 The `:core` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) for serving network requests. Providing the data source for the many features that require it.
 
-#### Feature modules
+#### Feature module
 
 The `:features_search` module is an [com.android.dynamic-feature](https://developer.android.com/studio/projects/dynamic-delivery) is essentially a gradle module which can be downloaded independently from the base application module. It can hold code and resources and include dependencies, just like any other gradle module.
 
-#### Commons modules
+#### Commons module
 
 The `:commons` modules are an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
