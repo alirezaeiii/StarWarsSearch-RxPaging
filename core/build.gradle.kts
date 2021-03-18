@@ -1,4 +1,5 @@
 import dependencies.Dependencies
+import extensions.addTestsDependencies
 
 plugins {
     id("commons.android-library")
@@ -11,6 +12,8 @@ android {
 }
 
 dependencies {
+    implementation(project(BuildModules.COMMONS))
+
     api(Dependencies.LIFECYCLE_EXTENSIONS)
     api(Dependencies.FRAGMENT_KTX)
     implementation(Dependencies.NAVIGATION_UI)
@@ -23,4 +26,6 @@ dependencies {
     implementation(Dependencies.MOSHI)
     implementation(Dependencies.MOSHI_KTX)
     implementation(Dependencies.TIMBER)
+
+    addTestsDependencies()
 }

@@ -2,6 +2,7 @@ package commons
 
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
+import extensions.addTestsDependencies
 import extensions.kapt
 
 plugins {
@@ -54,4 +55,6 @@ dependencies {
     implementation(Dependencies.RX_JAVA)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
+
+    addTestsDependencies()
 }

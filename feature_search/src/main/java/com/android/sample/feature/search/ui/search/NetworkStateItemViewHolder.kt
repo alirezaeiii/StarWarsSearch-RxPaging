@@ -53,7 +53,7 @@ class NetworkStateItemViewHolder(
                     root.context.resources.getDimension(R.dimen.network_state_height).toInt()
                 )
             )
-            val padding = root.context.resources.getDimension(R.dimen.spacing_small).toInt()
+            val padding = root.context.resources.getDimension(R.dimen.spacing_large).toInt()
             networkStateLayout.setPadding(padding, padding, padding, padding)
         }
         progressBar.toVisibility(networkState?.status == RUNNING)
