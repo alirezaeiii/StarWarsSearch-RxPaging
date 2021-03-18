@@ -76,7 +76,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun getDetails() {
+    fun givenServerResponse200_whenFetch_shouldReturnSuccess() {
         `when`(service.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(service.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(service.getFilm(anyString())).thenReturn(Single.just(film))
@@ -93,7 +93,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun getSpecieError() {
+    fun givenServerResponseError_whenFetch_specie_shouldReturnError() {
         `when`(service.getSpecie(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(service.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(service.getFilm(anyString())).thenReturn(Single.just(film))
@@ -108,7 +108,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun getPlanetError() {
+    fun givenServerResponseError_whenFetch_planet_shouldReturnError() {
         `when`(service.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(service.getPlanet(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(service.getFilm(anyString())).thenReturn(Single.just(film))
@@ -123,7 +123,7 @@ class DetailViewModelTest {
     }
 
     @Test
-    fun getFilmError() {
+    fun givenServerResponseError_whenFetch_film_shouldReturnError() {
         `when`(service.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(service.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(service.getFilm(anyString())).thenReturn(Single.error(Exception("error")))
