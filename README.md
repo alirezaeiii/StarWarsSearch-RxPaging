@@ -47,7 +47,7 @@ The `:features_search` module is an [com.android.dynamic-feature](https://develo
 
 #### Commons module
 
-The `:commons` modules are an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
+The `:commons` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
 ## Testing
 Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.
