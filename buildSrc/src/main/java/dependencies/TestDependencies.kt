@@ -6,7 +6,6 @@ package dependencies
  */
 object TestDependencies {
     const val JUNIT = "junit:junit:${BuildDependenciesVersions.JUNIT}"
-    const val MOCKK = "io.mockk:mockk:${BuildDependenciesVersions.MOCKK}"
     const val MOCKITO = "org.mockito:mockito-core:${BuildDependenciesVersions.MOCKITO}"
     const val EXT = "androidx.test.ext:junit:${BuildDependenciesVersions.EXT}"
     const val CORE = "androidx.test:core:${BuildDependenciesVersions.TEST}"

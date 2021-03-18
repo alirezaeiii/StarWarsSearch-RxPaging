@@ -71,7 +71,6 @@ fun DependencyHandler.androidTestImplementation(dependencyNotation: String): Dep
  */
 fun DependencyHandler.addTestsDependencies() {
     testImplementation(TestDependencies.JUNIT)
-    testImplementation(TestDependencies.MOCKK)
     testImplementation(TestDependencies.MOCKITO)
     testImplementation(TestDependencies.CORE)
     testImplementation(TestDependencies.ARCH_CORE)

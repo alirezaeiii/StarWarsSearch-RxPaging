@@ -9,8 +9,9 @@ An Android Application interacting with [Star Wars API](https://swapi.dev/). It 
 
 ## Architecture
 Modular Android App Architecture presented in Google I/O’19, is a software design technique to separate functionality into independent, interchangeable modules so that each contains everything necessary to execute a specific functionality.
+
 Clean architecture helps organizing the project into different layers so that it's easy to understand, scale and debug when need arises.
-Clean architecture maximizes the usa of SOLID principles. To keep things simple, I have used five layers.
+Clean architecture maximizes the usage of SOLID principles. To keep things simple, I have used five layers :
 
 * Presentation which is a layer that interacts with the UI.
 * UseCases(InterActors) defines actions that user can trigger.
