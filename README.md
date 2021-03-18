@@ -45,6 +45,8 @@ The `:features_search` module is an [com.android.dynamic-feature](https://develo
 
 The `:commons` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
+### Addenda
+
 *  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:commons` and `:feature_search` for instrumentation test using _androidTestImplementation_.
 * `:features_search` modules depend on `:commons`, `:core` and `:app`.
 * `:core` and `:commons` don’t have any dependency.
