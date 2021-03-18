@@ -18,28 +18,31 @@ Clean architecture maximizes the usa of SOLID principles. To keep things simple,
 * Data which include abstract definition of all the data sources.
 * Framework which implements interaction with the Android SDK and provide concrete implementations for the data layer.
 
-The project is divided into 4 Modules
-* :app depends on :core and indirectly depends on :features_search by dynamic-features.
-* :features modules depend on :commons, :core, :app.
-* :core and *:commons don’t have any dependency.
+The project is divided into 4 Modules :
+*  **:app**  depends on **:core** and indirectly depends on **:features_search** by dynamic-features.
+* **:features_search** modules depend on **:commons, :core, :app**.
+* **:core** and **:commons** don’t have any dependency.
 
 ## Testing
 Testing is done in each layer which is one of the advantages of Clean Architecture.
 
 # Libraries
 * [Android Jetpack](https://developer.android.com/jetpack)
+   * [Paging](https://developer.android.com/topic/libraries/architecture/paging) Library helps you load and display small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.
    * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) ViewModel is designed to store and manage UI-related data in a lifecycle conscious way. This allows data to survive configuration changes such as screen rotations.
-   * [DataBinding](https://developer.android.com/topic/libraries/data-binding/) The Data Binding Library is a support library that allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
-   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) LiveData is lifecycle-aware, meaning it respects the lifecycle of other app components updating app component observers that are in an active lifecycle state.
+   * [DataBinding](https://developer.android.com/topic/libraries/data-binding/) is a Library in the support library that allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
+   * [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) is lifecycle-aware, meaning it respects the lifecycle of other app components updating app component observers that are in an active lifecycle state.
    * [Navigation](https://developer.android.com/guide/navigation/) Android Jetpack's Navigation component helps you implement effective navigation.
-* [Dagger](https://developer.android.com/training/dependency-injection/dagger-multi-module) Dagger is a fully static, compile-time dependency injection framework for Java, Kotlin, and Android.
-* [RxJava](https://github.com/ReactiveX/RxJava) RxJava is a library for composing asynchronous code using observable sequences.
-* [RxAndroid](https://github.com/ReactiveX/RxAndroid) RxAndroid is a module that adds the minimum classes to RxJava to make writing reactive components in Android.
-* [Retrofit](https://square.github.io/retrofit/) Type-safe HTTP client for Android and Java and Kotlin by Square.
-* [Moshi](https://github.com/square/moshi) Moshi is a modern JSON library for Android and Java. It makes it easy to parse JSON format data.
+* [Dynamic feature module](https://developer.android.com/guide/app-bundle/play-feature-delivery) allows you to separate certain features and resources from the base module of your app.
+* [Dagger](https://developer.android.com/training/dependency-injection/dagger-multi-module) is a fully static, compile-time dependency injection framework for Java, Kotlin, and Android.
+* [RxJava](https://github.com/ReactiveX/RxJava) is a library for composing asynchronous code using observable sequences.
+* [RxAndroid](https://github.com/ReactiveX/RxAndroid) is a module that adds the minimum classes to RxJava to make writing reactive components in Android.
+* [Retrofit](https://square.github.io/retrofit/) is a Type-safe HTTP client for Android and Java and Kotlin by Square.
+* [Moshi](https://github.com/square/moshi) is a modern JSON library for Android and Java. It makes it easy to parse JSON format data.
 * [OkHttp interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) Logs HTTP requests and responses.
 * [Material Design](https://material.io/develop/android/) Build beautiful, usable products using Material Components for Android
 * [JUnit4](https://junit.org/junit4/) Unit Testing
+* [Mockito](https://github.com/mockito/mockito) which is the most popular Mocking framework for unit tests written in Java as well as Kotlin.
 * [Espresso](https://developer.android.com/training/testing/espresso) Automated testing UI test
 
 # Licence
