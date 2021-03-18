@@ -14,7 +14,7 @@ Clean architecture helps organizing the project into different layers so that it
 Clean architecture maximizes the usage of SOLID principles. SOLID design principles intended to make software designs more understandable, flexible and maintainable. To keep things simple, I have used five layers :
 
 * Presentation which is a layer that interacts with the UI.
-* UseCases(InterActors) defines actions that user can trigger.
+* UseCases(Interactors) defines actions that user can trigger.
 * Domain contains the business logic of the application.
 * Data which include abstract definition of all the data sources.
 * Framework which implements interaction with the Android SDK and provide concrete implementations for the data layer.
@@ -50,7 +50,7 @@ The `:features_search` module is an [com.android.dynamic-feature](https://develo
 The `:commons` modules are an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
 ## Testing
-Testing is done in each layer includes Repository and UseCase in core module as well as ViewModel in feature module. This is one of the advantages of Clean Architecture.
+Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.
 
 # Libraries
 * [Android Jetpack](https://developer.android.com/jetpack)
