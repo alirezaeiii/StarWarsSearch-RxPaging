@@ -37,6 +37,7 @@ dependencies {
     implementation(Dependencies.KOTLIN)
     api(Dependencies.DAGGER)
     api(Dependencies.PAGING)
+    api(Dependencies.PAGING_RXJAVA)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
 }

@@ -18,6 +18,7 @@ object Dependencies {
     const val CORE_KTX = "androidx.core:core-ktx:${BuildDependenciesVersions.CORE_KTX}"
     const val CONSTRAIN_LAYOUT = "androidx.constraintlayout:constraintlayout:${BuildDependenciesVersions.CONSTRAIN_LAYOUT}"
     const val PAGING = "androidx.paging:paging-runtime-ktx:${BuildDependenciesVersions.PAGING}"
+    const val PAGING_RXJAVA = "androidx.paging:paging-rxjava2:${BuildDependenciesVersions.PAGING}"
     const val DAGGER = "com.google.dagger:dagger:${BuildDependenciesVersions.DAGGER}"
     const val RX_JAVA = "io.reactivex.rxjava2:rxjava:${BuildDependenciesVersions.RX_JAVA}"
     const val RX_ANDROID = "io.reactivex.rxjava2:rxandroid:${BuildDependenciesVersions.RX_ANDROID}"
@@ -28,4 +29,5 @@ object Dependencies {
     const val LOGGING = "com.squareup.okhttp3:logging-interceptor:${BuildDependenciesVersions.LOGGING}"
     const val MOSHI = "com.squareup.moshi:moshi:${BuildDependenciesVersions.MOSHI}"
     const val MOSHI_KTX = "com.squareup.moshi:moshi-kotlin:${BuildDependenciesVersions.MOSHI}"
+    const val ESPRESSO_IDLING_RESOURCE = "com.android.support.test.espresso:espresso-idling-resource:${BuildDependenciesVersions.ESPRESSO}"
 }

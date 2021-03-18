@@ -5,9 +5,9 @@
     <string name="label_birth_year">Birth Year :</string>
     <string name="label_height">Height :</string>
     <string name="person_height">%scm or %sfeet</string>
-    <string name="label_specie">Species</string>
+    <string name="label_species">Species</string>
     <string name="label_name">Name :</string>
     <string name="label_language">Language :</string>
     <string name="label_population">Population :</string>
-    <string name="films">Films</string>
+    <string name="label_films">Films</string>
 </resources>

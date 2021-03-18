@@ -20,8 +20,8 @@ Clean architecture maximizes the usage of SOLID principles. To keep things simpl
 * Framework which implements interaction with the Android SDK and provide concrete implementations for the data layer.
 
 The project is divided into 4 Modules :
-*  **:app**  depends on **:core** and indirectly depends on **:features_search** by dynamic-features.
-* **:features_search** modules depend on **:commons, :core, :app**.
+*  **:app**  depends on **:core** and indirectly depends on **:features_search** by dynamic-features. it also depends on **:commons** and **:feature_search** for instrumentation test using _androidTestImplementation_.
+* **:features_search** modules depend on **:commons**, **:core** and :app**.
 * **:core** and **:commons** don’t have any dependency.
 
 ## Testing

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.sample.commons.util.Resource
 import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
+import com.android.sample.commons.util.wrapEspressoIdlingResourceSingle
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
@@ -32,7 +33,8 @@ open class BaseViewModel<T>(
 
     fun sendRequest() {
         _liveData.value = Resource.Loading
-        singleRequest.subscribeOn(schedulerProvider.io())
+        wrapEspressoIdlingResourceSingle { singleRequest }
+            .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui()).subscribe({
                 _liveData.postValue(Resource.Success(it))
             }) {
