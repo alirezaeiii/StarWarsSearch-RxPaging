@@ -25,13 +25,9 @@ A single-activity architecture, using the Navigation component to manage fragmen
 
 Pattern Model-View-ViewModel (MVVM) facilitating a separation of development of the graphical user interface.
 
-### Modules
+## Modules
 
 Modules are collection of source files and build settings that allow you to divide a project into discrete units of functionality. In this case apart from dividing by functionality/responsibility, existing the following dependence between them. The project is divided into 4 Modules :
-
-*  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:commons` and `:feature_search` for instrumentation test using _androidTestImplementation_.
-* `:features_search` modules depend on `:commons`, `:core` and `:app`.
-* `:core` and `:commons` don’t have any dependency.
 
 #### App module
 
@@ -48,6 +44,10 @@ The `:features_search` module is an [com.android.dynamic-feature](https://develo
 #### Commons module
 
 The `:commons` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
+
+*  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:commons` and `:feature_search` for instrumentation test using _androidTestImplementation_.
+* `:features_search` modules depend on `:commons`, `:core` and `:app`.
+* `:core` and `:commons` don’t have any dependency.
 
 ## Testing
 Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.
