@@ -19,11 +19,6 @@ import com.android.sample.starwars.StarWarsApplication.Companion.coreComponent
 
 class SearchFragment : BaseFragment<SearchViewModel>() {
 
-    /**
-     * RecyclerView Adapter for converting a list of pokemon to items.
-     */
-    private lateinit var viewModelAdapter: MainAdapter
-
     private var _binding: FragmentSearchBinding? = null
 
     private val binding get() = _binding!!
@@ -50,15 +45,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        viewModel.items.observe(viewLifecycleOwner, {
-            viewModelAdapter.submitList(it)
-        })
-
-        viewModel.networkState.observe(viewLifecycleOwner, {
-            viewModelAdapter.setNetworkState(it)
-        })
-
-        viewModelAdapter =
+        val viewModelAdapter =
                 MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { person ->
                     val destination =
                             SearchFragmentDirections.actionSearchFragmentToDetailFragment(person)
@@ -67,6 +54,14 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                                 ?.let { navigate(destination) }
                     }
                 })
+
+        viewModel.items.observe(viewLifecycleOwner, {
+            viewModelAdapter.submitList(it)
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, {
+            viewModelAdapter.setNetworkState(it)
+        })
 
         with(binding) {
 
