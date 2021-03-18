@@ -5,7 +5,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -56,10 +56,10 @@ class MainActivityTest {
     fun shouldBeAbleToSearchItem() {
         onView(withId(R.id.search_view)).perform(click())
         onView(isAssignableFrom(EditText::class.java))
-            .perform(typeText("a"), pressImeActionButton())
+                .perform(typeText("a"), pressImeActionButton())
         Thread.sleep(2000)
         onView(withId(R.id.recyclerView)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<StarWarsItemViewHolder>(9, click()))
+                actionOnItemAtPosition<StarWarsItemViewHolder>(9, click()))
 
         onView(withText(R.string.label_birth_year)).check(matches(isDisplayed()))
         onView(withText(R.string.label_height)).check(matches(isDisplayed()))
