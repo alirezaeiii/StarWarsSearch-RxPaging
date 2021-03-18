@@ -25,7 +25,7 @@ The project is divided into 4 Modules :
 * **:core** and **:commons** don’t have any dependency.
 
 ## Testing
-Testing is done in each layer which is one of the advantages of Clean Architecture.
+Testing is done in each layer includes Repository and UseCase in core module as well as ViewModel in feature module. This is one of the advantages of Clean Architecture.
 
 # Libraries
 * [Android Jetpack](https://developer.android.com/jetpack)

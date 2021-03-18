@@ -10,9 +10,7 @@ import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
 import com.android.sample.core.response.Character
-import com.android.sample.core.response.PeopleWrapper
 import com.android.sample.feature.search.paging.SearchPageKeyRepository
-import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
@@ -22,10 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.anyString
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.concurrent.Executor
 
@@ -53,11 +48,6 @@ class SearchPageKeyRepositoryTest {
 
     @Test
     fun searchPeople() {
-        val peopleWrapper = PeopleWrapper(emptyList(), null)
-
-        `when`(service.searchPeople(anyString(), anyInt())
-        ).thenReturn(Observable.just(peopleWrapper))
-
         val searchRepository = SearchRepository(service)
         val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
 
