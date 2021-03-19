@@ -28,5 +28,4 @@ object Dependencies {
     const val LOGGING = "com.squareup.okhttp3:logging-interceptor:${BuildDependenciesVersions.LOGGING}"
     const val MOSHI = "com.squareup.moshi:moshi:${BuildDependenciesVersions.MOSHI}"
     const val MOSHI_KTX = "com.squareup.moshi:moshi-kotlin:${BuildDependenciesVersions.MOSHI}"
-    const val ESPRESSO_IDLING_RESOURCE = "com.android.support.test.espresso:espresso-idling-resource:${BuildDependenciesVersions.ESPRESSO}"
 }

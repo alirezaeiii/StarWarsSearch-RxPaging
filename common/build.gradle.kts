@@ -10,5 +10,4 @@ dependencies {
     implementation(Dependencies.RX_JAVA)
     implementation(Dependencies.RX_ANDROID)
     implementation(Dependencies.TIMBER)
-    implementation(Dependencies.ESPRESSO_IDLING_RESOURCE)
 }
