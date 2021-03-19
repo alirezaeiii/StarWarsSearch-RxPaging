@@ -2,7 +2,6 @@ package com.android.sample.feature.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.commons.util.Resource
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
 import com.android.sample.commons.util.schedulers.ImmediateSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
@@ -36,14 +35,6 @@ class DetailViewModelTest {
     @Mock
     private lateinit var service: StarWarsService
 
-    private lateinit var schedulerProvider: BaseSchedulerProvider
-
-    private lateinit var detailRepository: DetailRepository
-    private lateinit var getSpecieUseCase: GetSpecieUseCase
-    private lateinit var getPlanetUseCase: GetPlanetUseCase
-    private lateinit var getFilmUseCase: GetFilmUseCase
-
-    private lateinit var character: Character
     private lateinit var specie: Specie
     private lateinit var planet: Planet
     private lateinit var film: Film
@@ -55,24 +46,21 @@ class DetailViewModelTest {
         initMocks(this)
 
         // Make the sure that all schedulers are immediate.
-        schedulerProvider = ImmediateSchedulerProvider()
+        val schedulerProvider = ImmediateSchedulerProvider()
 
-        detailRepository = DetailRepository(service)
-        getSpecieUseCase = GetSpecieUseCase(detailRepository)
-        getPlanetUseCase = GetPlanetUseCase(detailRepository)
-        getFilmUseCase = GetFilmUseCase(detailRepository)
-        character = Character(
+        val detailRepository = DetailRepository(service)
+        val character = Character(
             "Ali", "127", "1385", emptyList(), emptyList()
+        )
+
+        viewModel = DetailViewModel(
+            schedulerProvider, character, GetSpecieUseCase(detailRepository),
+            GetPlanetUseCase(detailRepository), GetFilmUseCase(detailRepository)
         )
 
         specie = Specie("Ali", "Persian", "Iran")
         planet = Planet("")
         film = Film("")
-
-        viewModel = DetailViewModel(
-            schedulerProvider, character, getSpecieUseCase,
-            getPlanetUseCase, getFilmUseCase
-        )
     }
 
     @Test
