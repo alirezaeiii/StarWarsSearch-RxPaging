@@ -4,14 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.android.sample.common.paging.NetworkState
+import com.android.sample.common.util.EspressoIdlingResource
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import java.util.concurrent.Executor
 
 
 abstract class BasePageKeyedItemDataSource<T, R>(
-    protected val schedulerProvider: BaseSchedulerProvider,
-    private val retryExecutor: Executor
+        protected val schedulerProvider: BaseSchedulerProvider,
+        private val retryExecutor: Executor,
 ) : PageKeyedDataSource<Int, T>() {
 
     // keep a function reference for the retry event
@@ -42,6 +43,8 @@ abstract class BasePageKeyedItemDataSource<T, R>(
     }
 
     protected inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
+            .doOnSubscribe { EspressoIdlingResource.increment() } // App is busy until further notice
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
+            .doFinally { EspressoIdlingResource.decrement() } // Set app as idle.
 }

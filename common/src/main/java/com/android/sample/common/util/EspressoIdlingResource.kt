@@ -17,8 +17,6 @@
 package com.android.sample.common.util
 
 import androidx.test.espresso.IdlingResource
-import io.reactivex.Observable
-import io.reactivex.Single
 
 /**
  * Contains a static reference to [IdlingResource], only available in the 'mock' build type.
@@ -40,20 +38,3 @@ object EspressoIdlingResource {
         }
     }
 }
-
-inline fun <T> wrapEspressoIdlingResource(function: () -> T): T {
-    EspressoIdlingResource.increment() // Set app as busy.
-    return try {
-        function()
-    } finally {
-        EspressoIdlingResource.decrement() // Set app as idle.
-    }
-}
-
-inline fun <T> wrapEspressoIdlingResourceObservable(task: () -> Observable<T>): Observable<T> =
-    task().doOnSubscribe { EspressoIdlingResource.increment() } // App is busy until further notice
-        .doFinally { EspressoIdlingResource.decrement() } // Set app as idle.
-
-inline fun <T> wrapEspressoIdlingResourceSingle(task: () -> Single<T>): Single<T> = task()
-    .doOnSubscribe { EspressoIdlingResource.increment() } // App is busy until further notice
-    .doFinally { EspressoIdlingResource.decrement() } // Set app as idle.

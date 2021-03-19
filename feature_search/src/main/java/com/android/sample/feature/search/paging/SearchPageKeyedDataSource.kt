@@ -7,7 +7,6 @@ import com.android.sample.common.extension.isNetworkAvailable
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.NetworkException
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import com.android.sample.common.util.wrapEspressoIdlingResourceObservable
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.core.response.PeopleWrapper
@@ -16,25 +15,23 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
 
 class SearchPageKeyedDataSource(
-    private val useCase: SearchPeopleUseCase,
-    private val query: String,
-    private val compositeDisposable: CompositeDisposable,
-    schedulerProvider: BaseSchedulerProvider,
-    retryExecutor: Executor,
-    private val context: Context,
+        private val useCase: SearchPeopleUseCase,
+        private val query: String,
+        private val compositeDisposable: CompositeDisposable,
+        schedulerProvider: BaseSchedulerProvider,
+        retryExecutor: Executor,
+        private val context: Context,
 ) : BasePageKeyedItemDataSource<Character, PeopleWrapper>(
-    schedulerProvider, retryExecutor
+        schedulerProvider, retryExecutor
 ) {
 
     private var isNext = true
 
     private val isNetworkAvailable: Observable<Boolean> =
-        Observable.fromCallable { context.isNetworkAvailable() }
+            Observable.fromCallable { context.isNetworkAvailable() }
 
     override fun fetchItems(page: Int): Observable<PeopleWrapper> =
-        wrapEspressoIdlingResourceObservable {
             composeObservable { useCase(query, page) }
-        }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         if (isNext) {
@@ -57,7 +54,7 @@ class SearchPageKeyedDataSource(
     }
 
     override fun loadInitial(
-        params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
+            params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
     ) {
         _networkState.postValue(NetworkState.LOADING)
 
