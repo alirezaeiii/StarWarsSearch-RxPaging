@@ -1,9 +1,9 @@
 package com.android.sample.feature.search.di
 
 import android.app.Application
-import com.android.sample.commons.extension.viewModel
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
-import com.android.sample.commons.util.schedulers.SchedulerProvider
+import com.android.sample.common.extension.viewModel
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.feature.search.ui.search.SearchFragment
 import com.android.sample.feature.search.viewmodel.SearchViewModel

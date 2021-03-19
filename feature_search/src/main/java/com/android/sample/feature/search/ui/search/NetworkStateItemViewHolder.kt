@@ -7,13 +7,13 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.sample.commons.extension.layoutInflater
-import com.android.sample.commons.paging.NetworkState
-import com.android.sample.commons.paging.Status.FAILED
-import com.android.sample.commons.paging.Status.RUNNING
-import com.android.sample.commons.util.toVisibility
+import com.android.sample.common.extension.layoutInflater
+import com.android.sample.common.paging.NetworkState
+import com.android.sample.common.paging.Status.FAILED
+import com.android.sample.common.paging.Status.RUNNING
+import com.android.sample.common.util.toVisibility
 import com.android.sample.feature.search.R
-import com.android.sample.commons.R as Rcommons
+import com.android.sample.common.R as R1
 
 /**
  * A View Holder that can display a loading or have click action.
@@ -54,7 +54,7 @@ class NetworkStateItemViewHolder(
                     root.context.resources.getDimension(R.dimen.network_state_height).toInt()
                 )
             )
-            val padding = root.context.resources.getDimension(Rcommons.dimen.spacing_small).toInt()
+            val padding = root.context.resources.getDimension(R1.dimen.spacing_large).toInt()
             networkStateLayout.setPadding(padding, padding, padding, padding)
         }
         progressBar.toVisibility(networkState?.status == RUNNING)

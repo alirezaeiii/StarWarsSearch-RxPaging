@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
-import com.android.sample.commons.base.BaseFragment
+import com.android.sample.common.base.BaseFragment
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding

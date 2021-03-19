@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.android.sample.commons.extension.layoutInflater
+import com.android.sample.common.extension.layoutInflater
 import com.android.sample.core.response.Film
 import com.android.sample.feature.search.databinding.FilmItemBinding
 import com.android.sample.feature.search.ui.detail.FilmAdapter.FilmViewHolder

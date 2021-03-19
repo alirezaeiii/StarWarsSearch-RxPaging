@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.android.sample.commons.base.BaseFragment
-import com.android.sample.commons.util.Resource
+import com.android.sample.common.base.BaseFragment
+import com.android.sample.common.util.Resource
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.databinding.FragmentDetailBinding
 import com.android.sample.feature.search.di.DaggerDetailComponent

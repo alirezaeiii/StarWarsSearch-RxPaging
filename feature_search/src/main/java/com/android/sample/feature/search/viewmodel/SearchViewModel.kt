@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.android.sample.commons.base.BasePagingViewModel
-import com.android.sample.commons.paging.Listing
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.base.BasePagingViewModel
+import com.android.sample.common.paging.Listing
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.paging.SearchPageKeyRepository

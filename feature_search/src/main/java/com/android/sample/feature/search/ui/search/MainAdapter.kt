@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.android.sample.commons.paging.NetworkState
+import com.android.sample.common.paging.NetworkState
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.R
 

@@ -1,7 +1,7 @@
 package com.android.sample.feature.search.viewmodel
 
-import com.android.sample.commons.base.BaseViewModel
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.base.BaseViewModel
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase

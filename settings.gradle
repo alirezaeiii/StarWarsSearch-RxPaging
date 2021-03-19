@@ -1,5 +1,5 @@
 include ':core'
-include ':commons'
+include ':common'
 include ':feature_search'
 include ':app'
 rootProject.name = "StarWars"

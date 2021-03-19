@@ -6,7 +6,7 @@ import kotlin.reflect.full.memberProperties
 object BuildModules {
     const val APP = ":app"
     const val CORE = ":core"
-    const val COMMONS = ":commons"
+    const val COMMON = ":common"
     const val FEATURE_SEARCH = ":feature_search"
 
     /*

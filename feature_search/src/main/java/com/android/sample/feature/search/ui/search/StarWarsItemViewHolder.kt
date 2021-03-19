@@ -2,7 +2,7 @@ package com.android.sample.feature.search.ui.search
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.sample.commons.extension.layoutInflater
+import com.android.sample.common.extension.layoutInflater
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.databinding.StarWarsItemBinding
 

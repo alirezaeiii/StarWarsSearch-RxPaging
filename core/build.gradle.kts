@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-    implementation(project(BuildModules.COMMONS))
+    implementation(project(BuildModules.COMMON))
 
     api(Dependencies.LIFECYCLE_EXTENSIONS)
     api(Dependencies.FRAGMENT_KTX)

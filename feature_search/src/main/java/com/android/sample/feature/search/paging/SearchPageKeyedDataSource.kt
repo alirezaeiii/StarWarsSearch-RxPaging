@@ -1,13 +1,13 @@
 package com.android.sample.feature.search.paging
 
 import android.content.Context
-import com.android.sample.commons.R
-import com.android.sample.commons.base.BasePageKeyedItemDataSource
-import com.android.sample.commons.extension.isNetworkAvailable
-import com.android.sample.commons.paging.NetworkState
-import com.android.sample.commons.util.NetworkException
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
-import com.android.sample.commons.util.wrapEspressoIdlingResourceObservable
+import com.android.sample.common.R
+import com.android.sample.common.base.BasePageKeyedItemDataSource
+import com.android.sample.common.extension.isNetworkAvailable
+import com.android.sample.common.paging.NetworkState
+import com.android.sample.common.util.NetworkException
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.util.wrapEspressoIdlingResourceObservable
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.core.response.PeopleWrapper

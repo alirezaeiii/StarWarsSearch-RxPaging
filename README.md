@@ -41,15 +41,15 @@ The `:core` module is an [com.android.library](https://developer.android.com/stu
 
 The `:features_search` module is an [com.android.dynamic-feature](https://developer.android.com/studio/projects/dynamic-delivery) is essentially a gradle module which can be downloaded independently from the base application module. It can hold code and resources and include dependencies, just like any other gradle module.
 
-#### Commons module
+#### Common module
 
-The `:commons` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
+The `:common` module is an [com.android.library](https://developer.android.com/studio/projects/android-library) only contains code and resources which are shared between feature modules. Reusing this way resources, layouts, views, and components in the different features modules, without the need to duplicate code.
 
 ### Addenda
 
-*  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:commons` and `:feature_search` for instrumentation test using _androidTestImplementation_.
-* `:features_search` modules depend on `:commons`, `:core` and `:app`.
-* `:core` and `:commons` don’t have any dependency.
+*  `:app`  depends on `:core` and indirectly depends on `:features_search` by dynamic-features. It also depends on `:common` and `:feature_search` for instrumentation test using _androidTestImplementation_.
+* `:features_search` modules depend on `:common`, `:core` and `:app`.
+* `:core` and `:common` don’t have any dependency.
 
 ## Testing
 Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.

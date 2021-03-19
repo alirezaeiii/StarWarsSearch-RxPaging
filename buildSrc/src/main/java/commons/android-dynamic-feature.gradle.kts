@@ -40,7 +40,7 @@ android {
 dependencies {
     implementation(project(BuildModules.APP))
     implementation(project(BuildModules.CORE))
-    implementation(project(BuildModules.COMMONS))
+    implementation(project(BuildModules.COMMON))
 
     implementation(Dependencies.APPCOMPAT)
     implementation(Dependencies.MATERIAL)

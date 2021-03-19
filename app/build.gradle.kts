@@ -53,7 +53,7 @@ android {
 
 dependencies {
     implementation(project(BuildModules.CORE))
-    androidTestImplementation(project(BuildModules.COMMONS))
+    androidTestImplementation(project(BuildModules.COMMON))
     androidTestImplementation(project(BuildModules.FEATURE_SEARCH))
 
     implementation(Dependencies.KOTLIN)

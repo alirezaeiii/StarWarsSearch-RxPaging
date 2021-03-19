@@ -1,8 +1,8 @@
 package com.android.sample.feature.search.di
 
-import com.android.sample.commons.extension.viewModel
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
-import com.android.sample.commons.util.schedulers.SchedulerProvider
+import com.android.sample.common.extension.viewModel
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
