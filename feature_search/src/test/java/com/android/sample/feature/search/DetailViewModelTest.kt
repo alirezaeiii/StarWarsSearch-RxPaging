@@ -1,8 +1,8 @@
 package com.android.sample.feature.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.android.sample.commons.util.Resource
-import com.android.sample.commons.util.schedulers.ImmediateSchedulerProvider
+import com.android.sample.common.util.Resource
+import com.android.sample.common.util.schedulers.ImmediateSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase

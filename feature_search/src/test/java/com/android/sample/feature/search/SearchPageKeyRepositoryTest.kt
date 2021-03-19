@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
-import com.android.sample.commons.util.schedulers.BaseSchedulerProvider
-import com.android.sample.commons.util.schedulers.ImmediateSchedulerProvider
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.util.schedulers.ImmediateSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
@@ -57,18 +57,18 @@ class SearchPageKeyRepositoryTest {
         val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
 
         val searchPageKeyRepository = SearchPageKeyRepository(
-            searchPeopleUseCase, "", CompositeDisposable(),
-            schedulerProvider, context
+                searchPeopleUseCase, "", CompositeDisposable(),
+                schedulerProvider, context
         )
 
         val character = Character(
-            "Ali", "127", "1385", emptyList(), emptyList()
+                "Ali", "127", "1385", emptyList(), emptyList()
         )
 
         val peopleWrapper = PeopleWrapper(listOf(character), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
-            .thenReturn(Observable.just(peopleWrapper))
+                .thenReturn(Observable.just(peopleWrapper))
 
         val listing = searchPageKeyRepository.getItems(networkExecutor)
         val observer = LoggingObserver<PagedList<Character>>()

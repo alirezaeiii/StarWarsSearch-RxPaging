@@ -10,7 +10,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import com.android.sample.commons.util.EspressoIdlingResource
+import com.android.sample.common.util.EspressoIdlingResource
 import com.android.sample.feature.search.R
 import com.android.sample.feature.search.ui.search.StarWarsItemViewHolder
 import org.junit.After
