@@ -88,4 +88,5 @@ fun DependencyHandler.addAndroidTestsDependencies() {
     androidTestImplementation(TestAndroidDependencies.RUNNER)
     androidTestImplementation(TestAndroidDependencies.RULES)
     androidTestImplementation(TestAndroidDependencies.JUNIT)
+    androidTestImplementation(TestAndroidDependencies.RX_IDLER)
 }

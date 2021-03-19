@@ -22,15 +22,15 @@ android {
         versionCode = BuildAndroidConfig.VERSION_CODE
         versionName = BuildAndroidConfig.VERSION_NAME
 
-        testInstrumentationRunner = BuildAndroidConfig.TEST_INSTRUMENTATION_RUNNER
+        testInstrumentationRunner = "com.android.sample.starwars.AppTestRunner"
     }
 
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }

@@ -29,4 +29,5 @@ object BuildDependenciesVersions {
     const val JUNIT = "4.13.1"
     const val MOCKITO = "2.23.0"
     const val ESPRESSO = "3.3.0"
+    const val RX_IDLER = "0.11.0"
 }
