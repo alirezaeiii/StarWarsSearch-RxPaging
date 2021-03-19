@@ -1,9 +1,7 @@
 package com.android.sample.feature.search.paging
 
 import android.content.Context
-import com.android.sample.common.R
 import com.android.sample.common.base.BasePageKeyedItemDataSource
-import com.android.sample.common.extension.isNetworkAvailable
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.NetworkException
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
@@ -20,15 +18,11 @@ class SearchPageKeyedDataSource(
         private val compositeDisposable: CompositeDisposable,
         schedulerProvider: BaseSchedulerProvider,
         retryExecutor: Executor,
-        private val context: Context,
+        context: Context,
 ) : BasePageKeyedItemDataSource<Character, PeopleWrapper>(
-        schedulerProvider, retryExecutor
-) {
+        schedulerProvider, retryExecutor, context) {
 
     private var isNext = true
-
-    private val isNetworkAvailable: Observable<Boolean> =
-            Observable.fromCallable { context.isNetworkAvailable() }
 
     override fun fetchItems(page: Int): Observable<PeopleWrapper> =
             composeObservable { useCase(query, page) }
@@ -75,16 +69,6 @@ class SearchPageKeyedDataSource(
     // ============================================================================================
     //  Private helper methods
     // ============================================================================================
-
-    private fun initError(throwable: Throwable) {
-        if (throwable is NetworkException) {
-            val error = NetworkState.error(context.getString(R.string.failed_network_msg))
-            _networkState.postValue(error)
-        } else {
-            val error = NetworkState.error(context.getString(R.string.failed_loading_msg))
-            _networkState.postValue(error)
-        }
-    }
 
     private fun fetchItems(isNetworkAvailable: Boolean, page: Int): Observable<PeopleWrapper> {
         return if (isNetworkAvailable) {
