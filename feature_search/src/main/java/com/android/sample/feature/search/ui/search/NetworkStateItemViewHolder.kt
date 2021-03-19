@@ -13,6 +13,7 @@ import com.android.sample.commons.paging.Status.FAILED
 import com.android.sample.commons.paging.Status.RUNNING
 import com.android.sample.commons.util.toVisibility
 import com.android.sample.feature.search.R
+import com.android.sample.commons.R as Rcommons
 
 /**
  * A View Holder that can display a loading or have click action.
@@ -53,7 +54,7 @@ class NetworkStateItemViewHolder(
                     root.context.resources.getDimension(R.dimen.network_state_height).toInt()
                 )
             )
-            val padding = root.context.resources.getDimension(R.dimen.spacing_large).toInt()
+            val padding = root.context.resources.getDimension(Rcommons.dimen.spacing_small).toInt()
             networkStateLayout.setPadding(padding, padding, padding, padding)
         }
         progressBar.toVisibility(networkState?.status == RUNNING)
