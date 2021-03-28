@@ -23,9 +23,9 @@
                 android:layout_height="?android:actionBarSize"
                 android:elevation="4dp"
                 android:outlineProvider="bounds"
-                app:layout_scrollFlags="scroll|enterAlways"
                 android:theme="@style/SearchViewTheme"
-                android:transitionGroup="false">
+                android:transitionGroup="false"
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <SearchView
                     android:id="@+id/search_view"
@@ -35,7 +35,7 @@
                     android:iconifiedByDefault="false"
                     android:queryHint="@string/app_name"
                     android:theme="@style/SearchViewStyle"
-                    android:transitionGroup="true"/>
+                    android:transitionGroup="true" />
 
             </FrameLayout>
 
@@ -48,6 +48,43 @@
             app:layoutManager="LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/star_wars_item" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/image_search"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_empty_search"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_mini"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:text="@string/label_empty"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_search"
+                app:layout_goneMarginEnd="@dimen/spacing_mini" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
