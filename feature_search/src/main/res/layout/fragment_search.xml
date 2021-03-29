@@ -80,9 +80,7 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_search"
-                app:layout_goneMarginEnd="@dimen/spacing_mini" />
-
+                app:layout_constraintTop_toBottomOf="@+id/image_search" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

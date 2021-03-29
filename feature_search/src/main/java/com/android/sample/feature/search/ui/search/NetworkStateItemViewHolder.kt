@@ -54,8 +54,8 @@ class NetworkStateItemViewHolder(
                     root.context.resources.getDimension(R.dimen.network_state_height).toInt()
                 )
             )
-            val padding = root.context.resources.getDimension(R1.dimen.spacing_large).toInt()
-            networkStateLayout.setPadding(padding, padding, padding, padding)
+            val padding = root.context.resources.getDimension(R1.dimen.spacing_small).toInt()
+            networkStateLayout.setPadding(padding, padding, padding, 0)
         }
         progressBar.toVisibility(networkState?.status == RUNNING)
         retry.toVisibility(networkState?.status == FAILED)

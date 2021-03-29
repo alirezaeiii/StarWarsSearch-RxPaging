@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.*
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
@@ -84,13 +83,13 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
 
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isEmpty()) {
-                        layoutEmpty.visibility = VISIBLE
-                        recyclerView.visibility = INVISIBLE
+                        layoutEmpty.visibility = View.VISIBLE
+                        recyclerView.visibility = View.INVISIBLE
                     } else {
-                        layoutEmpty.visibility = INVISIBLE
-                        recyclerView.visibility = VISIBLE
+                        search(query)
+                        layoutEmpty.visibility = View.INVISIBLE
+                        recyclerView.visibility = View.VISIBLE
                     }
-                    search(query)
                     return true
                 }
             })
