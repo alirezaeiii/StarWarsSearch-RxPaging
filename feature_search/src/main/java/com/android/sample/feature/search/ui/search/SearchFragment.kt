@@ -82,13 +82,9 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 }
 
                 override fun onQueryTextChange(query: String): Boolean {
-                    if (query.isEmpty()) {
-                        layoutEmpty.visibility = View.VISIBLE
-                        recyclerView.visibility = View.INVISIBLE
-                    } else {
-                        search(query)
+                    if (query.isNotEmpty()) {
                         layoutEmpty.visibility = View.INVISIBLE
-                        recyclerView.visibility = View.VISIBLE
+                        search(query)
                     }
                     return true
                 }
