@@ -2,7 +2,7 @@
     <string name="search_hint">Search for star wars character</string>
     <string name="feature_search">feature_search</string>
     <string name="retry">Retry</string>
-    <string name="label_empty">Lets Search for Star Wars Character</string>
+    <string name="label_empty">Lets explore the Star Wars Universe</string>
     <string name="label_birth_year">Birth Year :</string>
     <string name="label_height">Height :</string>
     <string name="person_height">%scm or %sfeet</string>

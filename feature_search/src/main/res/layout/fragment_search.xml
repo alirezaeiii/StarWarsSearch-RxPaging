@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="vm"
-            type="com.android.sample.feature.search.viewmodel.SearchViewModel" />
-    </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -67,6 +60,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
+                android:id="@+id/text_view_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_mini"
