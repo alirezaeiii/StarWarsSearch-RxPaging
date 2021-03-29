@@ -1,7 +1,6 @@
 package com.android.sample.core.di
 
 import android.app.Application
-import com.android.sample.core.network.NetworkModule
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.DetailRepository
 import com.android.sample.core.repository.SearchRepository
