@@ -14,11 +14,11 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class DetailViewModel @Inject constructor(
-    schedulerProvider: BaseSchedulerProvider,
-    character: Character,
-    getSpecieUseCase: GetSpecieUseCase,
-    getPlanetUseCase: GetPlanetUseCase,
-    getFilmUseCase: GetFilmUseCase,
+        schedulerProvider: BaseSchedulerProvider,
+        character: Character,
+        getSpecieUseCase: GetSpecieUseCase,
+        getPlanetUseCase: GetPlanetUseCase,
+        getFilmUseCase: GetFilmUseCase,
 ) : BaseViewModel<DetailWrapper>(schedulerProvider,
         Single.zip(getSpeciesWrapper(character, getSpecieUseCase, getPlanetUseCase),
                 getFilms(character, getFilmUseCase), { species, films ->
@@ -26,20 +26,14 @@ class DetailViewModel @Inject constructor(
         }))
 
 private fun getSpeciesWrapper(
-    character: Character, getSpecieUseCase: GetSpecieUseCase, getPlanetUseCase: GetPlanetUseCase,
-): Single<List<SpecieWrapper>> {
-    var name: String? = null
-    var language: String? = null
-    return Flowable.fromIterable(character.specieUrls)
+        character: Character, getSpecieUseCase: GetSpecieUseCase, getPlanetUseCase: GetPlanetUseCase,
+): Single<List<SpecieWrapper>> = Flowable.fromIterable(character.specieUrls)
             .flatMapSingle { specieUrl -> getSpecieUseCase(specieUrl) }
             .flatMapSingle { specie ->
-                name = specie.name
-                language = specie.language
-                getPlanetUseCase(specie.homeWorld)
-            }.map { planet ->
-                SpecieWrapper(name, language, planet.population)
+                getPlanetUseCase(specie.homeWorld).map { planet ->
+                    SpecieWrapper(specie.name, specie.language, planet.population)
+                }
             }.toList()
-}
 
 private fun getFilms(character: Character, getFilmUseCase: GetFilmUseCase): Single<List<Film>> {
     return Flowable.fromIterable(character.filmUrls)

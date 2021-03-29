@@ -8,7 +8,7 @@ class DetailWrapper(
 )
 
 class SpecieWrapper(
-    val name: String?,
-    val language: String?,
+    val name: String,
+    val language: String,
     val population: String,
 )
