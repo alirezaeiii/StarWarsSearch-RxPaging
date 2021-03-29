@@ -10,9 +10,10 @@ import com.android.sample.common.util.NetworkException
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
 import java.util.concurrent.Executor
+import com.android.sample.common.R
 
 
-abstract class BasePageKeyedItemDataSource<T, R>(
+abstract class BasePageKeyedItemDataSource<T, K>(
         protected val schedulerProvider: BaseSchedulerProvider,
         private val retryExecutor: Executor,
         private val context: Context,
@@ -42,7 +43,7 @@ abstract class BasePageKeyedItemDataSource<T, R>(
         }
     }
 
-    protected abstract fun fetchItems(page: Int): Observable<R>
+    protected abstract fun fetchItems(page: Int): Observable<K>
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
         // ignored, since we only ever append to our initial load
@@ -52,13 +53,13 @@ abstract class BasePageKeyedItemDataSource<T, R>(
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())
 
-    protected fun initError(throwable: Throwable) {
+    protected fun setErrorMsg(throwable: Throwable) {
         if (throwable is NetworkException) {
             _networkState.postValue(NetworkState.error(
-                    context.getString(com.android.sample.common.R.string.failed_network_msg)))
+                    context.getString(R.string.failed_network_msg)))
         } else {
             _networkState.postValue(NetworkState.error(
-                    context.getString(com.android.sample.common.R.string.failed_loading_msg)))
+                    context.getString(R.string.failed_loading_msg)))
         }
     }
 }

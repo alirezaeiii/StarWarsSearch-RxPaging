@@ -30,7 +30,7 @@ private fun getSpeciesWrapper(
 ): Single<List<SpecieWrapper>> {
     var name: String? = null
     var language: String? = null
-    return Flowable.fromIterable(character.species)
+    return Flowable.fromIterable(character.specieUrls)
             .flatMapSingle { specieUrl -> getSpecieUseCase(specieUrl) }
             .flatMapSingle { specie ->
                 name = specie.name
@@ -42,7 +42,7 @@ private fun getSpeciesWrapper(
 }
 
 private fun getFilms(character: Character, getFilmUseCase: GetFilmUseCase): Single<List<Film>> {
-    return Flowable.fromIterable(character.films)
+    return Flowable.fromIterable(character.filmUrls)
             .flatMapSingle { filmUrl -> getFilmUseCase(filmUrl) }
             .toList()
 }

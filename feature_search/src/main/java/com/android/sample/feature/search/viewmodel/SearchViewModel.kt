@@ -13,7 +13,7 @@ import com.android.sample.feature.search.paging.SearchPageKeyRepository
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-        private val useCase: SearchPeopleUseCase,
+        private val searchPeopleUseCase: SearchPeopleUseCase,
         private val schedulerProvider: BaseSchedulerProvider,
         private val app: Application,
 ) : BasePagingViewModel<Character>(app) {
@@ -22,7 +22,7 @@ class SearchViewModel @Inject constructor(
 
     override val repoResult: LiveData<Listing<Character>> = Transformations.map(query) {
         SearchPageKeyRepository(
-                useCase, it, compositeDisposable,
+                searchPeopleUseCase, it, compositeDisposable,
                 schedulerProvider, app.applicationContext
         ).getItems(networkIO)
     }

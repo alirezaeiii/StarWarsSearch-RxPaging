@@ -16,8 +16,10 @@ data class Character(
         val height: String,
         @Json(name = "birth_year")
         val birthYear: String,
-        val species: List<String>,
-        val films: List<String>,
+        @Json(name = "species")
+        val specieUrls: List<String>,
+        @Json(name = "films")
+        val filmUrls: List<String>,
 ) : Parcelable
 
 class Specie(

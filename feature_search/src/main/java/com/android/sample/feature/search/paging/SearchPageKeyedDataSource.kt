@@ -13,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
 
 class SearchPageKeyedDataSource(
-        private val useCase: SearchPeopleUseCase,
+        private val searchPeopleUseCase: SearchPeopleUseCase,
         private val query: String,
         private val compositeDisposable: CompositeDisposable,
         schedulerProvider: BaseSchedulerProvider,
@@ -25,7 +25,7 @@ class SearchPageKeyedDataSource(
     private var isNext = true
 
     override fun fetchItems(page: Int): Observable<PeopleWrapper> =
-            composeObservable { useCase(query, page) }
+            composeObservable { searchPeopleUseCase(query, page) }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         if (isNext) {
@@ -42,7 +42,7 @@ class SearchPageKeyedDataSource(
                 retry = {
                     loadAfter(params, callback)
                 }
-                initError(it)
+                setErrorMsg(it)
             }.also { compositeDisposable.add(it) }
         }
     }
@@ -62,7 +62,7 @@ class SearchPageKeyedDataSource(
             retry = {
                 loadInitial(params, callback)
             }
-            initError(it)
+            setErrorMsg(it)
         }.also { compositeDisposable.add(it) }
     }
 

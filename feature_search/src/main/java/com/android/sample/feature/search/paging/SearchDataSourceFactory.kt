@@ -11,19 +11,19 @@ import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
 
 class SearchDataSourceFactory(
-        private val useCase: SearchPeopleUseCase,
+        private val searchPeopleUseCase: SearchPeopleUseCase,
         private val query: String,
         private val compositeDisposable: CompositeDisposable,
         private val schedulerProvider: BaseSchedulerProvider,
         private val retryExecutor: Executor,
-        private val context: Context
+        private val context: Context,
 ) : BaseDataSourceFactory<Character, PeopleWrapper>() {
 
     override fun getDataSource(): BasePageKeyedItemDataSource<Character, PeopleWrapper> =
-        SearchPageKeyedDataSource(useCase = useCase,
-            query = query,
-            compositeDisposable = compositeDisposable,
-            schedulerProvider = schedulerProvider,
-            retryExecutor = retryExecutor,
-            context = context)
+            SearchPageKeyedDataSource(searchPeopleUseCase = searchPeopleUseCase,
+                    query = query,
+                    compositeDisposable = compositeDisposable,
+                    schedulerProvider = schedulerProvider,
+                    retryExecutor = retryExecutor,
+                    context = context)
 }
