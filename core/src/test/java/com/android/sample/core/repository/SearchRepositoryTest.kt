@@ -27,14 +27,14 @@ class SearchRepositoryTest {
     fun searchRepository() {
         val searchRepository = SearchRepository(service)
 
-        val peopleWrapper = CharacterWrapper(emptyList(), null)
+        val characterWrapper = CharacterWrapper(emptyList(), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
-            .thenReturn(Observable.just(peopleWrapper))
+            .thenReturn(Observable.just(characterWrapper))
 
         val testObserver = searchRepository.searchPeople(anyString(), anyInt()).test()
 
-        testObserver.assertValues(peopleWrapper)
+        testObserver.assertValues(characterWrapper)
 
         testObserver.dispose()
     }

@@ -65,10 +65,10 @@ class SearchPageKeyRepositoryTest {
                 "Ali", "127", "1385", emptyList(), emptyList()
         )
 
-        val peopleWrapper = CharacterWrapper(listOf(character), null)
+        val characterWrapper = CharacterWrapper(listOf(character), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
-                .thenReturn(Observable.just(peopleWrapper))
+                .thenReturn(Observable.just(characterWrapper))
 
         val listing = searchPageKeyRepository.getItems(networkExecutor)
         val observer = LoggingObserver<PagedList<Character>>()

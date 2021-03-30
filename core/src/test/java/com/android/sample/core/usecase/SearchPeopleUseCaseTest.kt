@@ -30,14 +30,14 @@ class SearchPeopleUseCaseTest {
         val searchRepository = SearchRepository(service)
         val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
 
-        val peopleWrapper = CharacterWrapper(emptyList(), null)
+        val characterWrapper = CharacterWrapper(emptyList(), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
-            .thenReturn(Observable.just(peopleWrapper))
+            .thenReturn(Observable.just(characterWrapper))
 
         val testObserver = searchPeopleUseCase(anyString(), anyInt()).test()
 
-        testObserver.assertValues(peopleWrapper)
+        testObserver.assertValues(characterWrapper)
 
         testObserver.dispose()
     }
