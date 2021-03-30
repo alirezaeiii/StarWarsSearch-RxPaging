@@ -22,9 +22,6 @@ abstract class BasePageKeyedItemDataSource<T, K>(
     // keep a function reference for the retry event
     protected var retry: (() -> Any)? = null
 
-    protected val isNetworkAvailable: Observable<Boolean> =
-            Observable.fromCallable { context.isNetworkAvailable() }
-
     /**
      * There is no sync on the state because paging will always call loadInitial first then wait
      * for it to return some success value before calling loadAfter.
@@ -43,15 +40,20 @@ abstract class BasePageKeyedItemDataSource<T, K>(
         }
     }
 
-    protected abstract fun fetchItems(page: Int): Observable<K>
-
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, T>) {
         // ignored, since we only ever append to our initial load
     }
 
-    protected inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
-            .subscribeOn(schedulerProvider.io())
-            .observeOn(schedulerProvider.ui())
+    protected abstract fun fetchObservableItem(page: Int): Observable<K>
+
+    protected fun fetchItems(page: Int): Observable<K> =
+            Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
+                if (it) {
+                    return@flatMap composeObservable { fetchObservableItem(page) }
+                } else {
+                    return@flatMap Observable.error(NetworkException())
+                }
+            }
 
     protected fun setErrorMsg(throwable: Throwable) {
         if (throwable is NetworkException) {
@@ -62,4 +64,8 @@ abstract class BasePageKeyedItemDataSource<T, K>(
                     context.getString(R.string.failed_loading_msg)))
         }
     }
+
+    private inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
+            .subscribeOn(schedulerProvider.io())
+            .observeOn(schedulerProvider.ui())
 }

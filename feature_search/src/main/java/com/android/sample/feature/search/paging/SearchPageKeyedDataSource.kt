@@ -3,7 +3,6 @@ package com.android.sample.feature.search.paging
 import android.content.Context
 import com.android.sample.common.base.BasePageKeyedItemDataSource
 import com.android.sample.common.paging.NetworkState
-import com.android.sample.common.util.NetworkException
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
@@ -24,13 +23,13 @@ class SearchPageKeyedDataSource(
 
     private var isNext = true
 
-    override fun fetchItems(page: Int): Observable<PeopleWrapper> =
-            composeObservable { searchPeopleUseCase(query, page) }
+    override fun fetchObservableItem(page: Int): Observable<PeopleWrapper> =
+            searchPeopleUseCase(query, page)
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         if (isNext) {
             mutableNetworkState.postValue(NetworkState.LOADING)
-            isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
+            fetchItems(params.key).subscribe({
                 mutableNetworkState.postValue(NetworkState.LOADED)
                 //clear retry since last request succeeded
                 retry = null
@@ -52,7 +51,7 @@ class SearchPageKeyedDataSource(
     ) {
         mutableNetworkState.postValue(NetworkState.LOADING)
 
-        isNetworkAvailable.flatMap { fetchItems(it, 1) }.subscribe({
+        fetchItems(1).subscribe({
             mutableNetworkState.postValue(NetworkState.LOADED)
             if (it.next == null) {
                 isNext = false
@@ -64,17 +63,5 @@ class SearchPageKeyedDataSource(
             }
             setErrorMsg(it)
         }.also { compositeDisposable.add(it) }
-    }
-
-    // ============================================================================================
-    //  Private helper methods
-    // ============================================================================================
-
-    private fun fetchItems(isNetworkAvailable: Boolean, page: Int): Observable<PeopleWrapper> {
-        return if (isNetworkAvailable) {
-            fetchItems(page)
-        } else {
-            Observable.error(NetworkException())
-        }
     }
 }
