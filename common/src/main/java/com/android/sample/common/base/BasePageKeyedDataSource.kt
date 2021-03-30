@@ -13,7 +13,7 @@ import java.util.concurrent.Executor
 import com.android.sample.common.R
 
 
-abstract class BasePageKeyedItemDataSource<T, K>(
+abstract class BasePageKeyedDataSource<T, K>(
         protected val schedulerProvider: BaseSchedulerProvider,
         private val retryExecutor: Executor,
         private val context: Context,

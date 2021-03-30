@@ -2,7 +2,7 @@ package com.android.sample.feature.search.paging
 
 import android.content.Context
 import com.android.sample.common.base.BaseDataSourceFactory
-import com.android.sample.common.base.BasePageKeyedItemDataSource
+import com.android.sample.common.base.BasePageKeyedDataSource
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.PeopleWrapper
@@ -19,7 +19,7 @@ class SearchDataSourceFactory(
         private val context: Context,
 ) : BaseDataSourceFactory<Character, PeopleWrapper>() {
 
-    override fun getDataSource(): BasePageKeyedItemDataSource<Character, PeopleWrapper> =
+    override fun getDataSource(): BasePageKeyedDataSource<Character, PeopleWrapper> =
             SearchPageKeyedDataSource(searchPeopleUseCase = searchPeopleUseCase,
                     query = query,
                     compositeDisposable = compositeDisposable,

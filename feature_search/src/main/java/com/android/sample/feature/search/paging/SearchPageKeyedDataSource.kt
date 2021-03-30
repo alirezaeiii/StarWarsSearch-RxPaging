@@ -1,7 +1,7 @@
 package com.android.sample.feature.search.paging
 
 import android.content.Context
-import com.android.sample.common.base.BasePageKeyedItemDataSource
+import com.android.sample.common.base.BasePageKeyedDataSource
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
@@ -18,7 +18,7 @@ class SearchPageKeyedDataSource(
         schedulerProvider: BaseSchedulerProvider,
         retryExecutor: Executor,
         context: Context,
-) : BasePageKeyedItemDataSource<Character, PeopleWrapper>(
+) : BasePageKeyedDataSource<Character, PeopleWrapper>(
         schedulerProvider, retryExecutor, context) {
 
     private var isNext = true
