@@ -29,9 +29,9 @@ class SearchPageKeyedDataSource(
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         if (isNext) {
-            _networkState.postValue(NetworkState.LOADING)
+            mutableNetworkState.postValue(NetworkState.LOADING)
             isNetworkAvailable.flatMap { fetchItems(it, params.key) }.subscribe({
-                _networkState.postValue(NetworkState.LOADED)
+                mutableNetworkState.postValue(NetworkState.LOADED)
                 //clear retry since last request succeeded
                 retry = null
                 if (it.next == null) {
@@ -50,10 +50,10 @@ class SearchPageKeyedDataSource(
     override fun loadInitial(
             params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
     ) {
-        _networkState.postValue(NetworkState.LOADING)
+        mutableNetworkState.postValue(NetworkState.LOADING)
 
         isNetworkAvailable.flatMap { fetchItems(it, 1) }.subscribe({
-            _networkState.postValue(NetworkState.LOADED)
+            mutableNetworkState.postValue(NetworkState.LOADED)
             if (it.next == null) {
                 isNext = false
             }

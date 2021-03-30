@@ -29,9 +29,9 @@ abstract class BasePageKeyedItemDataSource<T, K>(
      * There is no sync on the state because paging will always call loadInitial first then wait
      * for it to return some success value before calling loadAfter.
      */
-    protected val _networkState = MutableLiveData<NetworkState>()
+    protected val mutableNetworkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState>
-        get() = _networkState
+        get() = mutableNetworkState
 
     fun retryAllFailed() {
         val prevRetry = retry
@@ -55,10 +55,10 @@ abstract class BasePageKeyedItemDataSource<T, K>(
 
     protected fun setErrorMsg(throwable: Throwable) {
         if (throwable is NetworkException) {
-            _networkState.postValue(NetworkState.error(
+            mutableNetworkState.postValue(NetworkState.error(
                     context.getString(R.string.failed_network_msg)))
         } else {
-            _networkState.postValue(NetworkState.error(
+            mutableNetworkState.postValue(NetworkState.error(
                     context.getString(R.string.failed_loading_msg)))
         }
     }
