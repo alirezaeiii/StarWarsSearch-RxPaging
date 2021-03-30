@@ -10,7 +10,7 @@ import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
 import com.android.sample.core.response.Character
-import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.CharacterWrapper
 import com.android.sample.feature.search.paging.SearchPageKeyRepository
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -65,7 +65,7 @@ class SearchPageKeyRepositoryTest {
                 "Ali", "127", "1385", emptyList(), emptyList()
         )
 
-        val peopleWrapper = PeopleWrapper(listOf(character), null)
+        val peopleWrapper = CharacterWrapper(listOf(character), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
                 .thenReturn(Observable.just(peopleWrapper))

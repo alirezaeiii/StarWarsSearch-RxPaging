@@ -6,7 +6,7 @@ import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
-import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.Executor
@@ -18,12 +18,12 @@ class SearchPageKeyedDataSource(
         schedulerProvider: BaseSchedulerProvider,
         retryExecutor: Executor,
         context: Context,
-) : BasePageKeyedDataSource<Character, PeopleWrapper>(
+) : BasePageKeyedDataSource<Character, CharacterWrapper>(
         schedulerProvider, retryExecutor, context) {
 
     private var isNext = true
 
-    override fun fetchObservableItem(page: Int): Observable<PeopleWrapper> =
+    override fun fetchObservableItem(page: Int): Observable<CharacterWrapper> =
             searchPeopleUseCase(query, page)
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {

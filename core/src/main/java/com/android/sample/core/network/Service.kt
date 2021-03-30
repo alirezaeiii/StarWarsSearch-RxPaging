@@ -1,7 +1,7 @@
 package com.android.sample.core.network
 
 import com.android.sample.core.response.Film
-import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.CharacterWrapper
 import com.android.sample.core.response.Planet
 import com.android.sample.core.response.Specie
 import io.reactivex.Observable
@@ -19,7 +19,7 @@ interface StarWarsService {
     fun searchPeople(
         @Query("search") query: String,
         @Query("page") page: Int,
-    ): Observable<PeopleWrapper>
+    ): Observable<CharacterWrapper>
 
     @GET
     fun getSpecie(@Url url: String) : Single<Specie>

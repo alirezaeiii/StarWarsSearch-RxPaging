@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
-import com.android.sample.core.response.PeopleWrapper
+import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
 import org.junit.Rule
 import org.junit.Test
@@ -30,7 +30,7 @@ class SearchPeopleUseCaseTest {
         val searchRepository = SearchRepository(service)
         val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
 
-        val peopleWrapper = PeopleWrapper(emptyList(), null)
+        val peopleWrapper = CharacterWrapper(emptyList(), null)
 
         `when`(service.searchPeople(anyString(), anyInt()))
             .thenReturn(Observable.just(peopleWrapper))
