@@ -5,6 +5,9 @@ import com.android.sample.common.extension.viewModel
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
+import com.android.sample.core.network.StarWarsService
+import com.android.sample.core.repository.SearchRepository
+import com.android.sample.core.repository.SearchRepositoryImpl
 import com.android.sample.feature.search.ui.search.SearchFragment
 import com.android.sample.feature.search.viewmodel.SearchViewModel
 import dagger.Module
@@ -36,4 +39,8 @@ class SearchModule(private val fragment: SearchFragment) {
     @Provides
     internal fun provideSchedulerProvider(): BaseSchedulerProvider =
             SchedulerProvider()
+
+    @Provides
+    internal fun provideSearchRepository(service: StarWarsService): SearchRepository =
+            SearchRepositoryImpl(service)
 }

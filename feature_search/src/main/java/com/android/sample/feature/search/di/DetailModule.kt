@@ -6,6 +6,9 @@ import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
+import com.android.sample.core.network.StarWarsService
+import com.android.sample.core.repository.DetailRepository
+import com.android.sample.core.repository.DetailRepositoryImpl
 import com.android.sample.feature.search.ui.detail.DetailFragment
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import dagger.Module
@@ -38,5 +41,9 @@ class DetailModule(private val fragment: DetailFragment) {
 
     @Provides
     internal fun provideSchedulerProvider(): BaseSchedulerProvider =
-        SchedulerProvider()
+            SchedulerProvider()
+
+    @Provides
+    internal fun provideDetailRepository(service: StarWarsService): DetailRepository =
+            DetailRepositoryImpl(service)
 }
