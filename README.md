@@ -48,7 +48,7 @@ The `:common` module is an [com.android.library](https://developer.android.com/s
 ## Testing
 Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.
 
-# Libraries
+## Libraries
 * [Android Jetpack](https://developer.android.com/jetpack)
    * [Paging](https://developer.android.com/topic/libraries/architecture/paging) Library helps you load and display small chunks of data at a time. Loading partial data on demand reduces usage of network bandwidth and system resources.
    * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) ViewModel is designed to store and manage UI-related data in a lifecycle conscious way. This allows data to survive configuration changes such as screen rotations.
@@ -67,7 +67,7 @@ Testing is done in each layer includes Repository and UseCase in `:core` module 
 * [Mockito](https://github.com/mockito/mockito) which is the most popular Mocking framework for unit tests written in Java as well as Kotlin.
 * [Espresso](https://developer.android.com/training/testing/espresso) Automated testing UI test
 
-# Licence
+## Licence
     MIT License
 
     Copyright (c) 2021 Mohammadali Rezaei
