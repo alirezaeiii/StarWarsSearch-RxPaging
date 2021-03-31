@@ -29,7 +29,7 @@ class DetailRepositoryTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
 
-        detailRepository = DetailRepository(service)
+        detailRepository = DetailRepositoryImpl(service)
     }
 
     @Test

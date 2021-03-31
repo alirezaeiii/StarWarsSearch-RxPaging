@@ -3,7 +3,7 @@ package com.android.sample.core.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.network.StarWarsService
-import com.android.sample.core.repository.DetailRepository
+import com.android.sample.core.repository.DetailRepositoryImpl
 import com.android.sample.core.response.Planet
 import io.reactivex.Single
 import org.junit.Rule
@@ -26,7 +26,7 @@ class GetPlanetUseCaseTest {
 
     @Test
     fun getPlanet() {
-        val detailRepository = DetailRepository(service)
+        val detailRepository = DetailRepositoryImpl(service)
         val getPlanetUseCase = GetPlanetUseCase(detailRepository)
 
         val planet = Planet("")

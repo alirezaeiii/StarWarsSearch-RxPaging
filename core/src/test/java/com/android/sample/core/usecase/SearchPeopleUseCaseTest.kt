@@ -3,7 +3,7 @@ package com.android.sample.core.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
-import com.android.sample.core.repository.SearchRepository
+import com.android.sample.core.repository.SearchRepositoryImpl
 import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
 import org.junit.Rule
@@ -27,7 +27,7 @@ class SearchPeopleUseCaseTest {
 
     @Test
     fun searchPeople() {
-        val searchRepository = SearchRepository(service)
+        val searchRepository = SearchRepositoryImpl(service)
         val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
 
         val characterWrapper = CharacterWrapper(emptyList(), null)

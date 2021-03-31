@@ -25,7 +25,7 @@ class SearchRepositoryTest {
 
     @Test
     fun searchRepository() {
-        val searchRepository = SearchRepository(service)
+        val searchRepository = SearchRepositoryImpl(service)
 
         val characterWrapper = CharacterWrapper(emptyList(), null)
 

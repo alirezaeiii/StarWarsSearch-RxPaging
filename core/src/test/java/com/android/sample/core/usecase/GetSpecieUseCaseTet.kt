@@ -3,7 +3,7 @@ package com.android.sample.core.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.core.domain.GetSpecieUseCase
 import com.android.sample.core.network.StarWarsService
-import com.android.sample.core.repository.DetailRepository
+import com.android.sample.core.repository.DetailRepositoryImpl
 import com.android.sample.core.response.Specie
 import io.reactivex.Single
 import org.junit.Rule
@@ -26,7 +26,7 @@ class GetSpecieUseCaseTet {
 
     @Test
     fun getSpecie() {
-        val detailRepository = DetailRepository(service)
+        val detailRepository = DetailRepositoryImpl(service)
         val getSpecieUseCase = GetSpecieUseCase(detailRepository)
 
         val specie = Specie("Ali", "Persian", "Iran")

@@ -7,7 +7,6 @@ import androidx.paging.PagedList
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.common.util.schedulers.ImmediateSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
-import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
 import com.android.sample.core.response.Character
 import com.android.sample.core.response.CharacterWrapper
@@ -36,7 +35,7 @@ class SearchPageKeyRepositoryTest {
     var rule: TestRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var service: StarWarsService
+    private lateinit var repository: SearchRepository
 
     @Mock
     private lateinit var context: Context
@@ -53,8 +52,7 @@ class SearchPageKeyRepositoryTest {
 
     @Test
     fun searchPeople() {
-        val searchRepository = SearchRepository(service)
-        val searchPeopleUseCase = SearchPeopleUseCase(searchRepository)
+        val searchPeopleUseCase = SearchPeopleUseCase(repository)
 
         val searchPageKeyRepository = SearchPageKeyRepository(
                 searchPeopleUseCase, "", CompositeDisposable(),
@@ -67,7 +65,7 @@ class SearchPageKeyRepositoryTest {
 
         val characterWrapper = CharacterWrapper(listOf(character), null)
 
-        `when`(service.searchPeople(anyString(), anyInt()))
+        `when`(repository.searchPeople(anyString(), anyInt()))
                 .thenReturn(Observable.just(characterWrapper))
 
         val listing = searchPageKeyRepository.getItems(networkExecutor)
