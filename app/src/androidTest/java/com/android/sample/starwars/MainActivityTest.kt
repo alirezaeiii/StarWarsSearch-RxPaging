@@ -34,7 +34,6 @@ class MainActivityTest {
         onView(withId(R.id.search_view)).perform(click())
         onView(isAssignableFrom(EditText::class.java))
             .perform(typeText("a"), pressImeActionButton())
-        Thread.sleep(2000)
         onView(withId(R.id.recyclerView)).perform(
             actionOnItemAtPosition<StarWarsItemViewHolder>(9, click())
         )

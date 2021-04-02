@@ -17,19 +17,19 @@ abstract class BasePageKeyRepository<T, R> : PageKeyRepository<T> {
         val sourceFactory = getSourceFactory()
 
         val rxPagedList = RxPagedListBuilder(sourceFactory, PAGE_SIZE)
-            .setNotifyScheduler(scheduler.ui()).buildObservable()
-
+                .setFetchScheduler(scheduler.io()).setNotifyScheduler(scheduler.ui())
+                .buildObservable()
 
         val networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.networkState
         }
 
         return Listing(
-            pagedList = rxPagedList,
-            networkState = networkState,
-            retry = {
-                sourceFactory.sourceLiveData.value?.retryAllFailed()
-            }
+                pagedList = rxPagedList,
+                networkState = networkState,
+                retry = {
+                    sourceFactory.sourceLiveData.value?.retryAllFailed()
+                }
         )
     }
 
