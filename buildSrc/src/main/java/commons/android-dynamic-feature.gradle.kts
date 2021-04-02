@@ -53,7 +53,6 @@ dependencies {
     implementation(Dependencies.CONSTRAIN_LAYOUT)
     implementation(Dependencies.RECYCLE_VIEW)
     implementation(Dependencies.RX_JAVA)
-    implementation(Dependencies.TIMBER)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)
 
