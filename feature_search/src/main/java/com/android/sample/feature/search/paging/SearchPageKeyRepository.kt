@@ -5,10 +5,9 @@ import com.android.sample.common.base.BaseDataSourceFactory
 import com.android.sample.common.base.BasePageKeyRepository
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
-import com.android.sample.core.response.CharacterWrapper
 import com.android.sample.core.response.Character
+import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.disposables.CompositeDisposable
-import java.util.concurrent.Executor
 
 class SearchPageKeyRepository(
         private val searchPeopleUseCase: SearchPeopleUseCase,
@@ -18,12 +17,11 @@ class SearchPageKeyRepository(
         private val context: Context,
 ) : BasePageKeyRepository<Character, CharacterWrapper>() {
 
-    override fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<Character, CharacterWrapper> =
+    override fun getSourceFactory(): BaseDataSourceFactory<Character, CharacterWrapper> =
             SearchDataSourceFactory(searchPeopleUseCase = searchPeopleUseCase,
                     query = query,
                     compositeDisposable = compositeDisposable,
                     schedulerProvider = schedulerProvider,
-                    retryExecutor = retryExecutor,
                     context = context
             )
 }

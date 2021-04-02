@@ -3,24 +3,23 @@ package com.android.sample.common.base
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
 import androidx.paging.PagedList
 import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.NetworkState
 import io.reactivex.disposables.CompositeDisposable
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 
-abstract class BasePagingViewModel<T>(app: Application): AndroidViewModel(app) {
-
-    // thread pool used for network requests
-    protected val networkIO: ExecutorService = Executors.newFixedThreadPool(5)
+abstract class BasePagingViewModel<T>(app: Application) : AndroidViewModel(app) {
 
     protected val compositeDisposable = CompositeDisposable()
 
     protected abstract val repoResult: LiveData<Listing<T>>
 
-    val items: LiveData<PagedList<T>> by lazy { switchMap(repoResult) { it.pagedList } }
+    protected val mutableLiveData = MutableLiveData<PagedList<T>>()
+    val liveData: LiveData<PagedList<T>>
+        get() = mutableLiveData
+
     val networkState: LiveData<NetworkState> by lazy { switchMap(repoResult) { it.networkState } }
 
     fun retry() {

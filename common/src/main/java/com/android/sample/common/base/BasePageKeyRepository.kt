@@ -2,25 +2,22 @@ package com.android.sample.common.base
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.Transformations
-import androidx.paging.LivePagedListBuilder
+import androidx.paging.RxPagedListBuilder
 import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.PageKeyRepository
-import java.util.concurrent.Executor
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 
 abstract class BasePageKeyRepository<T, R> : PageKeyRepository<T> {
 
-    protected abstract fun getSourceFactory(retryExecutor: Executor): BaseDataSourceFactory<T, R>
+    protected abstract fun getSourceFactory(): BaseDataSourceFactory<T, R>
 
     @MainThread
-    override fun getItems(networkExecutor: Executor): Listing<T> {
+    override fun getItems(scheduler: BaseSchedulerProvider): Listing<T> {
 
-        val sourceFactory = getSourceFactory(networkExecutor)
+        val sourceFactory = getSourceFactory()
 
-        val livePagedList = LivePagedListBuilder(sourceFactory, PAGE_SIZE)
-            // provide custom executor for network requests, otherwise it will default to
-            // Arch Components' IO pool which is also used for disk access
-            .setFetchExecutor(networkExecutor)
-            .build()
+        val rxPagedList = RxPagedListBuilder(sourceFactory, PAGE_SIZE)
+            .setNotifyScheduler(scheduler.ui()).buildObservable()
 
 
         val networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
@@ -28,7 +25,7 @@ abstract class BasePageKeyRepository<T, R> : PageKeyRepository<T> {
         }
 
         return Listing(
-            pagedList = livePagedList,
+            pagedList = rxPagedList,
             networkState = networkState,
             retry = {
                 sourceFactory.sourceLiveData.value?.retryAllFailed()

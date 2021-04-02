@@ -4,20 +4,23 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
+import com.android.sample.common.R
 import com.android.sample.common.extension.isNetworkAvailable
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.NetworkException
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Observable
-import java.util.concurrent.Executor
-import com.android.sample.common.R
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 abstract class BasePageKeyedDataSource<T, K>(
         protected val schedulerProvider: BaseSchedulerProvider,
-        private val retryExecutor: Executor,
         private val context: Context,
 ) : PageKeyedDataSource<Int, T>() {
+
+    // thread pool used for network requests
+    private val networkIO: ExecutorService = Executors.newFixedThreadPool(5)
 
     // keep a function reference for the retry event
     protected var retry: (() -> Any)? = null
@@ -34,7 +37,7 @@ abstract class BasePageKeyedDataSource<T, K>(
         val prevRetry = retry
         retry = null
         prevRetry?.let {
-            retryExecutor.execute {
+            networkIO.execute {
                 it.invoke()
             }
         }

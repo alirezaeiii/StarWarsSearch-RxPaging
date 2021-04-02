@@ -10,21 +10,22 @@ import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.paging.SearchPageKeyRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-        private val searchPeopleUseCase: SearchPeopleUseCase,
-        private val schedulerProvider: BaseSchedulerProvider,
-        private val app: Application,
+    private val searchPeopleUseCase: SearchPeopleUseCase,
+    private val schedulerProvider: BaseSchedulerProvider,
+    private val app: Application,
 ) : BasePagingViewModel<Character>(app) {
 
     private val query = MutableLiveData<String>()
 
     override val repoResult: LiveData<Listing<Character>> = Transformations.map(query) {
         SearchPageKeyRepository(
-                searchPeopleUseCase, it, compositeDisposable,
-                schedulerProvider, app.applicationContext
-        ).getItems(networkIO)
+            searchPeopleUseCase, it, compositeDisposable,
+            schedulerProvider, app.applicationContext
+        ).getItems(schedulerProvider)
     }
 
     fun showQuery(query: String): Boolean {
@@ -32,6 +33,13 @@ class SearchViewModel @Inject constructor(
             return false
         }
         this.query.value = query
+        repoResult.value?.pagedList?.subscribeOn(schedulerProvider.io())
+            ?.observeOn(schedulerProvider.ui())
+            ?.subscribe({
+                mutableLiveData.postValue(it)
+            }) {
+                Timber.e(it)
+            }.also { disposable -> disposable?.let { compositeDisposable.add(it) } }
         return true
     }
 }

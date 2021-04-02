@@ -55,7 +55,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                     }
                 })
 
-        viewModel.items.observe(viewLifecycleOwner, {
+        viewModel.liveData.observe(viewLifecycleOwner, {
             viewModelAdapter.submitList(it)
         })
 

@@ -9,17 +9,15 @@ import com.android.sample.core.response.Character
 import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import java.util.concurrent.Executor
 
 class SearchPageKeyedDataSource(
         private val searchPeopleUseCase: SearchPeopleUseCase,
         private val query: String,
         private val compositeDisposable: CompositeDisposable,
         schedulerProvider: BaseSchedulerProvider,
-        retryExecutor: Executor,
         context: Context,
 ) : BasePageKeyedDataSource<Character, CharacterWrapper>(
-        schedulerProvider, retryExecutor, context) {
+        schedulerProvider, context) {
 
     private var isNext = true
 

@@ -1,8 +1,8 @@
 package com.android.sample.common.paging
 
-import java.util.concurrent.Executor
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 
 interface PageKeyRepository<T> {
 
-    fun getItems(networkExecutor: Executor): Listing<T>
+    fun getItems(scheduler: BaseSchedulerProvider): Listing<T>
 }
