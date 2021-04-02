@@ -24,7 +24,7 @@ class SearchViewModel @Inject constructor(
         SearchPageKeyRepository(
             searchPeopleUseCase, it, compositeDisposable,
             schedulerProvider, app.applicationContext
-        ).getItems(schedulerProvider)
+        ).getItems()
     }
 
     fun showQuery(query: String): Boolean {

@@ -15,7 +15,7 @@ class SearchPageKeyRepository(
         private val compositeDisposable: CompositeDisposable,
         private val schedulerProvider: BaseSchedulerProvider,
         private val context: Context,
-) : BasePageKeyRepository<Character, CharacterWrapper>() {
+) : BasePageKeyRepository<Character, CharacterWrapper>(schedulerProvider) {
 
     override fun getSourceFactory(): BaseDataSourceFactory<Character, CharacterWrapper> =
             SearchDataSourceFactory(searchPeopleUseCase = searchPeopleUseCase,

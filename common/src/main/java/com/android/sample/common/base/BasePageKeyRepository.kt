@@ -7,12 +7,14 @@ import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.PageKeyRepository
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 
-abstract class BasePageKeyRepository<T, R> : PageKeyRepository<T> {
+abstract class BasePageKeyRepository<T, R>(
+        private val scheduler: BaseSchedulerProvider,
+) : PageKeyRepository<T> {
 
     protected abstract fun getSourceFactory(): BaseDataSourceFactory<T, R>
 
     @MainThread
-    override fun getItems(scheduler: BaseSchedulerProvider): Listing<T> {
+    override fun getItems(): Listing<T> {
 
         val sourceFactory = getSourceFactory()
 
