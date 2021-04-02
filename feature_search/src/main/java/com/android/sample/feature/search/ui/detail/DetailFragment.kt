@@ -12,7 +12,6 @@ import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.databinding.FragmentDetailBinding
 import com.android.sample.feature.search.di.DaggerDetailComponent
 import com.android.sample.feature.search.di.DetailModule
-import com.android.sample.feature.search.ui.detail.DetailFragmentArgs
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import com.android.sample.starwars.StarWarsApplication
 
