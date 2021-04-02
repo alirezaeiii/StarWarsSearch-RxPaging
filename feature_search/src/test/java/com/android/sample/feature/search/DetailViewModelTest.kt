@@ -2,6 +2,7 @@ package com.android.sample.feature.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.common.util.Resource
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.common.util.schedulers.ImmediateSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
@@ -34,6 +35,9 @@ class DetailViewModelTest {
     @Mock
     private lateinit var repository: DetailRepository
 
+    private lateinit var schedulerProvider: BaseSchedulerProvider
+
+    private lateinit var character: Character
     private lateinit var specie: Specie
     private lateinit var planet: Planet
     private lateinit var film: Film
@@ -45,16 +49,10 @@ class DetailViewModelTest {
         initMocks(this)
 
         // Make the sure that all schedulers are immediate.
-        val schedulerProvider = ImmediateSchedulerProvider()
+        schedulerProvider = ImmediateSchedulerProvider()
 
-        val character = Character(
-            "Ali", "127", "1385", emptyList(), emptyList()
-        )
-
-        viewModel = DetailViewModel(
-            schedulerProvider, character, GetSpecieUseCase(repository),
-            GetPlanetUseCase(repository), GetFilmUseCase(repository)
-        )
+        character = Character("Ali", "127", "1385",
+                listOf("url1", "url2"), listOf("url1", "url2"))
 
         specie = Specie("Ali", "Persian", "Iran")
         planet = Planet("")
@@ -67,12 +65,15 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
+        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+                GetPlanetUseCase(repository), GetFilmUseCase(repository))
+
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Success) {
                 it.data?.let { data ->
-                    assertTrue(data.films.isEmpty())
-                    assertTrue(data.species.isEmpty())
+                    assertTrue(data.films.isNotEmpty())
+                    assertTrue(data.species.isNotEmpty())
                 }
             }
         }
@@ -83,6 +84,9 @@ class DetailViewModelTest {
         `when`(repository.getSpecie(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
+
+        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+                GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
@@ -99,6 +103,9 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
+        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+                GetPlanetUseCase(repository), GetFilmUseCase(repository))
+
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Error) {
@@ -113,6 +120,9 @@ class DetailViewModelTest {
         `when`(repository.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.error(Exception("error")))
+
+        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+                GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
