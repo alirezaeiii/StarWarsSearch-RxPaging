@@ -1,7 +1,5 @@
 package com.android.sample.feature.search.ui.search
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.android.sample.common.base.BaseFragment
 import com.android.sample.feature.search.BR
-import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding
 import com.android.sample.feature.search.di.DaggerSearchComponent
 import com.android.sample.feature.search.di.SearchModule
@@ -70,11 +67,6 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 adapter = viewModelAdapter
             }
 
-            val searchManager =
-                    requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-            // hint seem to be ignored from XML! Set in code
-            searchView.queryHint = getString(R.string.search_hint)
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     search(query)
@@ -83,9 +75,9 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
 
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isNotEmpty()) {
-                        emptyLayout.visibility = View.INVISIBLE
                         search(query)
                     }
+                    emptyLayout.visibility = View.INVISIBLE
                     return true
                 }
             })

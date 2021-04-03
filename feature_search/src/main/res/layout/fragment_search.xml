@@ -26,7 +26,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:iconifiedByDefault="false"
-                    android:queryHint="@string/app_name"
+                    android:queryHint="@string/search_hint"
                     android:theme="@style/SearchViewStyle"
                     android:transitionGroup="true" />
 
