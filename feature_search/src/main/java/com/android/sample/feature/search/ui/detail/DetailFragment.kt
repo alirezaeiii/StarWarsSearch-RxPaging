@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.android.sample.common.base.BaseFragment
 import com.android.sample.common.util.Resource
+import com.android.sample.core.response.Character
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.databinding.FragmentDetailBinding
 import com.android.sample.feature.search.di.DaggerDetailComponent
 import com.android.sample.feature.search.di.DetailModule
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import com.android.sample.starwars.StarWarsApplication
+import javax.inject.Inject
 
 class DetailFragment : BaseFragment<DetailViewModel>() {
 
-    private val args: DetailFragmentArgs by navArgs()
+    @Inject
+    lateinit var character: Character
 
     /**
      * Initialize dagger injection dependency graph.
@@ -37,7 +39,7 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
 
         val binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
             setVariable(BR.vm, viewModel)
-            character = args.character
+            character = this@DetailFragment.character
             // Set the lifecycleOwner so DataBinding can observe LiveData
             lifecycleOwner = viewLifecycleOwner
         }
