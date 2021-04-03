@@ -1,5 +1,6 @@
 package com.android.sample.feature.search.di
 
+import androidx.navigation.fragment.navArgs
 import com.android.sample.common.extension.viewModel
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.common.util.schedulers.SchedulerProvider
@@ -13,7 +14,6 @@ import com.android.sample.core.response.Character
 import com.android.sample.feature.search.ui.detail.DetailFragment
 import com.android.sample.feature.search.ui.detail.DetailFragmentArgs
 import com.android.sample.feature.search.viewmodel.DetailViewModel
-import com.android.sample.starwars.R
 import dagger.Module
 import dagger.Provides
 
@@ -53,9 +53,7 @@ class DetailModule(private val fragment: DetailFragment) {
 
     @Provides
     internal fun provideCharacter(): Character {
-        val navHostFragment = fragment.requireActivity().supportFragmentManager
-                .findFragmentById(R.id.navHostFragment)
-        val fragment = navHostFragment!!.childFragmentManager.fragments[0]
-        return DetailFragmentArgs.fromBundle(fragment.requireArguments()).character
+        val args: DetailFragmentArgs by fragment.navArgs()
+        return args.character
     }
 }
