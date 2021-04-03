@@ -19,8 +19,7 @@ abstract class BasePageKeyRepository<T, R>(
         val sourceFactory = getSourceFactory()
 
         val rxPagedList = RxPagedListBuilder(sourceFactory, PAGE_SIZE)
-                .setFetchScheduler(scheduler.io()).setNotifyScheduler(scheduler.ui())
-                .buildObservable()
+                .setFetchScheduler(scheduler.io()).buildObservable()
 
         val networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.networkState
