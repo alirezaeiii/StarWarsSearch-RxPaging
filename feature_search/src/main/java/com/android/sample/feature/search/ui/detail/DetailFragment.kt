@@ -17,7 +17,7 @@ import com.android.sample.starwars.StarWarsApplication
 
 class DetailFragment : BaseFragment<DetailViewModel>() {
 
-    internal val args: DetailFragmentArgs by navArgs()
+    private val args: DetailFragmentArgs by navArgs()
 
     /**
      * Initialize dagger injection dependency graph.

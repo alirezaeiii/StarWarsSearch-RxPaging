@@ -9,8 +9,11 @@ import com.android.sample.core.domain.GetSpecieUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.DetailRepository
 import com.android.sample.core.repository.DetailRepositoryImpl
+import com.android.sample.core.response.Character
 import com.android.sample.feature.search.ui.detail.DetailFragment
+import com.android.sample.feature.search.ui.detail.DetailFragmentArgs
 import com.android.sample.feature.search.viewmodel.DetailViewModel
+import com.android.sample.starwars.R
 import dagger.Module
 import dagger.Provides
 
@@ -34,8 +37,9 @@ class DetailModule(private val fragment: DetailFragment) {
             getSpecieUseCase: GetSpecieUseCase,
             getPlanetUseCase: GetPlanetUseCase,
             getFilmUseCase: GetFilmUseCase,
+            character: Character,
     ) = fragment.viewModel {
-        DetailViewModel(schedulerProvider, fragment.args.character, getSpecieUseCase,
+        DetailViewModel(schedulerProvider, character, getSpecieUseCase,
                 getPlanetUseCase, getFilmUseCase)
     }
 
@@ -46,4 +50,12 @@ class DetailModule(private val fragment: DetailFragment) {
     @Provides
     internal fun provideDetailRepository(service: StarWarsService): DetailRepository =
             DetailRepositoryImpl(service)
+
+    @Provides
+    internal fun provideCharacter(): Character {
+        val navHostFragment = fragment.requireActivity().supportFragmentManager
+                .findFragmentById(R.id.navHostFragment)
+        val fragment = navHostFragment!!.childFragmentManager.fragments[0]
+        return DetailFragmentArgs.fromBundle(fragment.requireArguments()).character
+    }
 }
