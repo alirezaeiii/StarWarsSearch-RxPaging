@@ -15,7 +15,7 @@ import dagger.Module
 import dagger.Provides
 
 /**
- * Class that contributes to the object graph [SearchComponent].
+ * Class that contributes to the object graph [DetailComponent].
  *
  * @see Module
  */
