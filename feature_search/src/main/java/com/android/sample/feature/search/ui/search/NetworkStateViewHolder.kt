@@ -19,7 +19,7 @@ import com.android.sample.common.R as R1
  * A View Holder that can display a loading or have click action.
  * It is used to show the network state of paging.
  */
-class NetworkStateItemViewHolder(
+class NetworkStateViewHolder(
     private val root: View,
     retryCallback: () -> Unit
 ) : RecyclerView.ViewHolder(root) {
@@ -64,10 +64,10 @@ class NetworkStateItemViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retryCallback: () -> Unit): NetworkStateItemViewHolder {
+        fun create(parent: ViewGroup, retryCallback: () -> Unit): NetworkStateViewHolder {
             val view = parent.context.layoutInflater
                 .inflate(R.layout.network_state_item, parent, false)
-            return NetworkStateItemViewHolder(view, retryCallback)
+            return NetworkStateViewHolder(view, retryCallback)
         }
     }
 }

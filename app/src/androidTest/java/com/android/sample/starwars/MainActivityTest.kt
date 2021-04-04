@@ -10,7 +10,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.android.sample.feature.search.R
-import com.android.sample.feature.search.ui.search.StarWarsItemViewHolder
+import com.android.sample.feature.search.ui.search.StarWarsViewHolder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +35,7 @@ class MainActivityTest {
         onView(isAssignableFrom(EditText::class.java))
             .perform(typeText("a"), pressImeActionButton())
         onView(withId(R.id.recyclerView)).perform(
-            actionOnItemAtPosition<StarWarsItemViewHolder>(9, click())
+            actionOnItemAtPosition<StarWarsViewHolder>(9, click())
         )
 
         onView(withText(R.string.label_birth_year)).check(matches(isDisplayed()))

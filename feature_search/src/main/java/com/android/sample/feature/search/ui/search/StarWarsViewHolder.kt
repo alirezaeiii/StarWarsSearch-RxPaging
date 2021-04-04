@@ -6,7 +6,7 @@ import com.android.sample.common.extension.layoutInflater
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.databinding.StarWarsItemBinding
 
-class StarWarsItemViewHolder(private val binding: StarWarsItemBinding) :
+class StarWarsViewHolder(private val binding: StarWarsItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bindTo(character: Character?, personCallback: MainAdapter.OnClickListener) {
@@ -18,13 +18,13 @@ class StarWarsItemViewHolder(private val binding: StarWarsItemBinding) :
     }
 
     companion object {
-        fun create(parent: ViewGroup): StarWarsItemViewHolder {
+        fun create(parent: ViewGroup): StarWarsViewHolder {
             val binding = StarWarsItemBinding.inflate(
                 parent.context.layoutInflater,
                 parent,
                 false
             )
-            return StarWarsItemViewHolder(binding)
+            return StarWarsViewHolder(binding)
         }
     }
 }

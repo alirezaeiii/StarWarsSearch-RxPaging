@@ -26,17 +26,17 @@ class MainAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.star_wars_item ->
-                (holder as StarWarsItemViewHolder).bindTo(getItem(position), callback)
+                (holder as StarWarsViewHolder).bindTo(getItem(position), callback)
 
             R.layout.network_state_item ->
-                (holder as NetworkStateItemViewHolder).bindTo(networkState, position)
+                (holder as NetworkStateViewHolder).bindTo(networkState, position)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.star_wars_item -> StarWarsItemViewHolder.create(parent)
-            R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)
+            R.layout.star_wars_item -> StarWarsViewHolder.create(parent)
+            R.layout.network_state_item -> NetworkStateViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
     }
