@@ -27,18 +27,18 @@ abstract class BasePagingViewModel<T>(
 
     val networkState: LiveData<NetworkState> by lazy { switchMap(repoResult) { it.networkState } }
 
-    fun retry() {
-        repoResult.value?.retry?.invoke()
+    protected fun showQuery() {
+        repoResult.value?.pagedList?.subscribeOn(schedulerProvider.io())
+                ?.observeOn(schedulerProvider.ui())
+                ?.subscribe({
+                    _liveData.postValue(it)
+                }) {
+                    Timber.e(it)
+                }.also { disposable -> disposable?.let { compositeDisposable.add(it) } }
     }
 
-    fun showQuery() {
-        repoResult.value?.pagedList?.subscribeOn(schedulerProvider.io())
-            ?.observeOn(schedulerProvider.ui())
-            ?.subscribe({
-                _liveData.postValue(it)
-            }) {
-                Timber.e(it)
-            }.also { disposable -> disposable?.let { compositeDisposable.add(it) } }
+    fun retry() {
+        repoResult.value?.retry?.invoke()
     }
 
     /**
