@@ -14,8 +14,7 @@
         android:theme="@style/Theme.StarWars"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|orientation">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
