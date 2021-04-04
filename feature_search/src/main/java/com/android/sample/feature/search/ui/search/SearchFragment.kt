@@ -77,7 +77,10 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                     if (query.isNotEmpty()) {
                         search(query)
                     }
-                    emptyLayout.visibility = View.INVISIBLE
+                    if (savedInstanceState == null ||
+                            savedInstanceState.getBoolean(EMPTY_VIEW_KEY)) {
+                        emptyLayout.visibility = View.INVISIBLE
+                    }
                     return true
                 }
             })
@@ -97,4 +100,11 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(EMPTY_VIEW_KEY, binding.recyclerView.adapter?.itemCount == 0)
+    }
 }
+
+private const val EMPTY_VIEW_KEY = "empty_view"
