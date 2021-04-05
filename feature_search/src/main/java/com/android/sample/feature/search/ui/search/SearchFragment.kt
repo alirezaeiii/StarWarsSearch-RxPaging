@@ -43,9 +43,9 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         }
 
         val viewModelAdapter =
-                MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { person ->
+                MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { character ->
                     val destination =
-                            SearchFragmentDirections.actionSearchFragmentToDetailFragment(person)
+                            SearchFragmentDirections.actionSearchFragmentToDetailFragment(character)
                     with(findNavController()) {
                         currentDestination?.getAction(destination.actionId)
                                 ?.let { navigate(destination) }
@@ -76,8 +76,9 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isNotEmpty()) {
                         search(query)
+                        emptyLayout.visibility = View.INVISIBLE
                     }
-                    if (query.isNotEmpty() || savedInstanceState == null ||
+                    if (savedInstanceState == null ||
                             savedInstanceState.getBoolean(EMPTY_VIEW_KEY)) {
                         emptyLayout.visibility = View.INVISIBLE
                     }
