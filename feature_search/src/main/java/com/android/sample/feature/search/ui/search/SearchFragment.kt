@@ -82,7 +82,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 }
             })
 
-            if (savedInstanceState?.getBoolean(EMPTY_VIEW_KEY) == true) {
+            if (savedInstanceState?.getBoolean(HIDE_EMPTY_VIEW_KEY) == true) {
                 emptyLayout.visibility = View.INVISIBLE
             }
         }
@@ -104,8 +104,8 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean(EMPTY_VIEW_KEY, _binding?.recyclerView?.adapter?.itemCount != 0)
+        outState.putBoolean(HIDE_EMPTY_VIEW_KEY, _binding?.recyclerView?.adapter?.itemCount != 0)
     }
 }
 
-private const val EMPTY_VIEW_KEY = "empty_view"
+private const val HIDE_EMPTY_VIEW_KEY = "empty_view"
