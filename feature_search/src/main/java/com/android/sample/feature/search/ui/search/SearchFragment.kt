@@ -78,13 +78,13 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                         search(query)
                         emptyLayout.visibility = View.INVISIBLE
                     }
-                    if (savedInstanceState == null ||
-                            savedInstanceState.getBoolean(EMPTY_VIEW_KEY)) {
-                        emptyLayout.visibility = View.INVISIBLE
-                    }
                     return true
                 }
             })
+
+            if (savedInstanceState?.getBoolean(EMPTY_VIEW_KEY) == true) {
+                emptyLayout.visibility = View.INVISIBLE
+            }
         }
 
         return binding.root
