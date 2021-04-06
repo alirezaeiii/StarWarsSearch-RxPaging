@@ -23,7 +23,7 @@ class ApplicationModule(private val application: Application) {
      */
     @Singleton
     @Provides
-    fun provideApplication(): Application = application
+    internal fun provideApplication(): Application = application
 
     /**
      * Create a provider method binding for [SchedulerProvider].
@@ -32,5 +32,5 @@ class ApplicationModule(private val application: Application) {
      * @see Provides
      */
     @Provides
-    fun provideSchedulerProvider(): BaseSchedulerProvider = SchedulerProvider()
+    internal fun provideSchedulerProvider(): BaseSchedulerProvider = SchedulerProvider()
 }

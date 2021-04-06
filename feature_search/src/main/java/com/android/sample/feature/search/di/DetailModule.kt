@@ -6,9 +6,6 @@ import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
-import com.android.sample.core.network.StarWarsService
-import com.android.sample.core.repository.DetailRepository
-import com.android.sample.core.repository.DetailRepositoryImpl
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.ui.detail.DetailFragment
 import com.android.sample.feature.search.ui.detail.DetailFragmentArgs
@@ -41,10 +38,6 @@ class DetailModule(private val fragment: DetailFragment) {
         DetailViewModel(schedulerProvider, character, getSpecieUseCase,
                 getPlanetUseCase, getFilmUseCase)
     }
-
-    @Provides
-    internal fun provideDetailRepository(service: StarWarsService): DetailRepository =
-            DetailRepositoryImpl(service)
 
     @Provides
     internal fun provideCharacter(): Character {
