@@ -3,6 +3,7 @@ package commons
 import dependencies.Dependencies
 import dependencies.AnnotationProcessorsDependencies
 import extensions.addTestsDependencies
+import extensions.implementation
 import extensions.kapt
 
 plugins {
@@ -52,6 +53,7 @@ dependencies {
     implementation(Dependencies.NAVIGATION_UI)
     implementation(Dependencies.CONSTRAIN_LAYOUT)
     implementation(Dependencies.RECYCLE_VIEW)
+    implementation(Dependencies.DAGGER)
     implementation(Dependencies.RX_JAVA)
 
     kapt(AnnotationProcessorsDependencies.DAGGER)

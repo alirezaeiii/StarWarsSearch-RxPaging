@@ -35,7 +35,7 @@ android {
 
 dependencies {
     implementation(Dependencies.KOTLIN)
-    api(Dependencies.DAGGER)
+    implementation(Dependencies.DAGGER)
     api(Dependencies.PAGING)
     api(Dependencies.RX_PAGING)
 

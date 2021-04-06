@@ -47,7 +47,6 @@ class SearchPageKeyedDataSource(
             params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
     ) {
         mutableNetworkState.postValue(NetworkState.LOADING)
-
         fetchItems(1).subscribe({
             mutableNetworkState.postValue(NetworkState.LOADED)
             if (it.next == null) {
