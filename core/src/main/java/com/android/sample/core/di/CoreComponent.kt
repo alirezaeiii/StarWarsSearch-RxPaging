@@ -1,6 +1,7 @@
 package com.android.sample.core.di
 
 import android.app.Application
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.network.StarWarsService
 import dagger.Component
 import javax.inject.Singleton
@@ -17,9 +18,9 @@ import javax.inject.Singleton
 interface CoreComponent {
 
     /**
-     * Provide dependency graph Context
+     * Provide dependency graph Application
      *
-     * @return Context
+     * @return Application
      */
     fun application(): Application
 
@@ -29,4 +30,11 @@ interface CoreComponent {
      * @return StarWarsService
      */
     fun starWarsService(): StarWarsService
+
+    /**
+     * Provide dependency graph SchedulerProvider
+     *
+     * @return BaseSchedulerProvider
+     */
+    fun schedulerProvider(): BaseSchedulerProvider
 }

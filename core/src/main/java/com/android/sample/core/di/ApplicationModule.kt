@@ -1,7 +1,8 @@
 package com.android.sample.core.di
 
 import android.app.Application
-import android.content.Context
+import com.android.sample.common.util.schedulers.BaseSchedulerProvider
+import com.android.sample.common.util.schedulers.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -15,12 +16,21 @@ import javax.inject.Singleton
 class ApplicationModule(private val application: Application) {
 
     /**
-     * Create a provider method binding for [Context].
+     * Create a provider method binding for [Application].
      *
-     * @return Instance of context.
+     * @return Instance of application.
      * @see Provides
      */
     @Singleton
     @Provides
     fun provideApplication(): Application = application
+
+    /**
+     * Create a provider method binding for [SchedulerProvider].
+     *
+     * @return Instance of SchedulerProvider.
+     * @see Provides
+     */
+    @Provides
+    fun provideSchedulerProvider(): BaseSchedulerProvider = SchedulerProvider()
 }
