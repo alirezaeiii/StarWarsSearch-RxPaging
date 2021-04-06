@@ -16,7 +16,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [ApplicationModule::class,
     NetworkModule::class,
-    RepositoryModule::class]
+    RepositoryModule::class,
+    UtilsModule::class]
 )
 interface CoreComponent {
 
