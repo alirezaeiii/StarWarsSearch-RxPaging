@@ -32,7 +32,7 @@ abstract class BasePagingViewModel<T>(
                     _liveData.postValue(it)
                 }) {
                     Timber.e(it)
-                }.also { disposable -> disposable?.let { DisposableManager.getInstance().add(it) } }
+                }.also { disposable -> disposable?.let { DisposableManager.add(it) } }
     }
 
     fun retry() {
@@ -47,6 +47,6 @@ abstract class BasePagingViewModel<T>(
      */
     override fun onCleared() {
         super.onCleared()
-        DisposableManager.getInstance().clear()
+        DisposableManager.clear()
     }
 }

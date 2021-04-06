@@ -37,7 +37,7 @@ open class BaseViewModel<T>(
             }) {
                 _liveData.postValue(Resource.Error(it.localizedMessage))
                 Timber.e(it)
-            }.also { DisposableManager.getInstance().add(it) }
+            }.also { DisposableManager.add(it) }
     }
 
     /**
@@ -48,6 +48,6 @@ open class BaseViewModel<T>(
      */
     override fun onCleared() {
         super.onCleared()
-        DisposableManager.getInstance().clear()
+        DisposableManager.clear()
     }
 }

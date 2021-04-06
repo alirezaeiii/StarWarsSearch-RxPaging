@@ -39,7 +39,7 @@ class SearchPageKeyedDataSource(
                     loadAfter(params, callback)
                 }
                 setErrorMsg(it)
-            }.also { DisposableManager.getInstance().add(it) }
+            }.also { DisposableManager.add(it) }
         }
     }
 
@@ -59,6 +59,6 @@ class SearchPageKeyedDataSource(
                 loadInitial(params, callback)
             }
             setErrorMsg(it)
-        }.also { DisposableManager.getInstance().add(it) }
+        }.also { DisposableManager.add(it) }
     }
 }
