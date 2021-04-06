@@ -3,7 +3,6 @@ package com.android.sample.feature.search.di
 import android.app.Application
 import com.android.sample.common.extension.viewModel
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.repository.SearchRepository
@@ -35,10 +34,6 @@ class SearchModule(private val fragment: SearchFragment) {
     ) = fragment.viewModel {
         SearchViewModel(useCase, schedulerProvider, application)
     }
-
-    @Provides
-    internal fun provideSchedulerProvider(): BaseSchedulerProvider =
-            SchedulerProvider()
 
     @Provides
     internal fun provideSearchRepository(service: StarWarsService): SearchRepository =

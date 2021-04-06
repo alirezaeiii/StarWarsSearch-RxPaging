@@ -3,7 +3,6 @@ package com.android.sample.feature.search.di
 import androidx.navigation.fragment.navArgs
 import com.android.sample.common.extension.viewModel
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import com.android.sample.common.util.schedulers.SchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
@@ -42,10 +41,6 @@ class DetailModule(private val fragment: DetailFragment) {
         DetailViewModel(schedulerProvider, character, getSpecieUseCase,
                 getPlanetUseCase, getFilmUseCase)
     }
-
-    @Provides
-    internal fun provideSchedulerProvider(): BaseSchedulerProvider =
-            SchedulerProvider()
 
     @Provides
     internal fun provideDetailRepository(service: StarWarsService): DetailRepository =

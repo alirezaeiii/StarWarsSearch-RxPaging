@@ -2,6 +2,7 @@ package com.android.sample.feature.search.di
 
 import com.android.sample.core.di.CoreComponent
 import com.android.sample.core.di.FeatureScope
+import com.android.sample.core.di.SchedulerModule
 import com.android.sample.feature.search.ui.search.SearchFragment
 import dagger.Component
 
@@ -12,7 +13,7 @@ import dagger.Component
  * @see Component
  */
 @FeatureScope
-@Component(modules = [SearchModule::class],
+@Component(modules = [SearchModule::class, SchedulerModule::class],
         dependencies = [CoreComponent::class]
 )
 interface SearchComponent {
