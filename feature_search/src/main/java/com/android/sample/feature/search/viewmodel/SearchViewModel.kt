@@ -13,17 +13,15 @@ import com.android.sample.feature.search.paging.SearchPageKeyRepository
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
-    private val searchPeopleUseCase: SearchPeopleUseCase,
-    private val schedulerProvider: BaseSchedulerProvider,
-    private val app: Application,
+        private val searchPeopleUseCase: SearchPeopleUseCase,
+        private val schedulerProvider: BaseSchedulerProvider,
+        private val app: Application,
 ) : BasePagingViewModel<Character>(app, schedulerProvider) {
 
     private val query = MutableLiveData<String>()
 
     override val repoResult: LiveData<Listing<Character>> = Transformations.map(query) {
-        SearchPageKeyRepository(
-            searchPeopleUseCase, it, compositeDisposable,
-            schedulerProvider, app.applicationContext
+        SearchPageKeyRepository(searchPeopleUseCase, it, schedulerProvider, app.applicationContext
         ).getItems()
     }
 

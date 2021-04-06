@@ -3,10 +3,10 @@ package com.android.sample.common.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.sample.common.util.DisposableManager
 import com.android.sample.common.util.Resource
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import io.reactivex.Single
-import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 /**
@@ -19,8 +19,6 @@ open class BaseViewModel<T>(
     private val schedulerProvider: BaseSchedulerProvider,
     private val singleRequest: Single<T>,
 ) : ViewModel() {
-
-    private val compositeDisposable = CompositeDisposable()
 
     private val _liveData = MutableLiveData<Resource<T>>()
     val liveData: LiveData<Resource<T>>
@@ -39,7 +37,7 @@ open class BaseViewModel<T>(
             }) {
                 _liveData.postValue(Resource.Error(it.localizedMessage))
                 Timber.e(it)
-            }.also { compositeDisposable.add(it) }
+            }.also { DisposableManager.getInstance().add(it) }
     }
 
     /**
@@ -50,6 +48,6 @@ open class BaseViewModel<T>(
      */
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable.clear()
+        DisposableManager.getInstance().clear()
     }
 }

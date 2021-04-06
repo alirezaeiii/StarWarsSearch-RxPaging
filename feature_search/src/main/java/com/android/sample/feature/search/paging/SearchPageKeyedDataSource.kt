@@ -3,17 +3,16 @@ package com.android.sample.feature.search.paging
 import android.content.Context
 import com.android.sample.common.base.BasePageKeyedDataSource
 import com.android.sample.common.paging.NetworkState
+import com.android.sample.common.util.DisposableManager
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 import com.android.sample.core.domain.SearchPeopleUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 
 class SearchPageKeyedDataSource(
         private val searchPeopleUseCase: SearchPeopleUseCase,
         private val query: String,
-        private val compositeDisposable: CompositeDisposable,
         schedulerProvider: BaseSchedulerProvider,
         context: Context,
 ) : BasePageKeyedDataSource<Character, CharacterWrapper>(
@@ -40,7 +39,7 @@ class SearchPageKeyedDataSource(
                     loadAfter(params, callback)
                 }
                 setErrorMsg(it)
-            }.also { compositeDisposable.add(it) }
+            }.also { DisposableManager.getInstance().add(it) }
         }
     }
 
@@ -60,6 +59,6 @@ class SearchPageKeyedDataSource(
                 loadInitial(params, callback)
             }
             setErrorMsg(it)
-        }.also { compositeDisposable.add(it) }
+        }.also { DisposableManager.getInstance().add(it) }
     }
 }

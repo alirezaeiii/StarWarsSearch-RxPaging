@@ -8,16 +8,14 @@ import androidx.lifecycle.Transformations.switchMap
 import androidx.paging.PagedList
 import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.NetworkState
+import com.android.sample.common.util.DisposableManager
 import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 
 abstract class BasePagingViewModel<T>(
-    app: Application,
-    private val schedulerProvider: BaseSchedulerProvider
+        app: Application,
+        private val schedulerProvider: BaseSchedulerProvider,
 ) : AndroidViewModel(app) {
-
-    protected val compositeDisposable = CompositeDisposable()
 
     protected abstract val repoResult: LiveData<Listing<T>>
 
@@ -34,7 +32,7 @@ abstract class BasePagingViewModel<T>(
                     _liveData.postValue(it)
                 }) {
                     Timber.e(it)
-                }.also { disposable -> disposable?.let { compositeDisposable.add(it) } }
+                }.also { disposable -> disposable?.let { DisposableManager.getInstance().add(it) } }
     }
 
     fun retry() {
@@ -49,6 +47,6 @@ abstract class BasePagingViewModel<T>(
      */
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable.clear()
+        DisposableManager.getInstance().clear()
     }
 }
