@@ -2,8 +2,7 @@ package com.android.sample.feature.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.common.util.Resource
-import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import com.android.sample.common.util.schedulers.ImmediateSchedulerProvider
+import com.android.sample.common.util.schedulers.TestSchedulerProvider
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.domain.GetPlanetUseCase
 import com.android.sample.core.domain.GetSpecieUseCase
@@ -37,7 +36,7 @@ class DetailViewModelTest {
     @Mock
     private lateinit var repository: DetailRepository
 
-    private lateinit var schedulerProvider: ImmediateSchedulerProvider
+    private lateinit var schedulerProvider: TestSchedulerProvider
 
     private lateinit var character: Character
     private lateinit var specie: Specie
@@ -50,8 +49,7 @@ class DetailViewModelTest {
     fun setUp() {
         initMocks(this)
 
-        // Make the sure that all schedulers are immediate.
-        schedulerProvider = ImmediateSchedulerProvider()
+        schedulerProvider = TestSchedulerProvider()
 
         character = Character("Ali", "127", "1385",
                 listOf("url1", "url2"), listOf("url1", "url2"))
@@ -84,7 +82,7 @@ class DetailViewModelTest {
                     assertTrue(data.species.isNotEmpty())
                 }
             } else {
-                fail("Wrong type " + it)
+                fail("Wrong type $it")
             }
         }
     }
@@ -98,7 +96,11 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
-        //schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+        viewModel.liveData.value.let {
+            assertThat(it, `is`(Resource.Loading))
+        }
+
+        schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
@@ -106,7 +108,7 @@ class DetailViewModelTest {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
             } else {
-                fail("Wrong type " + it)
+                fail("Wrong type $it")
             }
         }
     }
@@ -120,7 +122,11 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
-        //schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+        viewModel.liveData.value.let {
+            assertThat(it, `is`(Resource.Loading))
+        }
+
+        schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
@@ -128,7 +134,7 @@ class DetailViewModelTest {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
             } else {
-                fail("Wrong type " + it)
+                fail("Wrong type $it")
             }
         }
     }
@@ -142,6 +148,10 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
+        viewModel.liveData.value.let {
+            assertThat(it, `is`(Resource.Loading))
+        }
+
         schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
 
         viewModel.liveData.value.let {
@@ -150,7 +160,7 @@ class DetailViewModelTest {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
             } else {
-                fail("Wrong type " + it)
+                fail("Wrong type $it")
             }
         }
     }

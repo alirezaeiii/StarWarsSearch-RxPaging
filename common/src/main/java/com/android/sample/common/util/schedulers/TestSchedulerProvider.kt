@@ -1,13 +1,12 @@
 package com.android.sample.common.util.schedulers
 
 import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.schedulers.TestScheduler
 
 /**
  * Implementation of the [BaseSchedulerProvider] making all [Scheduler]s immediate.
  */
-class ImmediateSchedulerProvider : BaseSchedulerProvider {
+class TestSchedulerProvider : BaseSchedulerProvider {
 
     val testScheduler = TestScheduler()
 
