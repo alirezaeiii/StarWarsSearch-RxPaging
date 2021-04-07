@@ -2,15 +2,18 @@ package com.android.sample.common.util.schedulers
 
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.TestScheduler
 
 /**
  * Implementation of the [BaseSchedulerProvider] making all [Scheduler]s immediate.
  */
 class ImmediateSchedulerProvider : BaseSchedulerProvider {
 
-    override fun computation(): Scheduler = Schedulers.trampoline()
+    val testScheduler = TestScheduler()
 
-    override fun io(): Scheduler = Schedulers.trampoline()
+    override fun computation(): Scheduler = testScheduler
 
-    override fun ui(): Scheduler = Schedulers.trampoline()
+    override fun io(): Scheduler = testScheduler
+
+    override fun ui(): Scheduler = testScheduler
 }
