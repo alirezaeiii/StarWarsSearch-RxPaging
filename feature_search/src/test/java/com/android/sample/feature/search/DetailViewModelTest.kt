@@ -43,8 +43,6 @@ class DetailViewModelTest {
     private lateinit var planet: Planet
     private lateinit var film: Film
 
-    private lateinit var viewModel: DetailViewModel
-
     @Before
     fun setUp() {
         initMocks(this)
@@ -65,7 +63,7 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
-        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
@@ -93,7 +91,7 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
-        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
@@ -119,7 +117,7 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
-        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
@@ -145,7 +143,7 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.error(Exception("error")))
 
-        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {

@@ -1,4 +1,4 @@
-# StarWarsSearch-Paging
+# StarWarsSearch-RxPaging
 An Android Application interacting with [Star Wars API](https://swapi.dev/). It enables users to search for Star Wars Characters and get their details from the Star Wars Universe.
 
 ## Features
