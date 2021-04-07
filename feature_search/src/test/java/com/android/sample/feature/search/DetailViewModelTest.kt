@@ -37,6 +37,7 @@ class DetailViewModelTest {
     private lateinit var repository: DetailRepository
 
     private lateinit var schedulerProvider: TestSchedulerProvider
+    private lateinit var viewModel: DetailViewModel
 
     private lateinit var character: Character
     private lateinit var specie: Specie
@@ -55,6 +56,9 @@ class DetailViewModelTest {
         specie = Specie("Ali", "Persian", "Iran")
         planet = Planet("")
         film = Film("")
+
+        viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
+                GetPlanetUseCase(repository), GetFilmUseCase(repository))
     }
 
     @Test
@@ -62,9 +66,6 @@ class DetailViewModelTest {
         `when`(repository.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
-
-        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
-                GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(Resource.Loading))
@@ -91,9 +92,6 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
-        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
-                GetPlanetUseCase(repository), GetFilmUseCase(repository))
-
         viewModel.liveData.value.let {
             assertThat(it, `is`(Resource.Loading))
         }
@@ -117,9 +115,6 @@ class DetailViewModelTest {
         `when`(repository.getPlanet(anyString())).thenReturn(Single.error(Exception("error")))
         `when`(repository.getFilm(anyString())).thenReturn(Single.just(film))
 
-        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
-                GetPlanetUseCase(repository), GetFilmUseCase(repository))
-
         viewModel.liveData.value.let {
             assertThat(it, `is`(Resource.Loading))
         }
@@ -142,9 +137,6 @@ class DetailViewModelTest {
         `when`(repository.getSpecie(anyString())).thenReturn(Single.just(specie))
         `when`(repository.getPlanet(anyString())).thenReturn(Single.just(planet))
         `when`(repository.getFilm(anyString())).thenReturn(Single.error(Exception("error")))
-
-        val viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
-                GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
             assertThat(it, `is`(Resource.Loading))
