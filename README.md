@@ -17,7 +17,7 @@ A single-activity architecture, using the Navigation component to manage fragmen
 
 [Android architecture components](https://developer.android.com/topic/libraries/architecture/) which is part of Android Jetpack to give the project a robust design, testable and maintainable.
 
-Pattern Model-View-ViewModel (MVVM) facilitating a separation of development of the graphical user interface.
+Pattern Model-View-ViewModel (MVVM) facilitates separation of concerns. MVVM separates your view (i.e. Activities and Fragments) from your business logic.
 
 ## Modules
 
