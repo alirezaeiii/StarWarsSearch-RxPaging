@@ -18,6 +18,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,6 +27,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations.initMocks
+import java.util.concurrent.TimeUnit
 
 class DetailViewModelTest {
 
@@ -35,7 +37,7 @@ class DetailViewModelTest {
     @Mock
     private lateinit var repository: DetailRepository
 
-    private lateinit var schedulerProvider: BaseSchedulerProvider
+    private lateinit var schedulerProvider: ImmediateSchedulerProvider
 
     private lateinit var character: Character
     private lateinit var specie: Specie
@@ -69,12 +71,20 @@ class DetailViewModelTest {
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
         viewModel.liveData.value.let {
+            assertThat(it, `is`(Resource.Loading))
+        }
+
+        schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+
+        viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Success) {
                 it.data?.let { data ->
                     assertTrue(data.films.isNotEmpty())
                     assertTrue(data.species.isNotEmpty())
                 }
+            } else {
+                fail("Wrong type " + it)
             }
         }
     }
@@ -88,11 +98,15 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
+        //schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Error) {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
+            } else {
+                fail("Wrong type " + it)
             }
         }
     }
@@ -106,11 +120,15 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
+        //schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Error) {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
+            } else {
+                fail("Wrong type " + it)
             }
         }
     }
@@ -124,11 +142,15 @@ class DetailViewModelTest {
         viewModel = DetailViewModel(schedulerProvider, character, GetSpecieUseCase(repository),
                 GetPlanetUseCase(repository), GetFilmUseCase(repository))
 
+        schedulerProvider.testScheduler.advanceTimeBy(1, TimeUnit.MILLISECONDS)
+
         viewModel.liveData.value.let {
             assertThat(it, `is`(notNullValue()))
             if (it is Resource.Error) {
                 assertThat(it.message, `is`(notNullValue()))
                 assertThat(it.message, `is`("error"))
+            } else {
+                fail("Wrong type " + it)
             }
         }
     }
