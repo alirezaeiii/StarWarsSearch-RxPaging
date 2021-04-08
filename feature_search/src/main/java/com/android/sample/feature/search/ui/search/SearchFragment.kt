@@ -53,6 +53,7 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 })
 
         viewModel.liveData.observe(viewLifecycleOwner, {
+            binding.emptyLayout.visibility = View.INVISIBLE
             viewModelAdapter.submitList(it)
         })
 
