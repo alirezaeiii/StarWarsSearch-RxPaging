@@ -90,7 +90,6 @@
                             app:layout_constraintStart_toEndOf="@+id/label_birth_year"
                             tools:text="80BBY" />
 
-
                         <TextView
                             android:id="@+id/label_height"
                             style="@style/Widget.StarWarsSearch.Label"
@@ -114,7 +113,6 @@
                             tools:text="20cm or 1.6feet" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 </androidx.cardview.widget.CardView>
 
@@ -268,13 +266,22 @@
         <LinearLayout
             android:id="@+id/error_view"
             style="@style/ErrorViewStyle"
+            android:layout_gravity="center"
             app:showError="@{vm.liveData}">
 
-            <TextView style="@style/ErrorTextViewStyle" />
+            <ImageView
+                android:id="@+id/error_icon"
+                style="@style/ErrorImageViewStyle"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                style="@style/ErrorTextViewStyle"
+                android:text="@string/failed_loading_msg" />
 
             <Button
                 android:id="@+id/retry_btn"
                 style="@style/ErrorButtonStyle"
+                android:layout_gravity="center"
                 android:onClick="@{()-> vm.sendRequest()}" />
 
         </LinearLayout>

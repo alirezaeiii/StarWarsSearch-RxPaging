@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/network_state_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical">
+    style="@style/ErrorViewStyle"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/error_icon"
+        style="@style/ErrorImageViewStyle"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/error_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_small" />
+        style="@style/ErrorTextViewStyle" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -20,9 +22,6 @@
 
     <Button
         android:id="@+id/retry_button"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/retry" />
+        style="@style/ErrorButtonStyle" />
 
 </LinearLayout>

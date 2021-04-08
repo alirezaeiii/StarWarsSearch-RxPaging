@@ -2,10 +2,7 @@ package com.android.sample.feature.search.ui.search
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sample.common.extension.layoutInflater
 import com.android.sample.common.paging.NetworkState
@@ -28,6 +25,7 @@ class NetworkStateViewHolder(
     private val progressBar = root.findViewById<ProgressBar>(R.id.progress_bar)
     private val retry = root.findViewById<Button>(R.id.retry_button)
     private val errorMsg = root.findViewById<TextView>(R.id.error_msg)
+    private val errorIcon = root.findViewById<ImageView>(R.id.error_icon)
 
     init {
         retry.setOnClickListener {
@@ -47,6 +45,7 @@ class NetworkStateViewHolder(
                 0, 0, 0,
                 root.context.resources.getDimension(R.dimen.network_state_bottom_padding).toInt()
             )
+            errorIcon.toVisibility(networkState?.status == FAILED)
         } else {
             networkStateLayout.layoutParams = ViewGroup.LayoutParams(
                 LinearLayout.LayoutParams(
@@ -56,6 +55,7 @@ class NetworkStateViewHolder(
             )
             val padding = root.context.resources.getDimension(R1.dimen.spacing_small).toInt()
             networkStateLayout.setPadding(padding, padding, padding, 0)
+            errorIcon.visibility = View.GONE
         }
         progressBar.toVisibility(networkState?.status == RUNNING)
         retry.toVisibility(networkState?.status == FAILED)
