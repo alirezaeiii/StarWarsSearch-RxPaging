@@ -1,6 +1,7 @@
-package com.android.sample.core.repository
+package com.android.sample.core.data
 
 import com.android.sample.core.network.StarWarsService
+import com.android.sample.core.repository.SearchRepository
 import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable
 import javax.inject.Inject

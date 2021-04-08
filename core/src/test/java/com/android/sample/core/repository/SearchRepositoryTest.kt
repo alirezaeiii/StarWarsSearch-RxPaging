@@ -1,6 +1,7 @@
 package com.android.sample.core.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.android.sample.core.data.SearchRepositoryImpl
 import com.android.sample.core.network.StarWarsService
 import com.android.sample.core.response.CharacterWrapper
 import io.reactivex.Observable

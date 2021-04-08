@@ -1,6 +1,7 @@
-package com.android.sample.core.repository
+package com.android.sample.core.data
 
 import com.android.sample.core.network.StarWarsService
+import com.android.sample.core.repository.DetailRepository
 import com.android.sample.core.response.Film
 import com.android.sample.core.response.Planet
 import com.android.sample.core.response.Specie

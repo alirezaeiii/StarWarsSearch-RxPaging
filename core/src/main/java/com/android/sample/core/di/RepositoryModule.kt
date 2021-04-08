@@ -1,9 +1,9 @@
 package com.android.sample.core.di
 
 import com.android.sample.core.repository.DetailRepository
-import com.android.sample.core.repository.DetailRepositoryImpl
+import com.android.sample.core.data.DetailRepositoryImpl
 import com.android.sample.core.repository.SearchRepository
-import com.android.sample.core.repository.SearchRepositoryImpl
+import com.android.sample.core.data.SearchRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
