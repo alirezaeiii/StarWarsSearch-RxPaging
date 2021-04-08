@@ -9,9 +9,11 @@ import com.android.sample.common.base.BaseFragment
 import com.android.sample.common.util.Resource
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.BR
+import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentDetailBinding
 import com.android.sample.feature.search.di.DaggerDetailComponent
 import com.android.sample.feature.search.di.DetailModule
+import com.android.sample.feature.search.model.SpecieWrapper
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import com.android.sample.starwars.StarWarsApplication
 import javax.inject.Inject
@@ -26,15 +28,15 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
      */
     override fun onInitDependencyInjection() {
         DaggerDetailComponent
-            .builder()
-            .coreComponent(StarWarsApplication.coreComponent(requireContext()))
-            .detailModule(DetailModule(this))
-            .build()
-            .inject(this)
+                .builder()
+                .coreComponent(StarWarsApplication.coreComponent(requireContext()))
+                .detailModule(DetailModule(this))
+                .build()
+                .inject(this)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
         val binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
@@ -60,10 +62,11 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
             viewModel.liveData.observe(viewLifecycleOwner, { resource ->
                 if (resource is Resource.Success) {
                     val species = resource.data?.species
-                    if (species.isNullOrEmpty()) {
-                        layoutSpecie.visibility = View.GONE
+                    specie = if (species.isNullOrEmpty()) {
+                        val notAvailable = getString(R.string.label_not_available)
+                        SpecieWrapper(notAvailable, notAvailable, notAvailable)
                     } else {
-                        specie = species[0]
+                        species[0]
                     }
                     filmAdapter.submitList(resource.data?.films)
                 }

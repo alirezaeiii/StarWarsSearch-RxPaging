@@ -11,4 +11,5 @@
     <string name="label_language">Language :</string>
     <string name="label_population">Population :</string>
     <string name="label_films">Films</string>
+    <string name="label_not_available">N/A</string>
 </resources>
