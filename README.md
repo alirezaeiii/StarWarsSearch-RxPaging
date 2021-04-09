@@ -4,7 +4,7 @@ An Android Application interacting with [Star Wars API](https://swapi.dev/). It 
 ## Features
 * Modular Android App Architecture
 * Clean Architecture + MVVM Architecture + Repository design Pattern.
-* Jetpack Libraries and Architecture Component
+* Jetpack Libraries and Architecture Components.
 * Kotlin Gradle DSL
 
 ## Architecture
@@ -17,7 +17,7 @@ A single-activity architecture, using the Navigation component to manage fragmen
 
 [Android architecture components](https://developer.android.com/topic/libraries/architecture/) which is part of Android Jetpack to give the project a robust design, testable and maintainable.
 
-Pattern Model-View-ViewModel (MVVM) facilitates separation of concerns. MVVM separates your view (i.e. Activities and Fragments) from your business logic.
+Architecture Model-View-ViewModel (MVVM) facilitates separation of concerns. MVVM separates your view (i.e. Activities and Fragments) from your business logic.
 
 ## Modules
 
