@@ -63,7 +63,6 @@ Testing is done in each layer includes Repository and UseCase in `:core` module 
 * [Moshi](https://github.com/square/moshi) is a modern JSON library for Android and Java. It makes it easy to parse JSON format data.
 * [OkHttp interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) Logs HTTP requests and responses.
 * [Material Design](https://material.io/develop/android/) Build beautiful, usable products using Material Components for Android
-* [JUnit4](https://junit.org/junit4/) Unit Testing
 * [Mockito](https://github.com/mockito/mockito) which is the most popular Mocking framework for unit tests written in Java as well as Kotlin.
 * [Espresso](https://developer.android.com/training/testing/espresso) Automated testing UI test
 
