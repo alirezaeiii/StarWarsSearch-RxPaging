@@ -4,7 +4,7 @@ An Android Application interacting with [Star Wars API](https://swapi.dev/). It 
 ## Features
 * Modular Android App Architecture
 * Clean Architecture + MVVM Architecture + Repository design Pattern.
-* Jetpack Libraries and Architecture Component
+* Jetpack Libraries and Architecture Components.
 * Kotlin Gradle DSL
 
 ## Architecture
@@ -17,7 +17,7 @@ A single-activity architecture, using the Navigation component to manage fragmen
 
 [Android architecture components](https://developer.android.com/topic/libraries/architecture/) which is part of Android Jetpack to give the project a robust design, testable and maintainable.
 
-Pattern Model-View-ViewModel (MVVM) facilitates separation of concerns. MVVM separates your view (i.e. Activities and Fragments) from your business logic.
+Architecture Model-View-ViewModel (MVVM) facilitates separation of concerns. MVVM separates your view (i.e. Activities and Fragments) from your business logic.
 
 ## Modules
 
@@ -59,11 +59,10 @@ Testing is done in each layer includes Repository and UseCase in `:core` module 
 * [Dagger](https://developer.android.com/training/dependency-injection/dagger-multi-module) is a fully static, compile-time dependency injection framework for Java, Kotlin, and Android.
 * [RxJava](https://github.com/ReactiveX/RxJava) is a library for composing asynchronous code using observable sequences.
 * [RxAndroid](https://github.com/ReactiveX/RxAndroid) is a module that adds the minimum classes to RxJava to make writing reactive components in Android.
-* [Retrofit](https://square.github.io/retrofit/) is a Type-safe HTTP client for Android and Java and Kotlin by Square.
+* [Retrofit](https://square.github.io/retrofit/) is a Type-safe HTTP client for Android, Java and Kotlin by Square.
 * [Moshi](https://github.com/square/moshi) is a modern JSON library for Android and Java. It makes it easy to parse JSON format data.
 * [OkHttp interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) Logs HTTP requests and responses.
 * [Material Design](https://material.io/develop/android/) Build beautiful, usable products using Material Components for Android
-* [JUnit4](https://junit.org/junit4/) Unit Testing
 * [Mockito](https://github.com/mockito/mockito) which is the most popular Mocking framework for unit tests written in Java as well as Kotlin.
 * [Espresso](https://developer.android.com/training/testing/espresso) Automated testing UI test
 
