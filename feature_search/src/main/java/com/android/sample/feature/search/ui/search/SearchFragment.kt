@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.fragment.findNavController
 import com.android.sample.common.base.BaseFragment
 import com.android.sample.feature.search.BR
+import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding
 import com.android.sample.feature.search.di.DaggerSearchComponent
 import com.android.sample.feature.search.di.SearchModule
@@ -61,7 +64,13 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             viewModelAdapter.setNetworkState(it)
         })
 
+        val searchCloseIconButtonId = resources.getIdentifier("android:id/search_close_btn", null, null)
+
         with(binding) {
+
+            val searchClose: ImageView = searchView.findViewById(searchCloseIconButtonId)
+            val searchCloseIconColor = ResourcesCompat.getColor(resources, R.color.gray, null)
+            searchClose.setColorFilter(searchCloseIconColor)
 
             recyclerView.apply {
                 setHasFixedSize(true)
