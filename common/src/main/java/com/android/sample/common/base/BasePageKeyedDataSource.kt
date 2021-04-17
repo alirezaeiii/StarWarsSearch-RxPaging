@@ -15,7 +15,7 @@ import java.util.concurrent.Executors
 
 
 abstract class BasePageKeyedDataSource<T, K>(
-        protected val schedulerProvider: BaseSchedulerProvider,
+        private val schedulerProvider: BaseSchedulerProvider,
         private val context: Context,
 ) : PageKeyedDataSource<Int, T>() {
 
