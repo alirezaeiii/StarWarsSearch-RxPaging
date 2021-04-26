@@ -15,8 +15,8 @@ import java.util.concurrent.Executors
 
 
 abstract class BasePageKeyedDataSource<T, K>(
-        private val schedulerProvider: BaseSchedulerProvider,
-        private val context: Context,
+    private val schedulerProvider: BaseSchedulerProvider,
+    private val context: Context,
 ) : PageKeyedDataSource<Int, T>() {
 
     // thread pool used for network requests
@@ -50,22 +50,24 @@ abstract class BasePageKeyedDataSource<T, K>(
     protected abstract fun fetchObservableItem(page: Int): Observable<K>
 
     protected fun fetchItems(page: Int): Observable<K> =
-            Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
-                if (it) {
-                    return@flatMap composeObservable { fetchObservableItem(page) }
-                } else {
-                    return@flatMap Observable.error(NetworkException())
-                }
-            }
+        Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
+            return@flatMap if (it) composeObservable { fetchObservableItem(page) }
+            else Observable.error(NetworkException())
+        }
 
     protected fun setErrorMsg(throwable: Throwable) {
-        mutableNetworkState.postValue(NetworkState.error(context.getString(
-                if (throwable is NetworkException) R.string.failed_network_msg else
-                    R.string.failed_loading_msg)))
+        mutableNetworkState.postValue(
+            NetworkState.error(
+                context.getString(
+                    if (throwable is NetworkException) R.string.failed_network_msg
+                    else R.string.failed_loading_msg
+                )
+            )
+        )
 
     }
 
     private inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
-            .subscribeOn(schedulerProvider.io())
-            .observeOn(schedulerProvider.ui())
+        .subscribeOn(schedulerProvider.io())
+        .observeOn(schedulerProvider.ui())
 }
