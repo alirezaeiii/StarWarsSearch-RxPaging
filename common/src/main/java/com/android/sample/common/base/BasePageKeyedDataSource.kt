@@ -59,13 +59,10 @@ abstract class BasePageKeyedDataSource<T, K>(
             }
 
     protected fun setErrorMsg(throwable: Throwable) {
-        if (throwable is NetworkException) {
-            mutableNetworkState.postValue(NetworkState.error(
-                    context.getString(R.string.failed_network_msg)))
-        } else {
-            mutableNetworkState.postValue(NetworkState.error(
-                    context.getString(R.string.failed_loading_msg)))
-        }
+        mutableNetworkState.postValue(NetworkState.error(context.getString(
+                if (throwable is NetworkException) R.string.failed_network_msg else
+                    R.string.failed_loading_msg)))
+
     }
 
     private inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
