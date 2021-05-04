@@ -13,7 +13,7 @@ abstract class BaseFragment<VM : ViewModel> : Fragment() {
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.
      */
-    abstract fun onInitDependencyInjection()
+    protected abstract fun onInitDependencyInjection()
 
     /**
      * Called when a fragment is first attached to its context.
