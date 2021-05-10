@@ -6,7 +6,7 @@ package dependencies
  */
 object TestAndroidDependencies {
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${BuildDependenciesVersions.ESPRESSO}"
-    const val ESPRESSO_CONTRIB = "com.android.support.test.espresso:espresso-contrib:${BuildDependenciesVersions.ESPRESSO}"
+    const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib:${BuildDependenciesVersions.ESPRESSO}"
     const val RUNNER = "androidx.test:runner:${BuildDependenciesVersions.TEST}"
     const val RULES = "androidx.test:rules:${BuildDependenciesVersions.TEST}"
     const val JUNIT = "androidx.test.ext:junit:${BuildDependenciesVersions.EXT}"
