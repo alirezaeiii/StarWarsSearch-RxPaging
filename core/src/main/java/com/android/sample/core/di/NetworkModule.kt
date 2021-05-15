@@ -20,38 +20,42 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    // Configure retrofit to parse JSON and use rxJava
+    /**
+     * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
+     * full Kotlin compatibility.
+     */
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
 
-        /**
-         * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
-         * full Kotlin compatibility.
-         */
-        val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
-
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor {
             Timber.d(it)
         }
         logger.level = HttpLoggingInterceptor.Level.BASIC
 
-        val okHttpClient =  OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-
-        return Retrofit.Builder()
-                .baseUrl(BuildConfig.STAR_WARS_API_BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
+        return OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
     }
+
+
+    // Configure retrofit to parse JSON and use rxJava
+    @Singleton
+    @Provides
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.STAR_WARS_API_BASE_URL)
+        .client(okHttpClient)
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
 
     @Singleton
     @Provides
     fun provideStarWarsService(retrofit: Retrofit): StarWarsService =
-            retrofit.create(StarWarsService::class.java)
+        retrofit.create(StarWarsService::class.java)
 }
