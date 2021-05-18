@@ -28,15 +28,15 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
      */
     override fun onInitDependencyInjection() {
         DaggerSearchComponent
-                .builder()
-                .coreComponent(coreComponent(requireContext()))
-                .searchModule(SearchModule(this))
-                .build()
-                .inject(this)
+            .builder()
+            .coreComponent(coreComponent(requireContext()))
+            .searchModule(SearchModule(this))
+            .build()
+            .inject(this)
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
         _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
@@ -46,17 +46,21 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         }
 
         val viewModelAdapter =
-                MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { character ->
-                    val destination =
-                            SearchFragmentDirections.actionSearchFragmentToDetailFragment(character)
-                    with(findNavController()) {
-                        currentDestination?.getAction(destination.actionId)
-                                ?.let { navigate(destination) }
-                    }
-                })
+            MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { character ->
+                val destination =
+                    SearchFragmentDirections.actionSearchFragmentToDetailFragment(character)
+                with(findNavController()) {
+                    currentDestination?.getAction(destination.actionId)
+                        ?.let { navigate(destination) }
+                }
+            })
 
         viewModel.liveData.observe(viewLifecycleOwner, {
-            binding.emptyLayout.visibility = View.INVISIBLE
+            if (it.isEmpty() && binding.searchView.query.isEmpty()) {
+                binding.emptyLayout.visibility = View.VISIBLE
+            } else {
+                binding.emptyLayout.visibility = View.INVISIBLE
+            }
             viewModelAdapter.submitList(it)
         })
 
@@ -64,7 +68,8 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
             viewModelAdapter.setNetworkState(it)
         })
 
-        val searchCloseIconButtonId = resources.getIdentifier("android:id/search_close_btn", null, null)
+        val searchCloseIconButtonId =
+            resources.getIdentifier("android:id/search_close_btn", null, null)
 
         with(binding) {
 
@@ -86,16 +91,13 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isNotEmpty()) {
                         search(query)
+                    } else if (binding.recyclerView.adapter?.itemCount == 0) {
+                        binding.emptyLayout.visibility = View.VISIBLE
                     }
                     return true
                 }
             })
-
-            if (savedInstanceState?.getBoolean(HIDE_EMPTY_VIEW_KEY) == true) {
-                emptyLayout.visibility = View.INVISIBLE
-            }
         }
-
         return binding.root
     }
 
@@ -110,11 +112,4 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         super.onDestroyView()
         _binding = null
     }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(HIDE_EMPTY_VIEW_KEY, _binding?.recyclerView?.adapter?.itemCount != 0)
-    }
 }
-
-private const val HIDE_EMPTY_VIEW_KEY = "empty_view"
