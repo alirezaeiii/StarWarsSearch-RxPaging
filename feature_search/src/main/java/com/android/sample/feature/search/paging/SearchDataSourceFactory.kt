@@ -9,15 +9,17 @@ import com.android.sample.core.response.Character
 import com.android.sample.core.response.CharacterWrapper
 
 class SearchDataSourceFactory(
-        private val searchPeopleUseCase: SearchPeopleUseCase,
-        private val query: String,
-        private val schedulerProvider: BaseSchedulerProvider,
-        private val context: Context,
+    searchPeopleUseCase: SearchPeopleUseCase,
+    query: String,
+    schedulerProvider: BaseSchedulerProvider,
+    context: Context,
 ) : BaseDataSourceFactory<Character, CharacterWrapper>() {
 
-    override fun getDataSource(): BasePageKeyedDataSource<Character, CharacterWrapper> =
-            SearchPageKeyedDataSource(searchPeopleUseCase = searchPeopleUseCase,
-                    query = query,
-                    schedulerProvider = schedulerProvider,
-                    context = context)
+    override val dataSource: BasePageKeyedDataSource<Character, CharacterWrapper> =
+        SearchPageKeyedDataSource(
+            searchPeopleUseCase = searchPeopleUseCase,
+            query = query,
+            schedulerProvider = schedulerProvider,
+            context = context
+        )
 }

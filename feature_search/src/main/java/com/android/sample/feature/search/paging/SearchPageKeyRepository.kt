@@ -9,16 +9,17 @@ import com.android.sample.core.response.Character
 import com.android.sample.core.response.CharacterWrapper
 
 class SearchPageKeyRepository(
-        private val searchPeopleUseCase: SearchPeopleUseCase,
-        private val query: String,
-        private val schedulerProvider: BaseSchedulerProvider,
-        private val context: Context,
+    searchPeopleUseCase: SearchPeopleUseCase,
+    query: String,
+    schedulerProvider: BaseSchedulerProvider,
+    context: Context,
 ) : BasePageKeyRepository<Character, CharacterWrapper>(schedulerProvider) {
 
-    override fun getSourceFactory(): BaseDataSourceFactory<Character, CharacterWrapper> =
-            SearchDataSourceFactory(searchPeopleUseCase = searchPeopleUseCase,
-                    query = query,
-                    schedulerProvider = schedulerProvider,
-                    context = context
-            )
+    override val sourceFactory: BaseDataSourceFactory<Character, CharacterWrapper> =
+        SearchDataSourceFactory(
+            searchPeopleUseCase = searchPeopleUseCase,
+            query = query,
+            schedulerProvider = schedulerProvider,
+            context = context
+        )
 }

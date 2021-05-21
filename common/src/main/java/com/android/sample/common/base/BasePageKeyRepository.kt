@@ -11,12 +11,10 @@ abstract class BasePageKeyRepository<T, R>(
         private val scheduler: BaseSchedulerProvider,
 ) : PageKeyRepository<T> {
 
-    protected abstract fun getSourceFactory(): BaseDataSourceFactory<T, R>
+    protected abstract val sourceFactory: BaseDataSourceFactory<T, R>
 
     @MainThread
     override fun getItems(): Listing<T> {
-
-        val sourceFactory = getSourceFactory()
 
         val rxPagedList = RxPagedListBuilder(sourceFactory, PAGE_SIZE)
                 .setFetchScheduler(scheduler.io()).buildObservable()

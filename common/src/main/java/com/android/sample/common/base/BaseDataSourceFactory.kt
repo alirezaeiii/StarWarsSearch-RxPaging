@@ -10,11 +10,10 @@ abstract class BaseDataSourceFactory<T, R> : DataSource.Factory<Int, T>() {
     val sourceLiveData: LiveData<BasePageKeyedDataSource<T, R>>
         get() = _sourceLiveData
 
-    protected abstract fun getDataSource(): BasePageKeyedDataSource<T, R>
+    protected abstract val dataSource: BasePageKeyedDataSource<T, R>
 
     override fun create(): DataSource<Int, T> {
-        val source = getDataSource()
-        _sourceLiveData.postValue(source)
-        return source
+        _sourceLiveData.postValue(dataSource)
+        return dataSource
     }
 }
