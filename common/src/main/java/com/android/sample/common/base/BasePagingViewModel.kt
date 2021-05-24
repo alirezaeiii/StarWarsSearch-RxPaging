@@ -25,7 +25,7 @@ abstract class BasePagingViewModel<T>(
 
     val networkState: LiveData<NetworkState> by lazy { switchMap(repoResult) { it.networkState } }
 
-    protected fun showQuery() {
+    protected fun subscribeRepoResult() {
         repoResult.value?.pagedList?.subscribeOn(schedulerProvider.io())
                 ?.observeOn(schedulerProvider.ui())
                 ?.subscribe({

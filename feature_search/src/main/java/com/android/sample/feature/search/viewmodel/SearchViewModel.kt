@@ -30,7 +30,7 @@ class SearchViewModel @Inject constructor(
             return false
         }
         this.query.value = query
-        super.showQuery()
+        super.subscribeRepoResult()
         return true
     }
 }
