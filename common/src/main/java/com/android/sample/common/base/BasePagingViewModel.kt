@@ -9,13 +9,8 @@ import androidx.paging.PagedList
 import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.DisposableManager
-import com.android.sample.common.util.schedulers.BaseSchedulerProvider
-import timber.log.Timber
 
-abstract class BasePagingViewModel<T>(
-        app: Application,
-        private val schedulerProvider: BaseSchedulerProvider,
-) : AndroidViewModel(app) {
+abstract class BasePagingViewModel<T>(app: Application) : AndroidViewModel(app) {
 
     protected abstract val repoResult: LiveData<Listing<T>>
 
@@ -26,13 +21,9 @@ abstract class BasePagingViewModel<T>(
     val networkState: LiveData<NetworkState> by lazy { switchMap(repoResult) { it.networkState } }
 
     protected fun subscribeRepoResult() {
-        repoResult.value?.pagedList?.subscribeOn(schedulerProvider.io())
-                ?.observeOn(schedulerProvider.ui())
-                ?.subscribe({
-                    _liveData.postValue(it)
-                }) {
-                    Timber.e(it)
-                }.also { disposable -> disposable?.let { DisposableManager.add(it) } }
+        repoResult.value?.pagedList?.subscribe {
+            _liveData.value = it
+        }.also { disposable -> disposable?.let { DisposableManager.add(it) } }
     }
 
     fun retry() {
