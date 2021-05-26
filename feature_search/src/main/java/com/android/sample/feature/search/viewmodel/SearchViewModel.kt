@@ -16,7 +16,7 @@ class SearchViewModel @Inject constructor(
         private val searchPeopleUseCase: SearchPeopleUseCase,
         private val schedulerProvider: BaseSchedulerProvider,
         private val app: Application,
-) : BasePagingViewModel<Character>(app) {
+) : BasePagingViewModel<Character>(app, schedulerProvider) {
 
     private val query = MutableLiveData<String>()
 
