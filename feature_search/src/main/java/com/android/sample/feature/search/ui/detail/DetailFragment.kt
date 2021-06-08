@@ -17,7 +17,7 @@ import com.android.sample.feature.search.viewmodel.DetailViewModel
 import com.android.sample.starwars.StarWarsApplication
 import javax.inject.Inject
 
-class DetailFragment : BaseFragment<DetailViewModel>() {
+class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     @Inject
     lateinit var character: Character
@@ -38,12 +38,9 @@ class DetailFragment : BaseFragment<DetailViewModel>() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        val binding = FragmentDetailBinding.inflate(inflater, container, false).apply {
-            setVariable(BR.vm, viewModel)
-            character = this@DetailFragment.character
-            // Set the lifecycleOwner so DataBinding can observe LiveData
-            lifecycleOwner = viewLifecycleOwner
-        }
+        val binding = FragmentDetailBinding.inflate(inflater, container, false)
+        applyDataBinding(binding, BR.vm)
+        binding.character = this@DetailFragment.character
 
         val filmAdapter = FilmAdapter()
 

@@ -14,10 +14,11 @@ import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding
 import com.android.sample.feature.search.di.DaggerSearchComponent
 import com.android.sample.feature.search.di.SearchModule
+import com.android.sample.feature.search.ui.search.MainAdapter.OnClickListener
 import com.android.sample.feature.search.viewmodel.SearchViewModel
 import com.android.sample.starwars.StarWarsApplication.Companion.coreComponent
 
-class SearchFragment : BaseFragment<SearchViewModel>() {
+class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
 
     private var _binding: FragmentSearchBinding? = null
 
@@ -39,14 +40,11 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
-            setVariable(BR.vm, viewModel)
-            // Set the lifecycleOwner so DataBinding can observe LiveData
-            lifecycleOwner = viewLifecycleOwner
-        }
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        this.applyDataBinding(binding, BR.vm)
 
         val viewModelAdapter =
-            MainAdapter({ viewModel.retry() }, MainAdapter.OnClickListener { character ->
+            MainAdapter({ viewModel.retry() }, OnClickListener { character ->
                 val destination =
                     SearchFragmentDirections.actionSearchFragmentToDetailFragment(character)
                 with(findNavController()) {
