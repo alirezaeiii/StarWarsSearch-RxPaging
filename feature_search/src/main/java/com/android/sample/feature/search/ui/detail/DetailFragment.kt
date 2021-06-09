@@ -10,6 +10,7 @@ import com.android.sample.common.util.Resource
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.databinding.FragmentDetailBinding
+import com.android.sample.feature.search.databinding.FragmentDetailBinding.*
 import com.android.sample.feature.search.di.DaggerDetailComponent
 import com.android.sample.feature.search.di.DetailModule
 import com.android.sample.feature.search.model.SpecieWrapper.Companion.getUnAvailableSpecie
@@ -38,7 +39,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        val binding = FragmentDetailBinding.inflate(inflater, container, false)
+        val binding = inflate(inflater, container, false)
         applyDataBinding(binding, BR.vm)
         binding.character = this@DetailFragment.character
 
