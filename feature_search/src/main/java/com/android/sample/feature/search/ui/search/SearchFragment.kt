@@ -12,7 +12,6 @@ import com.android.sample.common.base.BaseFragment
 import com.android.sample.feature.search.BR
 import com.android.sample.feature.search.R
 import com.android.sample.feature.search.databinding.FragmentSearchBinding
-import com.android.sample.feature.search.databinding.FragmentSearchBinding.*
 import com.android.sample.feature.search.di.DaggerSearchComponent
 import com.android.sample.feature.search.di.SearchModule
 import com.android.sample.feature.search.ui.search.MainAdapter.OnClickListener
@@ -41,8 +40,9 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        _binding = inflate(inflater, container, false)
-        this.applyDataBinding(binding, BR.vm)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
+            applyDataBinding(this, BR.vm)
+        }
 
         val viewModelAdapter =
             MainAdapter({ viewModel.retry() }, OnClickListener { character ->
