@@ -18,11 +18,9 @@ import com.android.sample.feature.search.ui.search.MainAdapter.OnClickListener
 import com.android.sample.feature.search.viewmodel.SearchViewModel
 import com.android.sample.starwars.StarWarsApplication.Companion.coreComponent
 
-class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
-
-    private var _binding: FragmentSearchBinding? = null
-
-    private val binding get() = _binding!!
+class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
+    R.layout.fragment_search, BR.vm
+) {
 
     /**
      * Initialize dagger injection dependency graph.
@@ -40,9 +38,7 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
 
-        _binding = FragmentSearchBinding.inflate(inflater, container, false).apply {
-            applyDataBinding(this, BR.vm)
-        }
+        super.onCreateView(inflater, container, savedInstanceState)
 
         val viewModelAdapter =
             MainAdapter({ viewModel.retry() }, OnClickListener { character ->
@@ -106,10 +102,5 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
             binding.recyclerView.scrollToPosition(0)
             (binding.recyclerView.adapter as MainAdapter).submitList(null)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

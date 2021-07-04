@@ -1,15 +1,26 @@
 package com.android.sample.common.base
 
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-abstract class BaseFragment<VM : ViewModel, T: ViewDataBinding> : Fragment() {
+abstract class BaseFragment<VM : ViewModel, T: ViewDataBinding>(
+    @LayoutRes private val layoutId: Int,
+    private val vmVariableId: Int
+) : Fragment() {
 
     @Inject
     lateinit var viewModel: VM
+
+    protected lateinit var binding: T
 
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.
@@ -28,11 +39,15 @@ abstract class BaseFragment<VM : ViewModel, T: ViewDataBinding> : Fragment() {
         onInitDependencyInjection()
     }
 
-    protected fun applyDataBinding(binding: T, variableId: Int) {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.apply {
-            setVariable(variableId, viewModel)
+            setVariable(vmVariableId, viewModel)
             // Set the lifecycleOwner so DataBinding can observe LiveData
             lifecycleOwner = viewLifecycleOwner
         }
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 }
