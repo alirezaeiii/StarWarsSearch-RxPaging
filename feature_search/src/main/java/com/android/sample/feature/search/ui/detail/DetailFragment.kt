@@ -19,11 +19,13 @@ import com.android.sample.starwars.StarWarsApplication
 import javax.inject.Inject
 
 class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
-    R.layout.fragment_detail, BR.vm
+    R.layout.fragment_detail
 ) {
 
     @Inject
     lateinit var character: Character
+
+    override val vmVariableId = BR.vm
 
     /**
      * Initialize dagger injection dependency graph.

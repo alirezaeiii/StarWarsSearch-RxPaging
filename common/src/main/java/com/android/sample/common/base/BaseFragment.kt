@@ -14,13 +14,14 @@ import javax.inject.Inject
 
 abstract class BaseFragment<VM : ViewModel, T: ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
-    private val vmVariableId: Int
 ) : Fragment() {
 
     @Inject
     lateinit var viewModel: VM
 
     protected lateinit var binding: T
+
+    protected abstract val vmVariableId: Int
 
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.

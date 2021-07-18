@@ -51,7 +51,7 @@ abstract class BasePageKeyedDataSource<T, K>(
 
     protected fun fetchItems(page: Int): Observable<K> =
         Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
-            return@flatMap if (it) composeObservable { fetchObservableItem(page) }
+            return@flatMap if (it) fetchObservableItem(page)
             else Observable.error(NetworkException())
         }
 
@@ -64,10 +64,5 @@ abstract class BasePageKeyedDataSource<T, K>(
                 )
             )
         )
-
     }
-
-    private inline fun <T> composeObservable(task: () -> Observable<T>): Observable<T> = task()
-        .subscribeOn(schedulerProvider.io())
-        .observeOn(schedulerProvider.ui())
 }

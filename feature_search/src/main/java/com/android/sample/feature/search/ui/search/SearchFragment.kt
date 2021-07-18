@@ -19,8 +19,10 @@ import com.android.sample.feature.search.viewmodel.SearchViewModel
 import com.android.sample.starwars.StarWarsApplication.Companion.coreComponent
 
 class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
-    R.layout.fragment_search, BR.vm
+    R.layout.fragment_search
 ) {
+
+    override val vmVariableId = BR.vm
 
     /**
      * Initialize dagger injection dependency graph.
