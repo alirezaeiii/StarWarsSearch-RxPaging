@@ -52,7 +52,7 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                 }
             })
 
-        viewModel.liveData.observe(viewLifecycleOwner, {
+        viewModel.pagedList.observe(viewLifecycleOwner, {
             if (it.isEmpty() && binding.searchView.query.isEmpty()) {
                 binding.emptyLayout.visibility = View.VISIBLE
             } else {

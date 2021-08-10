@@ -3,34 +3,20 @@ package com.android.sample.common.base
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations.switchMap
 import androidx.paging.PagedList
 import com.android.sample.common.paging.Listing
 import com.android.sample.common.paging.NetworkState
 import com.android.sample.common.util.DisposableManager
-import com.android.sample.common.util.schedulers.BaseSchedulerProvider
 
 abstract class BasePagingViewModel<T>(
-    app: Application,
-    private val schedulerProvider: BaseSchedulerProvider
+    app: Application
 ) : AndroidViewModel(app) {
 
     protected abstract val repoResult: LiveData<Listing<T>>
 
-    private val _liveData = MutableLiveData<PagedList<T>>()
-    val liveData: LiveData<PagedList<T>>
-        get() = _liveData
-
     val networkState: LiveData<NetworkState> by lazy { switchMap(repoResult) { it.networkState } }
-
-    protected fun subscribeRepoResult() {
-        repoResult.value?.pagedList
-            ?.subscribeOn(schedulerProvider.io())
-            ?.subscribe {
-                _liveData.postValue(it)
-            }.also { disposable -> disposable?.let { DisposableManager.add(it) } }
-    }
+    val pagedList: LiveData<PagedList<T>> by lazy { switchMap(repoResult) { it.pagedList } }
 
     fun retry() {
         repoResult.value?.retry?.invoke()

@@ -16,7 +16,7 @@ class SearchViewModel @Inject constructor(
         private val searchPeopleUseCase: SearchPeopleUseCase,
         private val schedulerProvider: BaseSchedulerProvider,
         private val app: Application,
-) : BasePagingViewModel<Character>(app, schedulerProvider) {
+) : BasePagingViewModel<Character>(app) {
 
     private val query = MutableLiveData<String>()
 
@@ -30,7 +30,6 @@ class SearchViewModel @Inject constructor(
             return false
         }
         this.query.value = query
-        super.subscribeRepoResult()
         return true
     }
 }
