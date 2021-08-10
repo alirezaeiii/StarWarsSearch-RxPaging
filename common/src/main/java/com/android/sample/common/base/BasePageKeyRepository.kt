@@ -30,7 +30,7 @@ abstract class BasePageKeyRepository<T, R>(
 
         rxPagedList.subscribeOn(scheduler.io()).subscribe {
             pagedList.postValue(it)
-            }.also { disposable -> disposable?.let { DisposableManager.add(it) } }
+            }.also { DisposableManager.add(it) }
 
         return Listing(
                 pagedList = pagedList,
