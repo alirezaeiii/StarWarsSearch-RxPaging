@@ -24,11 +24,11 @@ open class BaseViewModel<T>(
     val liveData: LiveData<Resource<T>>
         get() = _liveData
 
-    fun sendRequest() {
-        sendRequest(singleRequest)
+    init {
+        sendRequest()
     }
 
-    protected fun sendRequest(singleRequest: Single<T>) {
+    fun sendRequest() {
         _liveData.value = Resource.Loading
         singleRequest.subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())

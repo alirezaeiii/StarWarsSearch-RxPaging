@@ -31,8 +31,4 @@ class DetailViewModel @Inject constructor(
                         .toList(), { species, films ->
             DetailWrapper(species, films)
         })) {
-
-    init {
-        sendRequest()
-    }
 }
