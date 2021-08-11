@@ -30,5 +30,4 @@ class DetailViewModel @Inject constructor(
                         .flatMapSingle { filmUrl -> getFilmUseCase(filmUrl) }
                         .toList(), { species, films ->
             DetailWrapper(species, films)
-        })) {
-}
+        }))
