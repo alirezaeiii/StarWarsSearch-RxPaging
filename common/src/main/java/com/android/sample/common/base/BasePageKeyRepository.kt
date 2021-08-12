@@ -16,8 +16,6 @@ abstract class BasePageKeyRepository<T, R>(
 
     protected abstract val sourceFactory: BaseDataSourceFactory<T, R>
 
-    private val pagedList = MutableLiveData<PagedList<T>>()
-
     @MainThread
     override fun getItems(): Listing<T> {
 
@@ -27,6 +25,8 @@ abstract class BasePageKeyRepository<T, R>(
         val networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
             it.networkState
         }
+
+        val pagedList = MutableLiveData<PagedList<T>>()
 
         rxPagedList.subscribeOn(scheduler.io()).subscribe {
             pagedList.postValue(it)
