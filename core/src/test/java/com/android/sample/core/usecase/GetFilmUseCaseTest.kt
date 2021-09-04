@@ -3,7 +3,7 @@ package com.android.sample.core.usecase
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.android.sample.core.domain.GetFilmUseCase
 import com.android.sample.core.network.StarWarsService
-import com.android.sample.core.data.DetailRepositoryImpl
+import com.android.sample.core.repository.DetailRepositoryImpl
 import com.android.sample.core.response.Film
 import io.reactivex.Single
 import org.junit.Rule
