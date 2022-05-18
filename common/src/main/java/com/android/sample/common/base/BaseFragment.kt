@@ -12,18 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
 
-abstract class BaseFragment<VM : ViewModel, T: ViewDataBinding>(
+abstract class BaseFragment<VM : ViewModel, VB: ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
+    private val vmVariableId: Int
 ) : Fragment() {
 
     @Inject
     lateinit var viewModel: VM
 
-    private var _binding: T? = null
+    private var _binding: VB? = null
 
     protected val binding get() = _binding!!
-
-    protected abstract val vmVariableId: Int
 
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.

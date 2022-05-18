@@ -19,10 +19,8 @@ import com.android.sample.feature.search.viewmodel.SearchViewModel
 import com.android.sample.starwars.StarWarsApplication.Companion.coreComponent
 
 class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
-    R.layout.fragment_search
+    R.layout.fragment_search, BR.vm
 ) {
-
-    override val vmVariableId = BR.vm
 
     /**
      * Initialize dagger injection dependency graph.
@@ -53,11 +51,6 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
             })
 
         viewModel.pagedList.observe(viewLifecycleOwner, {
-            if (it.isEmpty() && binding.searchView.query.isEmpty()) {
-                binding.emptyLayout.visibility = View.VISIBLE
-            } else {
-                binding.emptyLayout.visibility = View.INVISIBLE
-            }
             viewModelAdapter.submitList(it)
         })
 
@@ -88,10 +81,8 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isNotEmpty()) {
                         search(query)
-                        emptyLayout.visibility = View.INVISIBLE
-                    } else if (recyclerView.adapter?.itemCount == 0) {
-                        emptyLayout.visibility = View.VISIBLE
                     }
+                    emptyLayout.visibility = View.INVISIBLE
                     return true
                 }
             })
