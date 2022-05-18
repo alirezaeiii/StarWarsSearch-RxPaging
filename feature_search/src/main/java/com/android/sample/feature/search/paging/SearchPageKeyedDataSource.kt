@@ -20,13 +20,13 @@ class SearchPageKeyedDataSource(
 
     private var isNext = true
 
-    override fun fetchObservableItem(page: Int): Observable<CharacterWrapper> =
+    override fun fetchItems(page: Int): Observable<CharacterWrapper> =
             searchPeopleUseCase(query, page)
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Character>) {
         if (isNext) {
             mutableNetworkState.postValue(NetworkState.LOADING)
-            fetchItems(params.key).subscribe({
+            loadItems(params.key).subscribe({
                 mutableNetworkState.postValue(NetworkState.LOADED)
                 //clear retry since last request succeeded
                 retry = null
@@ -47,7 +47,7 @@ class SearchPageKeyedDataSource(
             params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Character>,
     ) {
         mutableNetworkState.postValue(NetworkState.LOADING)
-        fetchItems(1).subscribe({
+        loadItems(1).subscribe({
             mutableNetworkState.postValue(NetworkState.LOADED)
             if (it.next == null) {
                 isNext = false

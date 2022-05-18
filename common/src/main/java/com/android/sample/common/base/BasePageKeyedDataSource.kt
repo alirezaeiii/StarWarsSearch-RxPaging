@@ -13,7 +13,6 @@ import io.reactivex.Observable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-
 abstract class BasePageKeyedDataSource<T, K>(
     private val schedulerProvider: BaseSchedulerProvider,
     private val context: Context,
@@ -47,11 +46,11 @@ abstract class BasePageKeyedDataSource<T, K>(
         // ignored, since we only ever append to our initial load
     }
 
-    protected abstract fun fetchObservableItem(page: Int): Observable<K>
+    protected abstract fun fetchItems(page: Int): Observable<K>
 
-    protected fun fetchItems(page: Int): Observable<K> =
+    protected fun loadItems(page: Int): Observable<K> =
         Observable.fromCallable { context.isNetworkAvailable() }.flatMap {
-            return@flatMap if (it) fetchObservableItem(page)
+            return@flatMap if (it) fetchItems(page)
             else Observable.error(NetworkException())
         }
 
