@@ -58,7 +58,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
                 adapter = filmAdapter
             }
 
-            viewModel.liveData.observe(viewLifecycleOwner, { resource ->
+            viewModel.liveData.observe(viewLifecycleOwner) { resource ->
                 if (resource is Resource.Success) {
                     val species = resource.data?.species
                     specie = if (species.isNullOrEmpty()) {
@@ -68,7 +68,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
                     }
                     filmAdapter.submitList(resource.data?.films)
                 }
-            })
+            }
         }
 
         return binding.root

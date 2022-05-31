@@ -50,13 +50,13 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                 }
             })
 
-        viewModel.pagedList.observe(viewLifecycleOwner, {
+        viewModel.pagedList.observe(viewLifecycleOwner) {
             viewModelAdapter.submitList(it)
-        })
+        }
 
-        viewModel.networkState.observe(viewLifecycleOwner, {
+        viewModel.networkState.observe(viewLifecycleOwner) {
             viewModelAdapter.setNetworkState(it)
-        })
+        }
 
         val searchCloseIconButtonId =
             resources.getIdentifier("android:id/search_close_btn", null, null)
