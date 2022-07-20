@@ -9,6 +9,7 @@ import com.android.sample.core.domain.GetSpecieUseCase
 import com.android.sample.core.response.Character
 import com.android.sample.feature.search.ui.detail.DetailFragment
 import com.android.sample.feature.search.ui.detail.DetailFragmentArgs
+import com.android.sample.feature.search.ui.detail.FilmAdapter
 import com.android.sample.feature.search.viewmodel.DetailViewModel
 import dagger.Module
 import dagger.Provides
@@ -44,4 +45,7 @@ class DetailModule(private val fragment: DetailFragment) {
         val args: DetailFragmentArgs by fragment.navArgs()
         return args.character
     }
+
+    @Provides
+    fun provideFilmAdapter() = FilmAdapter()
 }

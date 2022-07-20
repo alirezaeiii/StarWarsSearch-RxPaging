@@ -25,6 +25,9 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
     @Inject
     lateinit var character: Character
 
+    @Inject
+    lateinit var filmAdapter: FilmAdapter
+
     /**
      * Initialize dagger injection dependency graph.
      */
@@ -44,8 +47,6 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
 
         binding.character = this@DetailFragment.character
-
-        val filmAdapter = FilmAdapter()
 
         with(binding) {
 
