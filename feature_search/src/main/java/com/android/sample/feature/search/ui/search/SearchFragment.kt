@@ -82,6 +82,7 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                     if (query.isNotEmpty()) {
                         search(query)
                     }
+                    emptyLayout.visibility = View.INVISIBLE
                     return true
                 }
             })
