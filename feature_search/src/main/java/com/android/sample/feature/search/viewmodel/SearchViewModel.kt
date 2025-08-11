@@ -18,11 +18,19 @@ class SearchViewModel @Inject constructor(
         private val app: Application,
 ) : BasePagingViewModel<Character>(app) {
 
+    private val _isEmptyLayoutHidden = MutableLiveData<Boolean>()
+    val isEmptyLayoutHidden: LiveData<Boolean>
+        get() = _isEmptyLayoutHidden
+
     private val query = MutableLiveData<String>()
 
     override val repoResult: LiveData<Listing<Character>> = Transformations.map(query) {
         SearchPageKeyRepository(searchPeopleUseCase, it, schedulerProvider, app.applicationContext
         ).getItems()
+    }
+
+    fun setEmptyLayoutHidden() {
+        _isEmptyLayoutHidden.value = true
     }
 
     fun showQuery(query: String): Boolean {

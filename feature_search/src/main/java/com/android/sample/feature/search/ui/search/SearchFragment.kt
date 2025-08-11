@@ -58,6 +58,10 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
             viewModelAdapter.setNetworkState(it)
         }
 
+        viewModel.isEmptyLayoutHidden.observe(viewLifecycleOwner) { hidden ->
+            binding.emptyLayout.visibility = if (hidden) View.INVISIBLE else View.VISIBLE
+        }
+
         val searchCloseIconButtonId =
             resources.getIdentifier("android:id/search_close_btn", null, null)
 
@@ -81,8 +85,8 @@ class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(
                 override fun onQueryTextChange(query: String): Boolean {
                     if (query.isNotEmpty()) {
                         search(query)
+                        viewModel.setEmptyLayoutHidden()
                     }
-                    emptyLayout.visibility = View.INVISIBLE
                     return true
                 }
             })
