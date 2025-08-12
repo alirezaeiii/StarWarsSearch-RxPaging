@@ -45,6 +45,10 @@ The `:common` module is an [com.android.library](https://developer.android.com/s
 * `:features_search` modules depend on `:common`, `:core` and `:app`.
 * `:core` and `:common` don’t have any dependency.
 
+### Inspired from
+[android-modular-architecture](https://github.com/vmadalin/android-modular-architecture)
+| :-: |
+
 ## Testing
 Testing is done in each layer includes Repository and UseCase in `:core` module as well as ViewModel in `:features_search` module. This is one of the advantages of Clean Architecture.
 
